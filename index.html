@@ -67,33 +67,24 @@
 
         /* --- BOUTON CALL TO ACTION --- */
         .cta-btn {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 15px 35px;
-            background-color: var(--primary-red);
-            color: white !important;
-            font-weight: 800;
-            text-transform: uppercase;
-            border-radius: 5px;
-            letter-spacing: 1px;
-            box-shadow: 0 5px 15px rgba(220, 50, 50, 0.3);
+            display: inline-block; margin-top: 20px; padding: 15px 35px;
+            background-color: var(--primary-red); color: white !important;
+            font-weight: 800; text-transform: uppercase; border-radius: 5px;
+            letter-spacing: 1px; box-shadow: 0 5px 15px rgba(220, 50, 50, 0.3);
         }
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(220, 50, 50, 0.5);
-        }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(220, 50, 50, 0.5); }
 
         /* --- SCROLLBAR --- */
         ::-webkit-scrollbar { width: 8px; height: 8px; }
         ::-webkit-scrollbar-track { background: var(--scroll-track); }
         ::-webkit-scrollbar-thumb { background: var(--primary-red); border-radius: 4px; }
 
-        /* --- SIDEBAR --- */
+        /* --- SIDEBAR DE BASE (Ordi) --- */
         .sidebar {
             height: 100vh; width: 240px; position: fixed; top: 0; left: 0;
             background-color: var(--sidebar-bg); border-right: 2px solid var(--primary-red);
             display: flex; flex-direction: column; padding: 50px 0 0 40px; z-index: 9999;
-            backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px); transition: transform 0.4s ease;
         }
         .logo-img { width: 120px; margin-bottom: 60px; transition: 0.5s; cursor: pointer; }
         .logo-img:hover { transform: scale(1.05); }
@@ -103,9 +94,19 @@
         }
         .sidebar a.nav-link:hover { color: var(--primary-red); padding-left: 10px; }
 
-        /* --- THEME SWITCH --- */
+        /* --- MENU HAMBURGER (Caché sur Ordi) --- */
+        #mobile-menu-toggle { display: none; }
+        .mobile-menu-btn {
+            display: none; position: fixed; top: 20px; left: 20px; z-index: 10000;
+            background: var(--bg-color); color: var(--primary-red);
+            border: 2px solid var(--primary-red); border-radius: 5px;
+            padding: 8px 12px; font-size: 1.5rem; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s;
+        }
+
+        /* --- BOUTON THEME (Déplacé en bas à droite) --- */
         .theme-switch {
-            position: fixed; top: 30px; right: 40px; z-index: 10001;
+            position: fixed; bottom: 30px; right: 40px; z-index: 10001;
             padding: 10px 15px; border: 2px solid var(--primary-red);
             background: var(--bg-color); color: var(--primary-red);
             cursor: pointer; font-family: 'Montserrat'; font-weight: 700;
@@ -114,7 +115,7 @@
         .theme-switch:hover { background: var(--primary-red); color: white; }
 
         /* --- MAIN CONTENT --- */
-        .main-content { margin-left: 240px; padding: 60px 80px; min-height: 100vh; }
+        .main-content { margin-left: 240px; padding: 60px 80px; min-height: 100vh; transition: margin 0.4s ease; }
         .hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
         h1.big-title { font-size: 5.5rem; letter-spacing: 12px; margin: 0; line-height: 1; }
 
@@ -147,11 +148,11 @@
             visibility: hidden; overflow-y: auto;
         }
         .splash-section:target { clip-path: circle(150% at 50% 50%); visibility: visible; }
-        .splash-content { max-width: 1200px; margin: 0 auto; padding: 120px 40px 80px 280px; }
+        .splash-content { max-width: 1200px; margin: 0 auto; padding: 120px 40px 80px 280px; transition: padding 0.4s ease;}
         .close-splash { position: fixed; top: 40px; right: 60px; font-weight: 800; color: var(--primary-red); border: 2px solid var(--primary-red); padding: 10px 25px; z-index: 5001; background: var(--bg-color); border-radius: 5px; }
 
         /* --- RED TRIGGER --- */
-        .trigger-red { position: fixed; bottom: 50px; left: 80px; width: 70px; height: 70px; background-color: var(--primary-red); border-radius: 50%; cursor: pointer; z-index: 10000; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .trigger-red { position: fixed; bottom: 50px; left: 80px; width: 70px; height: 70px; background-color: var(--primary-red); border-radius: 50%; cursor: pointer; z-index: 10000; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.3s;}
         #red-toggle { display: none; }
         .red-overlay {
             position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
@@ -161,22 +162,51 @@
         }
         #red-toggle:checked ~ .red-overlay { clip-path: circle(150% at 120px calc(100% - 90px)); }
 
+        /* ========================================= */
+        /* --- ADAPTATION MOBILE & TABLETTE (SLIDE) --- */
+        /* ========================================= */
         @media (max-width : 1002px ){
-            .sidebar { width: 80px; padding-left: 0; align-items: center; }
-            .logo-img { width: 50px; }
-            .main-content { margin-left: 80px; padding: 40px 20px; }
-            .splash-content { padding-left: 100px; }
+            /* On affiche le bouton menu hamburger */
+            .mobile-menu-btn { display: block; }
+            
+            /* Le menu glisse hors de l'écran par défaut */
+            .sidebar { transform: translateX(-100%); width: 260px; box-shadow: 5px 0 25px rgba(0,0,0,0.3); }
+            
+            /* Quand on clique sur le menu, il glisse vers la droite */
+            #mobile-menu-toggle:checked ~ .sidebar { transform: translateX(0); }
+            
+            /* Le contenu prend toute la largeur */
+            .main-content { margin-left: 0; padding: 80px 20px 40px 20px; }
+            .splash-content { padding: 100px 20px 40px 20px; } /* Plus de gros vide à gauche */
+            
             h1.big-title { font-size: 3rem; letter-spacing: 5px; }
             .project-card { min-width: 280px; }
-            .trigger-red { left: 20px; width: 50px; height: 50px; }
+            
+            /* Ajustement des boutons volants pour les petits écrans */
+            .trigger-red { left: 20px; bottom: 20px; width: 50px; height: 50px; }
+            .theme-switch { bottom: 20px; right: 20px; font-size: 0.6rem; padding: 8px 12px; }
+            .close-splash { top: 20px; right: 20px; padding: 8px 15px; font-size: 0.7rem; }
+        }
+
+        /* --- PETITS SMARTPHONES --- */
+        @media (max-width : 600px ){
+            h1.big-title { font-size: 2.2rem; letter-spacing: 2px; }
+            .services-circles-container { gap: 20px; }
+            .service-bubble { width: 100px; height: 100px; font-size: 0.8rem; }
+            .project-card { min-width: 240px; }
+            .mobile-menu-btn { top: 15px; left: 15px; padding: 5px 12px; font-size: 1.2rem; }
         }
     </style>
 </head>
 <body>
 
     <button class="theme-switch" onclick="toggleTheme()" aria-label="Changer le thème">MODE</button>
-    <input type="checkbox" id="red-toggle">
+    
+    <input type="checkbox" id="mobile-menu-toggle">
+    <label for="mobile-menu-toggle" class="mobile-menu-btn">☰</label>
 
+    <input type="checkbox" id="red-toggle">
+    <label for="red-toggle" class="trigger-red"></label>
     <div class="red-overlay">
         <label for="red-toggle" style="color:white; cursor:pointer; font-size:3rem; font-weight:800; position:absolute; top:40px; right:40px;">✕</label>
         <div style="text-align:center;">
@@ -186,11 +216,10 @@
     </div>
 
     <nav class="sidebar">
-        <a href="#home"><img src="./assets/img/Jackalop.png" alt="Amor Fati Logo" class="logo-img"></a>
-        <a href="#shorts" class="nav-link">COURT MÉTRAGE</a>
-        <a href="#bd" class="nav-link">BANDE DESSINÉE</a>
-        <a href="#illus" class="nav-link">ILLUSTRATION</a>
-        <label for="red-toggle" class="trigger-red"></label>
+        <a href="#home" onclick="document.getElementById('mobile-menu-toggle').checked=false"><img src="./assets/img/Jackalop.png" alt="Amor Fati Logo" class="logo-img"></a>
+        <a href="#shorts" class="nav-link" onclick="document.getElementById('mobile-menu-toggle').checked=false">COURT MÉTRAGE</a>
+        <a href="#bd" class="nav-link" onclick="document.getElementById('mobile-menu-toggle').checked=false">BANDE DESSINÉE</a>
+        <a href="#illus" class="nav-link" onclick="document.getElementById('mobile-menu-toggle').checked=false">ILLUSTRATION</a>
     </nav>
 
     <div class="main-content" id="home">
@@ -295,7 +324,7 @@
 
                 <div class="project-card" onclick="window.open('./assets/pdf/ForfaitlongEnglish.pdf', '_blank')" style="cursor:pointer; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 12px; min-width: 0;">
                     <div style="font-size: 40px; margin-bottom: 10px;">📄</div>
-                    <h4 style="font-size: 1.1rem; margin-bottom: 5px;">long term package</h4>
+                    <h4 style="font-size: 1.1rem; margin-bottom: 5px;">LONG TERM PACKAGE</h4>
                     <span style="color: var(--primary-red); font-weight: bold; font-size: 0.9rem;"></span>
                     <p style="font-size: 0.85rem; margin-top: 10px;"></p>
                 </div>
@@ -340,4 +369,4 @@
         });
     </script>
 </body>
-</html></html>
+</html>
