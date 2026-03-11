@@ -160,10 +160,23 @@
 
         
 
-        .savoir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .savoir-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+    grid-auto-flow: dense; 
+    gap: 20px; 
+    margin-top: 40px; 
+}
 
-        .savoir-item { position: relative; height: 280px; border-radius: 12px; overflow: hidden; cursor: pointer; border: 1px solid var(--primary-red); background: #000; }
-
+.savoir-item { 
+    position: relative; 
+    height: 300px; /* On définit une hauteur de base égale pour tous */
+    border-radius: 12px; 
+    overflow: hidden; 
+    cursor: pointer; 
+    border: 1px solid var(--primary-red); 
+    background: #000; 
+}
         .savoir-img-container { width: 100%; height: 100%; transition: transform 0.6s ease; }
 
         .savoir-img-container img { width: 100%; height: 100%; object-fit: cover; }
@@ -479,46 +492,134 @@
 
 
 
-    <div id="shorts" class="splash-section"><a href="#home" class="close-splash">FERMER</a><div class="splash-content"><h1>COURTS MÉTRAGES</h1><p>à venir...</p></div></div>
+ <div id="shorts" class="splash-section">
+    <a href="#home" class="close-splash">FERMER</a>
+    <div class="splash-content">
+        <h1 style="color: var(--primary-red);">COURTS MÉTRAGES</h1>
+        <p>Nos projets</p>
+
+        <div class="savoir-grid">
+			
+			 <div class="savoir-item">
+                <div class="savoir-img-container"><img src="./assets/img/rdls.jpg" alt="Court Métrage"></div>
+                <a href="https://www.youtube.com/watch?v=ixi3VgVQDY0" target="_blank" class="savoir-overlay">
+                    <h4>Reel de l'oie sauvage</h4>
+                    <p>▶Clique</p>
+                </a>
+            </div>
+            
+            <div class="savoir-item">
+                <div class="savoir-img-container"><img src="./assets/img/tc6.png" alt="Court Métrage"></div>
+                <a href="https://www.youtube.com/shorts/wQ4PMzQ_ilQ" target="_blank" class="savoir-overlay">
+                    <h4>BlockHead</h4>
+                    <p>▶Clique</p>
+                </a>
+            </div>
+            
+            <div class="savoir-item">
+                <div class="savoir-img-container"><img src="./assets/img/tc7.png" alt="Court Métrage"></div>
+                <a href="https://www.instagram.com/reel/DQsX6-cE6mI/" target="_blank" class="savoir-overlay">
+                    <h4>Note à vous-meme</h4>
+                    <p>▶Clique</p>
+                </a>
+            </div>
+
+            <div class="savoir-item" style="grid-column: span 2;">
+                <div class="savoir-img-container"><img src="./assets/img/tc5.png" alt="Court Métrage"></div>
+                <a href="https://www.youtube.com/shorts/d84gDK6BJ88" target="_blank" class="savoir-overlay">
+                    <h4>Dextérité</h4>
+                    <p>▶Clique</p>
+                </a>
+            </div>
+
+            <div class="savoir-item">
+                <div class="savoir-img-container"><img src="./assets/img/tc4.png" alt="Court Métrage"></div>
+                <a href="https://www.youtube.com/shorts/tpHyQy2-Wh4" target="_blank" class="savoir-overlay">
+                    <h4>Crainte</h4>
+                    <p>▶Clique</p>
+                </a>
+            </div>
+            
+            <div class="savoir-item">
+                <div class="savoir-img-container"><img src="./assets/img/tc3.png" alt="Court Métrage"></div>
+                <a href="https://www.youtube.com/shorts/t-GaajFJnhg" target="_blank" class="savoir-overlay">
+                    <h4>Avec le sauvage</h4>
+                    <p>▶Clique</p>
+                </a>
+            </div>
+			
+			 <div class="savoir-item">
+                <div class="savoir-img-container"><img src="./assets/img/tc55.png" alt="Court Métrage"></div>
+                <a href="https://www.instagram.com/reel/DLv3l-TABsm/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==" target="_blank" class="savoir-overlay">
+                    <h4>terrain connu</h4>
+                    <p>▶Clique</p>
+                </a>
+            </div>
+
+            <div class="savoir-item" style="grid-column: span 2;">
+                <div class="savoir-img-container"><img src="./assets/img/tc2.png" alt="Court Métrage"></div>
+                <a href="https://www.youtube.com/shorts/RuNl4Jeg9iQ" target="_blank" class="savoir-overlay">
+                    <h4>Tatonnement</h4>
+                    <p>▶Clique</p>
+                </a>
+            </div>
+
+            <div class="savoir-item">
+                <div class="savoir-img-container"><img src="./assets/img/tc1.png" alt="Court Métrage"></div>
+                <a href="https://www.youtube.com/shorts/lyadeVjiusY" target="_blank" class="savoir-overlay">
+                    <h4>En bons termes</h4>
+                    <p>▶Clique</p>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
 
     <div id="bd" class="splash-section"><a href="#home" class="close-splash">FERMER</a><div class="splash-content"><h1>BANDE DESSINÉE</h1><p>à venir...</p></div></div>
 
-    <div id="illus" class="splash-section">
-        <a href="#home" class="close-splash">FERMER</a>
-        <div class="splash-content">
-            <h1 style="color: var(--primary-red);">ILLUSTRATIONS</h1>
-            <p>Cliquez sur une image pour voir le post Instagram.</p>
+    <<div id="illus" class="splash-section">
+    <a href="#home" class="close-splash">FERMER</a>
+    <div class="splash-content">
+        <h1 style="color: var(--primary-red);">ILLUSTRATIONS</h1>
+        <p>Cliquez sur une image pour voir le post Instagram.</p>
 
-            <div class="savoir-grid">
-                
-                <div class="savoir-item" style="height: 300px;">
-                    <div class="savoir-img-container"><img src="./assets/img/ton-image-1.jpg" alt="Illustration"></div>
-                    <a href="https://www.instagram.com/jason_s_draw/" target="_blank" class="savoir-overlay">
-                        <h4>TITRE IMAGE</h4>
-                        <p>Voir sur Instagram</p>
-                    </a>
+        <div class="savoir-grid">
+            
+            <div class="savoir-item" style="height: 500px; grid-row: span 2;">
+                <div class="savoir-img-container">
+                    <img src="./assets/img/vrai-nom-image-1.jpg" alt="Illustration" style="object-fit: contain; background: #000;">
                 </div>
-
-                <div class="savoir-item" style="grid-column: span 2; height: 300px;">
-                    <div class="savoir-img-container"><img src="./assets/img/ton-image-2.jpg" alt="Illustration"></div>
-                    <a href="https://www.instagram.com/jason_s_draw/" target="_blank" class="savoir-overlay">
-                        <h4>IMAGE LARGE</h4>
-                        <p>Voir sur Instagram</p>
-                    </a>
-                </div>
-
-                <div class="savoir-item" style="height: 500px;">
-                    <div class="savoir-img-container"><img src="./assets/img/ton-image-3.jpg" alt="Illustration"></div>
-                    <a href="https://www.instagram.com/jason_s_draw/" target="_blank" class="savoir-overlay">
-                        <h4>IMAGE HAUTE</h4>
-                        <p>Voir sur Instagram</p>
-                    </a>
-                </div>
-
+                <a href="LIEN_INSTAGRAM" target="_blank" class="savoir-overlay">
+                    <h4>TITRE IMAGE</h4>
+                    <p>Voir sur Instagram</p>
+                </a>
             </div>
+
+            <div class="savoir-item" style="grid-column: span 2; height: 300px;">
+                <div class="savoir-img-container">
+                    <img src="./assets/img/vrai-nom-image-2.jpg" alt="Illustration" style="object-fit: contain; background: #000;">
+                </div>
+                <a href="LIEN_INSTAGRAM" target="_blank" class="savoir-overlay">
+                    <h4>IMAGE LARGE</h4>
+                    <p>Voir sur Instagram</p>
+                </a>
+            </div>
+
+            <div class="savoir-item" style="height: 300px;">
+                <div class="savoir-img-container">
+                    <img src="./assets/img/vrai-nom-image-3.jpg" alt="Illustration" style="object-fit: contain; background: #000;">
+                </div>
+                <a href="LIEN_INSTAGRAM" target="_blank" class="savoir-overlay">
+                    <h4>IMAGE STANDARD</h4>
+                    <p>Voir sur Instagram</p>
+                </a>
+            </div>
+			
+
         </div>
     </div>
-	
+</div>
 	 <div id="musique" class="splash-section">
     <a href="#home" class="close-splash">FERMER</a>
     <div class="splash-content">
