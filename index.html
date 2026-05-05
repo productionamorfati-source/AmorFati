@@ -117,6 +117,102 @@
             .project-card { min-width: 240px; }
             .mobile-menu-btn { top: 15px; left: 15px; padding: 5px 12px; font-size: 1.2rem; }
         }
+		
+		
+		/* --- COURTS MÉTRAGES STYLE CINÉMA --- */
+.films-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    margin-top: 40px;
+}
+
+.film-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: #000;
+    aspect-ratio: 16/9;
+}
+
+.film-card.film-large {
+    grid-column: span 2;
+}
+
+.film-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.6s ease;
+    filter: brightness(0.6);
+}
+
+.film-card:hover img {
+    transform: scale(1.05);
+    filter: brightness(0.3);
+}
+
+.film-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.film-meta {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.film-platform {
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+.film-yt  { background: #FF0000; color: white; }
+.film-ig  { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+
+.film-info {
+    transform: translateY(10px);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.film-card:hover .film-info {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.film-info h3 {
+    color: white;
+    font-size: 1.1rem;
+    margin: 0 0 6px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.film-info p {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    margin: 0;
+}
+
+@media (max-width: 1002px) {
+    .films-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+    .films-grid { grid-template-columns: 1fr; }
+    .film-card.film-large { grid-column: span 1; }
+}
     </style>
 </head>
 
@@ -244,25 +340,156 @@
     </div>
 
     <!-- COURTS MÉTRAGES -->
-    <div id="shorts" class="splash-section">
-        <a href="#home" class="close-splash">FERMER</a>
-        <div class="splash-content">
-            <h1 style="color:var(--primary-red);">COURTS MÉTRAGES</h1>
-            <p>Nos projets</p>
-            <div class="savoir-grid">
-                <div class="savoir-item"><div class="savoir-img-container"><img src="./assets/img/rdls.jpg" alt="Court Métrage"></div><a href="https://www.youtube.com/watch?v=ixi3VgVQDY0" target="_blank" class="savoir-overlay"><h4>Reel de l'oie sauvage</h4><p>▶ Regarder</p></a></div>
-                <div class="savoir-item"><div class="savoir-img-container"><img src="./assets/img/tc6.png" alt="Court Métrage"></div><a href="https://www.youtube.com/shorts/wQ4PMzQ_ilQ" target="_blank" class="savoir-overlay"><h4>BlockHead</h4><p>▶ Regarder</p></a></div>
-                <div class="savoir-item"><div class="savoir-img-container"><img src="./assets/img/tc7.png" alt="Court Métrage"></div><a href="https://www.instagram.com/reel/DQsX6-cE6mI/" target="_blank" class="savoir-overlay"><h4>Note à vous-même</h4><p>▶ Regarder</p></a></div>
-                <div class="savoir-item" style="grid-column:span 2;"><div class="savoir-img-container"><img src="./assets/img/tc5.png" alt="Court Métrage"></div><a href="https://www.youtube.com/shorts/d84gDK6BJ88" target="_blank" class="savoir-overlay"><h4>Dextérité</h4><p>▶ Regarder</p></a></div>
-                <div class="savoir-item"><div class="savoir-img-container"><img src="./assets/img/tc4.png" alt="Court Métrage"></div><a href="https://www.youtube.com/shorts/tpHyQy2-Wh4" target="_blank" class="savoir-overlay"><h4>Crainte</h4><p>▶ Regarder</p></a></div>
-                <div class="savoir-item"><div class="savoir-img-container"><img src="./assets/img/tc3.png" alt="Court Métrage"></div><a href="https://www.youtube.com/shorts/t-GaajFJnhg" target="_blank" class="savoir-overlay"><h4>Avec le sauvage</h4><p>▶ Regarder</p></a></div>
-                <div class="savoir-item"><div class="savoir-img-container"><img src="./assets/img/tc55.png" alt="Court Métrage"></div><a href="https://www.instagram.com/reel/DLv3l-TABsm/" target="_blank" class="savoir-overlay"><h4>Terrain connu</h4><p>▶ Regarder</p></a></div>
-                <div class="savoir-item" style="grid-column:span 2;"><div class="savoir-img-container"><img src="./assets/img/tc2.png" alt="Court Métrage"></div><a href="https://www.youtube.com/shorts/RuNl4Jeg9iQ" target="_blank" class="savoir-overlay"><h4>Tatonnement</h4><p>▶ Regarder</p></a></div>
-                <div class="savoir-item"><div class="savoir-img-container"><img src="./assets/img/tc1.png" alt="Court Métrage"></div><a href="https://www.youtube.com/shorts/lyadeVjiusY" target="_blank" class="savoir-overlay"><h4>En bons termes</h4><p>▶ Regarder</p></a></div>
+<div id="shorts" class="splash-section">
+    <a href="#home" class="close-splash">FERMER</a>
+    <div class="splash-content">
+        <h1 style="color:var(--primary-red);">COURTS MÉTRAGES</h1>
+        <p style="color:#888; letter-spacing:2px; font-size:0.85rem;">PRODUCTION AMOR FATI</p>
+
+        <div class="films-grid">
+
+            <!-- ================================
+                 FILM — pour modifier :
+                 1. src de l'image
+                 2. Titre
+                 3. Durée
+                 4. Plateforme (YouTube / Instagram)
+                 5. Lien
+            ================================ -->
+
+            <!-- FILM 1 -->
+            <div class="film-card" onclick="window.open('https://www.youtube.com/watch?v=ixi3VgVQDY0', '_blank')">
+                <img src="./assets/img/rdls.jpg" alt="Reel de l'oie sauvage">
+                <div class="film-overlay">
+                    <div class="film-meta">
+                        <span class="film-platform film-yt">YouTube</span>
+                    </div>
+                    <div class="film-info">
+                        <h3>Reel de l'oie sauvage</h3>
+                        <p>X min · Court métrage</p>
+                    </div>
+                </div>
             </div>
+
+            <!-- FILM 2 -->
+            <div class="film-card" onclick="window.open('https://www.youtube.com/shorts/wQ4PMzQ_ilQ', '_blank')">
+                <img src="./assets/img/tc6.png" alt="BlockHead">
+                <div class="film-overlay">
+                    <div class="film-meta">
+                        <span class="film-platform film-yt">YouTube</span>
+                    </div>
+                    <div class="film-info">
+                        <h3>BlockHead</h3>
+                        <p>X min · Court métrage</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILM 3 -->
+            <div class="film-card" onclick="window.open('https://www.instagram.com/reel/DQsX6-cE6mI/', '_blank')">
+                <img src="./assets/img/tc7.png" alt="Note à vous-même">
+                <div class="film-overlay">
+                    <div class="film-meta">
+                        <span class="film-platform film-ig">Instagram</span>
+                    </div>
+                    <div class="film-info">
+                        <h3>Note à vous-même</h3>
+                        <p>X min · Court métrage</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILM 4 — large -->
+            <div class="film-card film-large" onclick="window.open('https://www.youtube.com/shorts/d84gDK6BJ88', '_blank')">
+                <img src="./assets/img/tc5.png" alt="Dextérité">
+                <div class="film-overlay">
+                    <div class="film-meta">
+                        <span class="film-platform film-yt">YouTube</span>
+                    </div>
+                    <div class="film-info">
+                        <h3>Dextérité</h3>
+                        <p>X min · Court métrage</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILM 5 -->
+            <div class="film-card" onclick="window.open('https://www.youtube.com/shorts/tpHyQy2-Wh4', '_blank')">
+                <img src="./assets/img/tc4.png" alt="Crainte">
+                <div class="film-overlay">
+                    <div class="film-meta">
+                        <span class="film-platform film-yt">YouTube</span>
+                    </div>
+                    <div class="film-info">
+                        <h3>Crainte</h3>
+                        <p>X min · Court métrage</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILM 6 -->
+            <div class="film-card" onclick="window.open('https://www.youtube.com/shorts/t-GaajFJnhg', '_blank')">
+                <img src="./assets/img/tc3.png" alt="Avec le sauvage">
+                <div class="film-overlay">
+                    <div class="film-meta">
+                        <span class="film-platform film-yt">YouTube</span>
+                    </div>
+                    <div class="film-info">
+                        <h3>Avec le sauvage</h3>
+                        <p>X min · Court métrage</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILM 7 -->
+            <div class="film-card" onclick="window.open('https://www.instagram.com/reel/DLv3l-TABsm/', '_blank')">
+                <img src="./assets/img/tc55.png" alt="Terrain connu">
+                <div class="film-overlay">
+                    <div class="film-meta">
+                        <span class="film-platform film-ig">Instagram</span>
+                    </div>
+                    <div class="film-info">
+                        <h3>Terrain connu</h3>
+                        <p>X min · Court métrage</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILM 8 — large -->
+            <div class="film-card film-large" onclick="window.open('https://www.youtube.com/shorts/RuNl4Jeg9iQ', '_blank')">
+                <img src="./assets/img/tc2.png" alt="Tatonnement">
+                <div class="film-overlay">
+                    <div class="film-meta">
+                        <span class="film-platform film-yt">YouTube</span>
+                    </div>
+                    <div class="film-info">
+                        <h3>Tatonnement</h3>
+                        <p>X min · Court métrage</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FILM 9 -->
+            <div class="film-card" onclick="window.open('https://www.youtube.com/shorts/lyadeVjiusY', '_blank')">
+                <img src="./assets/img/tc1.png" alt="En bons termes">
+                <div class="film-overlay">
+                    <div class="film-meta">
+                        <span class="film-platform film-yt">YouTube</span>
+                    </div>
+                    <div class="film-info">
+                        <h3>En bons termes</h3>
+                        <p>X min · Court métrage</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POUR AJOUTER UN FILM : copiez un bloc film-card,
+                 changez l'image, le titre, la durée, la plateforme et le lien.
+                 Ajoutez film-large pour qu'il prenne 2 colonnes. -->
+
         </div>
     </div>
-
+</div>
    
     <!-- ILLUSTRATIONS -->
     <div id="illus" class="splash-section">
@@ -310,16 +537,14 @@
         </div>
     </div>
 
-   <!-- MUSIQUE -->
+  <!-- MUSIQUE -->
 <div id="musique" class="splash-section">
     <a href="#home" class="close-splash">FERMER</a>
     <div class="splash-content">
         <h1 style="color:var(--primary-red);">MUSIQUE / LABEL</h1>
         <h2 style="color:var(--primary-red);">GHOST KING / ON THE TRACK</h2>
 
-        <!-- ============================================================
-             ALBUM
-        ============================================================ -->
+        <!-- ALBUM -->
         <div style="margin-top:60px; border-top:2px solid var(--primary-red); padding-top:40px;">
             <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:30px; margin-bottom:40px;">
                 <div>
@@ -327,111 +552,40 @@
                     <h2 style="margin:0;">SOUL RESSURECTION</h2>
                     <p style="color:#888; font-size:0.85rem; margin:8px 0 0;">2025 · 10 titres</p>
                 </div>
-                <!-- SYNOPSIS DE L'ALBUM : remplacez ce texte -->
-                <p style="max-width:500px; font-size:0.9rem; line-height:1.8; color:#888;">
-                    Synopsis de l'album — premier projet du Ghost King, il aborde des sujets sensibles tel que l'hétérocuriosité, la violence et la gestion de ses vices.  
-                </p>
+                <p style="max-width:500px; font-size:0.9rem; line-height:1.8; color:#888;">Premier projet du Ghost King, il aborde des sujets sensibles tel que l'hétérocuriosité, la violence et la gestion de ses vices.</p>
             </div>
 
             <div class="illus-grid">
-
-                <!-- PISTE 1 — remplacez LIEN_SPOTIFY par votre lien -->
-                <div class="illus-card" onclick="window.open('https://l.instagram.com/?u=https%3A%2F%2Fopen.spotify.com%2Ftrack%2F0yQXN2tmFywdMosL6dUrDx%3Fsi%3D-cMivAj-RbWCkb8l8pYXgg&e=AUBfvGca8nF8j2xher_IHVwMSPidpYe-HeCjPTn9PYSjYrE6hUr1XRufnhR0qZpSul9OKQZ3StFy5T2xCzH3vvIu67ue6aXqDEwiflRBHwXEn0dSqdC9LqobXAHY')">
-                    <img src="./assets/img/soul.png" alt="TITRE">
-                    <div class="illus-hover"><p>PAS CONTENT</p></div>
-                </div>
-
-                <!-- PISTE 2 — remplacez LIEN_SPOTIFY par votre lien -->
-                <div class="illus-card" onclick="window.open('https://l.instagram.com/?u=https%3A%2F%2Fopen.spotify.com%2Ftrack%2F6WVyjInPdzeEJC3xASAwFl%3Fsi%3DgqcP0U12SZKoQXcQAmYE-w&e=AUBxl_8nnD5_OWn1pi6dbf2_w0-0QB1PQq-EhNwEnvQKiDB4k0yIA73WYhkI6jDt7ShtIa1T3CYmlQAasGpRDHpkY-712RphhhfV-ATEyxkSd3NfshOr1BVRcmL7')">
-                    <img src="./assets/img/soul.png" alt="TITRE">
-                    <div class="illus-hover"><p>NEW YEAR</p></div>
-                </div>
-
-                <!-- PISTE 3 — remplacez LIEN_SPOTIFY par votre lien -->
-                <div class="illus-card" onclick="window.open('https://l.instagram.com/?u=https%3A%2F%2Fopen.spotify.com%2Ftrack%2F0ulN8gCM1dCtMqkOvfgrXt%3Fsi%3DXlVjoE4PQHqvKNYRyLDavw&e=AUDIBbKmT-Q3JWNDs5yUP4ogtFSzKXdrTnwhR3Cu-2-jhkfB-6OiWgb4XF7lHdAUYE1scNZSdaMRAkjNReCGJzIhK9o3KmHqSjd9zl7L9uzY2MWskhtyDtafw6sk')">
-                    <img src="./assets/img/soul.png" alt="TITRE">
-                    <div class="illus-hover"><p>Wobble Bounce</p></div>
-                </div>
-				
-				 <!-- PISTE 1 — remplacez LIEN_SPOTIFY par votre lien -->
-                <div class="illus-card" onclick="window.open('https://l.instagram.com/?u=https%3A%2F%2Fopen.spotify.com%2Ftrack%2F4OgkRUy030KhLPCf7qeOm2%3Fsi%3Dy33aK0ztTlavxkVKmKYcEg&e=AUBmL0RkvZ3kXK4AJRN5kc9wPlaIUGFilJWU-GVLQwFRsNDGbEMg5L8d725S_lLkF_SYzZQKWhLXsYWnrb4sdI1Jqu1rVUD_QcMbBwve0PF67w2szlG2I9lqIjtR')">
-                    <img src="./assets/img/soul.png" alt="TITRE">
-                    <div class="illus-hover"><p>Pure Vitesse</p></div>
-                </div>
-
-                <!-- PISTE 2 — remplacez LIEN_SPOTIFY par votre lien -->
-                <div class="illus-card" onclick="https://l.instagram.com/?u=https%3A%2F%2Fopen.spotify.com%2Ftrack%2F46S49IeebcrXuz7Q9qfbCa%3Fsi%3DolB0IrTnQiqcAxAShNpMLg&e=AUD0NvvYDxgqNNG_de6kWS7EORoGWm3fTLMxCZXoYVaE1m-nltpqma7AHdACuGdDX7iOw3aY_C7KyS0raiWG-6MxfM3FTZ7dTOEXUpCyTH6jsQ9AQyJ493Jlb62v')">
-                    <img src="./assets/img/soul.png" alt="TITRE">
-                    <div class="illus-hover"><p>Bitches and Femboys</p></div>
-                </div>
-
-                <!-- PISTE 3 — remplacez LIEN_SPOTIFY par votre lien -->
-                <div class="illus-card" onclick="window.open('https://l.instagram.com/?https://l.instagram.com/?u=https%3A%2F%2Fopen.spotify.com%2Ftrack%2F0o9h9ECVMwHcFXmWnGXi6s%3Fsi%3DKp9VxcInQey_4C63r5sAYg&e=AUCoflenCQhHSXJrQ92RdHrlYgH92zlgvuFoJStha-RDSVALaG3C9MurDmfNgXc_APfDZa01HgD4xTjvUKAjoQcFrM-BksMe_9L0WNPgqiSvEnyidCMTDdwNBCcP')">
-                    <img src="./assets/img/soul.png" alt="TITRE">
-                    <div class="illus-hover"><p>119 GLOCKS</p></div> 
-                </div>
-				
-				 <!-- PISTE 1 — remplacez LIEN_SPOTIFY par votre lien -->
-                <div class="illus-card" onclick="window.open('https://l.instagram.com/?https://l.instagram.com/?u=https%3A%2F%2Fopen.spotify.com%2Ftrack%2F4h7WNnrfwrXnXS5KtDKy9i%3Fsi%3D_FRVgOqRTz6gfqAYDGlXxg&e=AUApz-mdSqlncFp3wDlmhDvT561Wa-h0xwSabAoSkv0fHReSQTeci3wkE3SReFEa-FZ-CCNklJMGWwGPSWyaSoxk1GovVXcqpJoecQLv6TO3eKIo2mmjYE5HZ8hr')">
-                    <img src="./assets/img/soul.png" alt="TITRE">
-                    <div class="illus-hover"><p>Okay</p></div>
-                </div>
-
-                <!-- PISTE 2 — remplacez LIEN_SPOTIFY par votre lien -->
-                <div class="illus-card" onclick="https://l.instagram.com/?https://l.instagram.com/?u=https%3A%2F%2Fopen.spotify.com%2Ftrack%2F2YFpinvfmmB7TmCzHVHgOQ%3Fsi%3D8a7KuORqSIO-UzBywpbd0w&e=AUBuHRj1pJNC2lTIE51QvYqxbaYMufPnzYcMsJnb8TVhpMx5NXcpkXT7FfTCSRiXkI66UmCP3vu9AmTPsVQ8cfSsgsZvOaMAkC5DkOXBMHCz0zmJrw3Z9Gtz68pE')">
-                    <img src="./assets/img/soul.png" alt="TITRE">
-                    <div class="illus-hover"><p>U.F.O (unidentified femboy orifices)</p></div>
-                </div>
-
-                <!-- PISTE 3 — remplacez LIEN_SPOTIFY par votre lien -->
-                <div class="illus-card" onclick="window.open('https://l.instagram.com/?https://l.instagram.com/?https://l.instagram.com/?u=https%3A%2F%2Fopen.spotify.com%2Ftrack%2F7bv9zvv60XIaymEJ4wl0b9%3Fsi%3DyoqU_rIDSJa1N82prFOhJw&e=AUC6o_NJUplsIEBVtEKigMRkOsrr0D6HsEhiTDob3-OrkzUhMP1OEhmnFPZaKlNslq-TjfVQexn9URYgIW_5_62C7fO0jQhXLZCiamPwH6AH6a_pjyvVGDj4Ik5m')">
-                    <img src="./assets/img/soul.png" alt="TITRE">
-                    <div class="illus-hover"><p>Shake 4 kirk</p></div> 
-                </div>
-				
-				   <!-- PISTE 3 — remplacez LIEN_SPOTIFY par votre lien -->
-                <div class="illus-card" onclick="window.open('https://l.instagram.com/?https://l.instagram.com/?https://l.instagram.com/?https://l.instagram.com/?u=https%3A%2F%2Fopen.spotify.com%2Ftrack%2F3k0wyQN9GnYUHzmalz23h6%3Fsi%3DfQzw34BaSHeQsyin-tdaEA&e=AUD0O9F8W5HXc0CXcBzjWf1qbgQ0pc8pRAWrQEE4cQb9j30eHJLJjzecJIskQYJS51sTy5cIY7YbZI36a_x-Xe6PnaILAH7Xknr9UasSUVYezU1o6p2lyBaKnpF0')">
-                    <img src="./assets/img/soul.png" alt="TITRE">
-                    <div class="illus-hover"><p>Femboy Obsession</p></div> 
-                </div>
-
-                <!-- POUR AJOUTER UNE PISTE : copiez un bloc illus-card,
-                     changez le LIEN_SPOTIFY, le alt et le texte dans illus-hover -->
-
+                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/0yQXN2tmFywdMosL6dUrDx', '_blank')"><img src="./assets/img/soul.png" alt="Pas Content"><div class="illus-hover"><p>PAS CONTENT</p></div></div>
+                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/6WVyjInPdzeEJC3xASAwFl', '_blank')"><img src="./assets/img/soul.png" alt="New Year"><div class="illus-hover"><p>NEW YEAR</p></div></div>
+                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/0ulN8gCM1dCtMqkOvfgrXt', '_blank')"><img src="./assets/img/soul.png" alt="Wobble Bounce"><div class="illus-hover"><p>WOBBLE BOUNCE</p></div></div>
+                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/4OgkRUy030KhLPCf7qeOm2', '_blank')"><img src="./assets/img/soul.png" alt="Pure Vitesse"><div class="illus-hover"><p>PURE VITESSE</p></div></div>
+                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/46S49IeebcrXuz7Q9qfbCa', '_blank')"><img src="./assets/img/soul.png" alt="Bitches and Femboys"><div class="illus-hover"><p>BITCHES AND FEMBOYS</p></div></div>
+                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/0o9h9ECVMwHcFXmWnGXi6s', '_blank')"><img src="./assets/img/soul.png" alt="119 Glocks"><div class="illus-hover"><p>119 GLOCKS</p></div></div>
+                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/4h7WNnrfwrXnXS5KtDKy9i', '_blank')"><img src="./assets/img/soul.png" alt="Okay"><div class="illus-hover"><p>OKAY</p></div></div>
+                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/2YFpinvfmmB7TmCzHVHgOQ', '_blank')"><img src="./assets/img/soul.png" alt="UFO"><div class="illus-hover"><p>U.F.O (UNIDENTIFIED FEMBOY ORIFICES)</p></div></div>
+                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/7bv9zvv60XIaymEJ4wl0b9', '_blank')"><img src="./assets/img/soul.png" alt="Shake 4 Kirk"><div class="illus-hover"><p>SHAKE 4 KIRK</p></div></div>
+                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/3k0wyQN9GnYUHzmalz23h6', '_blank')"><img src="./assets/img/soul.png" alt="Femboy Obsession"><div class="illus-hover"><p>FEMBOY OBSESSION</p></div></div>
+                <!-- POUR AJOUTER UNE PISTE : copiez un illus-card, changez le lien Spotify, alt et titre -->
             </div>
         </div>
 
-        <!-- ============================================================
-             SINGLES
-        ============================================================ -->
+        <!-- SINGLES -->
         <div style="margin-top:80px; border-top:2px solid var(--primary-red); padding-top:40px;">
             <div style="margin-bottom:40px;">
                 <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 8px;">SINGLES</p>
                 <h2 style="margin:0;">TITRES INDÉPENDANTS</h2>
             </div>
-
             <div class="illus-grid">
-
-                <!-- SINGLE 1 — remplacez LIEN_SPOTIFY par votre lien -->
-                <div class="illus-card" onclick="window.open('LIEN_SPOTIFY', '_blank')">
-                    <img src="./assets/img/soul.png" alt="TITRE">
-                    <div class="illus-hover"><p>TITRE</p></div>
-                </div>
-
-                <!-- SINGLE 2 — remplacez LIEN_SPOTIFY par votre lien -->
-                <div class="illus-card" onclick="window.open('LIEN_SPOTIFY', '_blank')">
-                    <img src="./assets/img/soul.png" alt="TITRE">
-                    <div class="illus-hover"><p>TITRE</p></div>
-                </div>
-
-                <!-- POUR AJOUTER UN SINGLE : copiez un bloc illus-card,
-                     changez le LIEN_SPOTIFY, le alt et le texte dans illus-hover -->
-
+                <div class="illus-card" onclick="window.open('LIEN_SPOTIFY', '_blank')"><img src="./assets/img/soul.png" alt="TITRE"><div class="illus-hover"><p>TITRE</p></div></div>
+                <div class="illus-card" onclick="window.open('LIEN_SPOTIFY', '_blank')"><img src="./assets/img/soul.png" alt="TITRE"><div class="illus-hover"><p>TITRE</p></div></div>
+                <!-- POUR AJOUTER UN SINGLE : copiez un illus-card, changez le lien Spotify, alt et titre -->
             </div>
         </div>
 
     </div>
 </div>
+
 
     <!-- CLOUD -->
     <div id="cloud-page" class="splash-section">
