@@ -95,6 +95,29 @@
         .illus-hover { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, rgba(0,0,0,0.75)); color: white; padding: 20px 12px 10px; opacity: 0; transition: opacity 0.3s ease; border-radius: 0 0 8px 8px; }
         .illus-card:hover .illus-hover { opacity: 1; }
 
+        /* --- PHOTOGRAPHIE (GALERIE PAR ARTISTE + LIGHTBOX) --- */
+        .photo-artist { margin-top: 50px; }
+        .photo-artist-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; border-bottom: 2px solid var(--primary-red); padding-bottom: 14px; margin-bottom: 24px; }
+        .photo-artist-head h2 { margin: 0; font-size: 1.6rem; letter-spacing: 2px; }
+        .photo-artist-head span { color: #888; font-size: 0.75rem; letter-spacing: 3px; font-weight: 700; }
+        .photo-grid { columns: 3; column-gap: 14px; }
+        .photo-card { break-inside: avoid; margin-bottom: 14px; border-radius: 8px; overflow: hidden; cursor: pointer; position: relative; background: #000; border: 1px solid var(--card-border); }
+        .photo-card img { width: 100%; display: block; transition: transform 0.5s ease, filter 0.5s ease; }
+        .photo-card:hover img { transform: scale(1.06); filter: brightness(0.55); }
+        .photo-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 18px; opacity: 0; transition: opacity 0.4s ease; background: linear-gradient(transparent 40%, rgba(0,0,0,0.8)); }
+        .photo-card:hover .photo-overlay { opacity: 1; }
+        .photo-overlay .p-title { color: #fff; font-weight: 800; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; margin: 0 0 4px; }
+        .photo-overlay .p-artist { color: var(--primary-red); font-size: 0.72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin: 0; }
+        .photo-expand { position: absolute; top: 12px; right: 12px; width: 34px; height: 34px; border-radius: 50%; background: rgba(0,0,0,0.55); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1rem; opacity: 0; transition: opacity 0.4s ease; }
+        .photo-card:hover .photo-expand { opacity: 1; }
+
+        #photo-lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.94); z-index: 9999; align-items: center; justify-content: center; flex-direction: column; padding: 30px; box-sizing: border-box; }
+        #photo-lightbox img { max-width: 92%; max-height: 78vh; object-fit: contain; border-radius: 8px; box-shadow: 0 20px 60px rgba(0,0,0,0.6); }
+        #photo-lightbox .pl-title { color: #fff; margin: 18px 0 4px; font-size: 1.1rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+        #photo-lightbox .pl-artist { color: var(--primary-red); font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin: 0; text-align: center; }
+        #photo-lightbox .pl-hint { color: rgba(255,255,255,0.4); font-size: 0.72rem; margin-top: 20px; }
+        .photo-lb-close { position: absolute; top: 24px; right: 30px; color: #fff; font-size: 2rem; font-weight: 800; cursor: pointer; line-height: 1; }
+
         /* --- RESPONSIVE --- */
         @media (max-width: 1002px) {
             .mobile-menu-btn { display: block; }
@@ -109,6 +132,7 @@
             .close-splash { top: 20px; right: 20px; padding: 8px 15px; font-size: 0.7rem; }
             .mobile-savoir-nav { display: block; }
             .illus-grid { columns: 1; }
+            .photo-grid { columns: 2; }
         }
         @media (max-width: 600px) {
             h1.big-title { font-size: 2.2rem; letter-spacing: 2px; }
@@ -116,6 +140,7 @@
             .service-bubble { width: 100px; height: 100px; font-size: 0.8rem; }
             .project-card { min-width: 240px; }
             .mobile-menu-btn { top: 15px; left: 15px; padding: 5px 12px; font-size: 1.2rem; }
+            .photo-grid { columns: 1; }
         }
 		
 		
@@ -435,8 +460,16 @@
                 </div>
             </div>
 
-            <!-- POUR AJOUTER UN FILM : copiez un bloc film-card film-poster,
-                 changez l'image (format 2:3), le titre, la durée, la plateforme et le lien. -->
+            <div class="film-card film-poster" onclick="window.open('https://youtu.be/C-VuWBeKA5g?si=aPafQHV93COAcniV', '_blank')">
+                <img src="./assets/img/SDC.png" alt="Scandale à Montréal">
+                <div class="film-overlay">
+                    <div class="film-info">
+                        <h3>Scandale à Montréal</h3>
+                        <p>Réal. Jonathan Vaillancourt · Court métrage</p>
+                    </div>
+                </div>
+            </div>
+      
 
         </div>
 
@@ -642,7 +675,123 @@
     <!-- PHOTOGRAPHIE -->
     <div id="photographie" class="splash-section">
         <a href="#home" class="close-splash">FERMER</a>
-        <div class="splash-content"><h1 style="color:var(--primary-red);">PHOTOGRAPHIE</h1></div>
+        <div class="splash-content">
+            <h1 style="color:var(--primary-red);">PHOTOGRAPHIE</h1>
+            <p>Survolez une photo pour voir l'œuvre et son artiste. Cliquez pour l'agrandir.</p>
+
+            <!-- =====================================================
+                 POUR AJOUTER UNE PHOTO :
+                 Copiez un bloc photo-card dans la bonne section d'artiste
+                 et changez :
+                 1. les deux src de l'image (./assets/img/photo/...)
+                 2. l'onclick : openPhoto('chemin', 'Titre', 'Artiste')
+                 3. le titre dans .p-title  et le nom dans .p-artist
+            ===================================================== -->
+
+            <!-- ===================== ARTISTE : CARLOS-ENRIQUE ===================== -->
+            <div class="photo-artist">
+                <div class="photo-artist-head">
+                    <h2>Carlos-Enrique</h2>
+                    <span>CLOUD 330</span>
+                </div>
+                <div class="photo-grid">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/carlos-mon-mur.jpg', 'Mon mur', 'Carlos-Enrique')">
+                        <img src="./assets/img/photo/carlos-mon-mur.jpg" alt="Mon mur — Carlos-Enrique" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Mon mur</p><p class="p-artist">Carlos-Enrique</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/carlos-the-glace.jpg', 'Thé glacé', 'Carlos-Enrique')">
+                        <img src="./assets/img/photo/carlos-the-glace.jpg" alt="Thé glacé — Carlos-Enrique" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Thé glacé</p><p class="p-artist">Carlos-Enrique</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/carlos-motion8-page3.jpg', 'Motion8 — page 3', 'Carlos-Enrique')">
+                        <img src="./assets/img/photo/carlos-motion8-page3.jpg" alt="Motion8 page 3 — Carlos-Enrique" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Motion8 — page 3</p><p class="p-artist">Carlos-Enrique</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== ARTISTE : JONAH ===================== -->
+            <div class="photo-artist">
+                <div class="photo-artist-head">
+                    <h2>Jonah</h2>
+                    <span>SÉRIE NIAGARA FALLS</span>
+                </div>
+                <div class="photo-grid">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-1.jpg', 'Niagara Falls 1', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-1.jpg" alt="Niagara Falls 1 — Jonah" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Niagara Falls 1</p><p class="p-artist">Jonah</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-2.jpg', 'Niagara Falls 2', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-2.jpg" alt="Niagara Falls 2 — Jonah" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Niagara Falls 2</p><p class="p-artist">Jonah</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-3.jpg', 'Niagara Falls 3', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-3.jpg" alt="Niagara Falls 3 — Jonah" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Niagara Falls 3</p><p class="p-artist">Jonah</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-4.jpg', 'Niagara Falls 4', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-4.jpg" alt="Niagara Falls 4 — Jonah" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Niagara Falls 4</p><p class="p-artist">Jonah</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-5.jpg', 'Niagara Falls 5', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-5.jpg" alt="Niagara Falls 5 — Jonah" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Niagara Falls 5</p><p class="p-artist">Jonah</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-6.jpg', 'Niagara Falls 6', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-6.jpg" alt="Niagara Falls 6 — Jonah" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Niagara Falls 6</p><p class="p-artist">Jonah</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-7.jpg', 'Niagara Falls 7', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-7.jpg" alt="Niagara Falls 7 — Jonah" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Niagara Falls 7</p><p class="p-artist">Jonah</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-8.jpg', 'Niagara Falls 8', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-8.jpg" alt="Niagara Falls 8 — Jonah" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Niagara Falls 8</p><p class="p-artist">Jonah</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-9.jpg', 'Niagara Falls 9', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-9.jpg" alt="Niagara Falls 9 — Jonah" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Niagara Falls 9</p><p class="p-artist">Jonah</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-10.jpg', 'Niagara Falls 10', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-10.jpg" alt="Niagara Falls 10 — Jonah" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Niagara Falls 10</p><p class="p-artist">Jonah</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-11.jpg', 'Niagara Falls 11', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-11.jpg" alt="Niagara Falls 11 — Jonah" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Niagara Falls 11</p><p class="p-artist">Jonah</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-12.jpg', 'Niagara Falls 12', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-12.jpg" alt="Niagara Falls 12 — Jonah" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Niagara Falls 12</p><p class="p-artist">Jonah</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LIGHTBOX PHOTO -->
+        <div id="photo-lightbox" onclick="closePhoto()">
+            <span class="photo-lb-close" onclick="closePhoto()">✕</span>
+            <img id="photo-lb-img" src="" alt="">
+            <p class="pl-title" id="photo-lb-title"></p>
+            <p class="pl-artist" id="photo-lb-artist"></p>
+            <p class="pl-hint">Cliquez n'importe où pour fermer</p>
+        </div>
     </div>
 
 
@@ -828,6 +977,18 @@
         function closeLightbox() {
             document.getElementById('lightbox').style.display = 'none';
         }
+        function openPhoto(src, titre, artiste) {
+            document.getElementById('photo-lb-img').src = src;
+            document.getElementById('photo-lb-title').textContent = titre;
+            document.getElementById('photo-lb-artist').textContent = artiste;
+            document.getElementById('photo-lightbox').style.display = 'flex';
+        }
+        function closePhoto() {
+            document.getElementById('photo-lightbox').style.display = 'none';
+        }
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') { closePhoto(); closeLightbox(); }
+        });
 
         /* --- INTRO CINÉMATIQUE J&J PILOTÉE PAR LE SCROLL --- */
         function initJJIntro() {
