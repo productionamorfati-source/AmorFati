@@ -139,6 +139,18 @@
     grid-column: span 2;
 }
 
+.film-card.film-poster {
+    aspect-ratio: 2/3;
+}
+
+.film-card.film-vertical {
+    aspect-ratio: 9/16;
+}
+
+.films-grid.connexe-grid {
+    grid-template-columns: repeat(4, 1fr);
+}
+
 .film-card img {
     width: 100%;
     height: 100%;
@@ -207,12 +219,28 @@
 
 @media (max-width: 1002px) {
     .films-grid { grid-template-columns: repeat(2, 1fr); }
+    .films-grid.connexe-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
 @media (max-width: 600px) {
     .films-grid { grid-template-columns: 1fr; }
+    .films-grid.connexe-grid { grid-template-columns: repeat(2, 1fr); }
     .film-card.film-large { grid-column: span 1; }
 }
+
+/* --- INTRO CINÉMATIQUE J&J (SCROLL STYLE APPLE) --- */
+.jj-intro { position: relative; height: 340vh; }
+.jj-intro-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+.jj-phase { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 6vw; opacity: 0; will-change: opacity, transform; }
+.jj-phase .jj-text { font-size: clamp(2rem, 6.2vw, 5rem); font-weight: 800; line-height: 1.06; letter-spacing: -1.5px; margin: 0; max-width: 16ch; text-transform: none; }
+.jj-phase .hl { color: var(--primary-red); }
+.jj-lead { font-size: clamp(1.4rem, 3.6vw, 2.5rem); font-weight: 800; line-height: 1.2; letter-spacing: -1px; margin: 0 0 clamp(28px, 5vh, 48px); max-width: 22ch; text-transform: none; }
+.jj-words { display: flex; flex-wrap: wrap; gap: 12px 26px; align-items: center; justify-content: center; max-width: 920px; }
+.jj-word { font-size: clamp(1.5rem, 4.6vw, 3.4rem); font-weight: 800; letter-spacing: -1px; color: var(--primary-red); opacity: 0; line-height: 1.1; will-change: opacity, transform; }
+.jj-scroll-cue { position: absolute; left: 50%; bottom: 36px; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 12px; color: #888; font-size: 0.68rem; font-weight: 700; letter-spacing: 3px; pointer-events: none; }
+.jj-chevron { width: 14px; height: 14px; border-right: 2px solid var(--primary-red); border-bottom: 2px solid var(--primary-red); animation: jjBob 1.6s ease-in-out infinite; }
+@keyframes jjBob { 0%,100% { transform: rotate(45deg) translate(-2px,-2px); opacity: .35; } 50% { transform: rotate(45deg) translate(2px,2px); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .jj-intro { display: none; } }
     </style>
 </head>
 
@@ -237,6 +265,7 @@
         <a href="#home" onclick="document.getElementById('mobile-menu-toggle').checked=false"><img src="./assets/img/Jackalop.png" alt="Amor Fati Logo" class="logo-img"></a>
         <a href="#shorts" class="nav-link" onclick="document.getElementById('mobile-menu-toggle').checked=false">COURT MÉTRAGE</a>
         <a href="#illus" class="nav-link" onclick="document.getElementById('mobile-menu-toggle').checked=false">ILLUSTRATION</a>
+        <a href="#photographie" class="nav-link" onclick="document.getElementById('mobile-menu-toggle').checked=false">PHOTOGRAPHIE</a>
         <a href="#musique" class="nav-link" onclick="document.getElementById('mobile-menu-toggle').checked=false">MUSIQUE</a>
     </nav>
 
@@ -286,22 +315,45 @@
     <!-- J&J PAGE -->
     <div id="jj-page" class="splash-section">
         <a href="#home" class="close-splash">FERMER</a>
+
+        <!-- INTRO CINÉMATIQUE (pilotée par le scroll) -->
+        <div class="jj-intro">
+            <div class="jj-intro-sticky">
+                <div class="jj-phase">
+                    <p class="jj-text">Vous voulez investir dans votre <span class="hl">entreprise</span>.</p>
+                </div>
+                <div class="jj-phase">
+                    <p class="jj-text">Chaque dollar investi avec nous vous <span class="hl">revient</span>.</p>
+                </div>
+                <div class="jj-phase">
+                    <p class="jj-lead">Occupez-vous de ce que vous savez faire.<br>De notre côté, on s'occupe de vos :</p>
+                    <div class="jj-words">
+                        <span class="jj-word">réseaux sociaux</span>
+                        <span class="jj-word">site web</span>
+                        <span class="jj-word">design publicitaire</span>
+                        <span class="jj-word">et plus encore.</span>
+                    </div>
+                </div>
+                <div class="jj-scroll-cue"><span>DÉFILEZ</span><div class="jj-chevron"></div></div>
+            </div>
+        </div>
+
         <div class="splash-content">
-            <h1 style="color:var(--primary-red);">J&J SERVICES</h1>
+            <h1 style="color:var(--primary-red);">SERVICE D'ACQUISITION DE CLIENTS</h1>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:60px; margin-top:40px;">
                 <div>
                     <h2>Un investissement, pas une dépense.</h2>
-                    <p>Chez J&J, nous créons du contenu dynamique pour les réseaux sociaux conçu pour mettre en valeur votre marque. Notre objectif ? Transformer vos spectateurs en clients.</p>
+                    <p>Chaque dollar investi dans votre image, c'est un dollar qui travaille pour vous. Chez J&J, nous transformons votre présence en ligne en véritable machine à attirer des clients : du contenu pensé pour capter l'attention, créer l'envie, et convertir vos visiteurs en réservations concrètes. Nos clients qui passent au contenu professionnel voient systématiquement leur achalandage et leur visibilité grimper, mois après mois.</p>
                     <h3>Pourquoi choisir notre solution ?</h3>
                     <ul>
-                        <li><strong>Qualité Cinéma :</strong> Captations professionnelles (4K, Gimbal, Audio Pro).</li>
-                        <li><strong>Tarif compétitif :</strong> Qualité supérieure à un prix 50% moins cher que le marché.</li>
-                        <li><strong>Impact réel :</strong> Boostez vos réservations et votre visibilité.</li>
+                        <li><strong>Qualité Cinéma :</strong> Captations professionnelles (4K, Gimbal, Audio Pro) qui démarquent votre marque de la concurrence.</li>
+                        <li><strong>Tarif compétitif :</strong> Qualité supérieure à un prix 50% moins cher que le marché, pour un retour sur investissement maximal.</li>
+                        <li><strong>Résultats concrets :</strong> Plus de visibilité, plus de réservations, plus de clients fidèles — chaque vidéo devient un actif qui rapporte sur le long terme.</li>
                     </ul>
                     <a href="#tarifs-page" class="cta-btn">Consulter nos forfaits</a>
                 </div>
                 <div>
-                    <img src="./assets/img/couverture-777.png" alt="Projet 777" style="width:100%; margin-bottom:20px; border-radius:10px; box-shadow:0 10px 20px rgba(0,0,0,0.1);">
+                    <img src="./assets/img/couverture777.png" alt="Projet 777" style="width:100%; margin-bottom:20px; border-radius:10px; box-shadow:0 10px 20px rgba(0,0,0,0.1);">
                     <img src="./assets/img/jojo1.png" alt="Projet Jojo" style="width:100%; border-radius:10px; box-shadow:0 10px 20px rgba(0,0,0,0.1);">
                 </div>
             </div>
@@ -311,14 +363,14 @@
                 <a href="https://www.instagram.com/jason_s_draw/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>JASON</strong><span>LAURIN</span></a>
                 <a href="https://www.instagram.com/yacancallmejo/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>JORDAN</strong><span>PAUL</span></a>
 				<a href="https://www.instagram.com/true._ivy?igsh=MWRpajlwcGU1dXNhcw==" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>ÉLIZABEL</strong><span>ROY</span></a>
-                <a href="https://www.instagram.com/mikeolivier_?igsh=NG01aGNhc205Zjdq" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>MIKE</strong><span>SOUFFRONT</span></a>
             </div>
 
-            <h3 style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;">Projets Récents J&J</h3>
+            <h3 style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;">Projets Récents Service d'Acquisition de Clients</h3>
             <div class="scroll-wrapper">
-                <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/ZappL48qgbQ', '_blank')"><div class="card-img"><img src="./assets/img/couverture-777.png" alt="Vidéo 777"></div><div class="card-info"><h4>Friperie 777</h4><p>J&J Marketing</p></div></div>
+                <div class="project-card" onclick="window.open('https://www.instagram.com/reel/DYiwM9euzUq/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')"><div class="card-img"><img src="./assets/img/cafecrepes2.png" alt="Vidéo Beau Réveil"></div><div class="card-info"><h4>Beau Réveil</h4><p>J&J Marketing</p></div></div>
+                <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/ZappL48qgbQ', '_blank')"><div class="card-img"><img src="./assets/img/couverture777.png" alt="Vidéo 777"></div><div class="card-info"><h4>Friperie 777</h4><p>J&J Marketing</p></div></div>
                 <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/lZZNtsFhsY4', '_blank')"><div class="card-img"><img src="./assets/img/jojo1.png" alt="Vidéo Jojo"></div><div class="card-info"><h4>Bistro à Jojo</h4><p>J&J Event</p></div></div>
-                <div class="project-card" onclick="window.open('https://www.youtube.com/watch?v=5gc4kjuLFOo', '_blank')"><div class="card-img"><img src="./assets/img/_DSC3055.png" alt="Vidéo Crêpes"></div><div class="card-info"><h4>Café & Crêpes</h4><p>J&J Marketing</p></div></div>
+                <div class="project-card" onclick="window.open('https://www.youtube.com/watch?v=5gc4kjuLFOo', '_blank')"><div class="card-img"><img src="./assets/img/DSC3055.png" alt="Vidéo Crêpes"></div><div class="card-info"><h4>Café & Crêpes</h4><p>J&J Marketing</p></div></div>
             </div>
         </div>
     </div>
@@ -349,11 +401,12 @@
         <h1 style="color:var(--primary-red);">COURTS MÉTRAGES</h1>
         <p style="color:#888; letter-spacing:2px; font-size:0.85rem;">PRODUCTION AMOR FATI</p>
 
+        <h2 style="margin-top:60px;">COURT MÉTRAGE</h2>
         <div class="films-grid">
 
             <!-- ================================
                  FILM — pour modifier :
-                 1. src de l'image
+                 1. src de l'image (format affiche de cinéma 2:3)
                  2. Titre
                  3. Durée
                  4. Plateforme (YouTube / Instagram)
@@ -361,12 +414,20 @@
             ================================ -->
 
             <!-- FILM 1 -->
-            <div class="film-card" onclick="window.open('https://www.youtube.com/watch?v=ixi3VgVQDY0', '_blank')">
-                <img src="./assets/img/rdls.jpg" alt="Reel de l'oie sauvage">
+            <div class="film-card film-poster" onclick="window.open('https://www.youtube.com/watch?v=dU1Lql5i_Bk&t=3s', '_blank')">
+                <img src="./assets/img/carpediem.png" alt="Carpe Diem">
                 <div class="film-overlay">
-                    <div class="film-meta">
-                        <span class="film-platform film-yt">YouTube</span>
+                    <div class="film-info">
+                        <h3>Carpe Diem</h3>
+                        <p>Réal. Mitch Mondestin · Court métrage</p>
                     </div>
+                </div>
+            </div>
+
+            <!-- FILM 2 -->
+            <div class="film-card film-poster" onclick="window.open('https://youtu.be/ixi3VgVQDY0?si=YKxSO7OclJBKyEBx', '_blank')">
+                <img src="./assets/img/rdls2.png" alt="Reel de l'oie sauvage">
+                <div class="film-overlay">
                     <div class="film-info">
                         <h3>Reel de l'oie sauvage</h3>
                         <p>X min · Court métrage</p>
@@ -374,123 +435,111 @@
                 </div>
             </div>
 
-            <!-- FILM 2 -->
-            <div class="film-card" onclick="window.open('https://www.youtube.com/shorts/wQ4PMzQ_ilQ', '_blank')">
-                <img src="./assets/img/tc6.png" alt="BlockHead">
-                <div class="film-overlay">
-                    <div class="film-meta">
-                        <span class="film-platform film-yt">YouTube</span>
-                    </div>
-                    <div class="film-info">
-                        <h3>BlockHead</h3>
-                        <p>X min · Court métrage</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FILM 3 -->
-            <div class="film-card" onclick="window.open('https://www.instagram.com/reel/DQsX6-cE6mI/', '_blank')">
-                <img src="./assets/img/tc7.png" alt="Note à vous-même">
-                <div class="film-overlay">
-                    <div class="film-meta">
-                        <span class="film-platform film-ig">Instagram</span>
-                    </div>
-                    <div class="film-info">
-                        <h3>Note à vous-même</h3>
-                        <p>X min · Court métrage</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FILM 4 — large -->
-            <div class="film-card film-large" onclick="window.open('https://www.youtube.com/shorts/d84gDK6BJ88', '_blank')">
-                <img src="./assets/img/tc5.png" alt="Dextérité">
-                <div class="film-overlay">
-                    <div class="film-meta">
-                        <span class="film-platform film-yt">YouTube</span>
-                    </div>
-                    <div class="film-info">
-                        <h3>Dextérité</h3>
-                        <p>X min · Court métrage</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FILM 5 -->
-            <div class="film-card" onclick="window.open('https://www.youtube.com/shorts/tpHyQy2-Wh4', '_blank')">
-                <img src="./assets/img/tc4.png" alt="Crainte">
-                <div class="film-overlay">
-                    <div class="film-meta">
-                        <span class="film-platform film-yt">YouTube</span>
-                    </div>
-                    <div class="film-info">
-                        <h3>Crainte</h3>
-                        <p>X min · Court métrage</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FILM 6 -->
-            <div class="film-card" onclick="window.open('https://www.youtube.com/shorts/t-GaajFJnhg', '_blank')">
-                <img src="./assets/img/tc3.png" alt="Avec le sauvage">
-                <div class="film-overlay">
-                    <div class="film-meta">
-                        <span class="film-platform film-yt">YouTube</span>
-                    </div>
-                    <div class="film-info">
-                        <h3>Avec le sauvage</h3>
-                        <p>X min · Court métrage</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FILM 7 -->
-            <div class="film-card" onclick="window.open('https://www.instagram.com/reel/DLv3l-TABsm/', '_blank')">
-                <img src="./assets/img/tc55.png" alt="Terrain connu">
-                <div class="film-overlay">
-                    <div class="film-meta">
-                        <span class="film-platform film-ig">Instagram</span>
-                    </div>
-                    <div class="film-info">
-                        <h3>Terrain connu</h3>
-                        <p>X min · Court métrage</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FILM 8 — large -->
-            <div class="film-card film-large" onclick="window.open('https://www.youtube.com/shorts/RuNl4Jeg9iQ', '_blank')">
-                <img src="./assets/img/tc2.png" alt="Tatonnement">
-                <div class="film-overlay">
-                    <div class="film-meta">
-                        <span class="film-platform film-yt">YouTube</span>
-                    </div>
-                    <div class="film-info">
-                        <h3>Tatonnement</h3>
-                        <p>X min · Court métrage</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- FILM 9 -->
-            <div class="film-card" onclick="window.open('https://www.youtube.com/shorts/lyadeVjiusY', '_blank')">
-                <img src="./assets/img/tc1.png" alt="En bons termes">
-                <div class="film-overlay">
-                    <div class="film-meta">
-                        <span class="film-platform film-yt">YouTube</span>
-                    </div>
-                    <div class="film-info">
-                        <h3>En bons termes</h3>
-                        <p>X min · Court métrage</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- POUR AJOUTER UN FILM : copiez un bloc film-card,
-                 changez l'image, le titre, la durée, la plateforme et le lien.
-                 Ajoutez film-large pour qu'il prenne 2 colonnes. -->
+            <!-- POUR AJOUTER UN FILM : copiez un bloc film-card film-poster,
+                 changez l'image (format 2:3), le titre, la durée, la plateforme et le lien. -->
 
         </div>
+
+        <h2 style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;">TÂCHE CONNEXE</h2>
+        <div class="films-grid connexe-grid">
+
+            <!-- ================================
+                 TÂCHE CONNEXE — placeholders 9:16
+                 pour modifier : src de l'image, titre et lien
+            ================================ -->
+
+            <!-- TÂCHE 8 -->
+            <div class="film-card film-vertical" onclick="window.open('https://www.instagram.com/reel/DRN8Jdvk6UO/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')">
+                <img src="./assets/img/tache8.png" alt="BlockHead">
+                <div class="film-overlay">
+                    <div class="film-info">
+                        <h3>BlockHead</h3>
+                        <p>Production J&J</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TÂCHE 7 -->
+            <div class="film-card film-vertical" onclick="window.open('https://www.instagram.com/reel/DRvl7ElkzVI/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')">
+                <img src="./assets/img/tache7.png" alt="Tympan">
+                <div class="film-overlay">
+                    <div class="film-info">
+                        <h3>Tympan</h3>
+                        <p>Production J&J</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TÂCHE 6 -->
+            <div class="film-card film-vertical" onclick="window.open('https://www.instagram.com/reel/DQsX6-cE6mI/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')">
+                <img src="./assets/img/tache6.png" alt="Note à vous-même">
+                <div class="film-overlay">
+                    <div class="film-info">
+                        <h3>Note à vous-même</h3>
+                        <p>Production J&J</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TÂCHE 5 -->
+            <div class="film-card film-vertical" onclick="window.open('https://www.instagram.com/reel/DMGvLfxTEfv/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')">
+                <img src="./assets/img/tache5.png" alt="Crainte">
+                <div class="film-overlay">
+                    <div class="film-info">
+                        <h3>Crainte</h3>
+                        <p>Production J&J</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TÂCHE 4 -->
+            <div class="film-card film-vertical" onclick="window.open('https://www.instagram.com/reel/DLlcATbzQSb/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')">
+                <img src="./assets/img/tache4.png" alt="Dextérité">
+                <div class="film-overlay">
+                    <div class="film-info">
+                        <h3>Dextérité</h3>
+                        <p>Production J&J</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TÂCHE 3 -->
+            <div class="film-card film-vertical" onclick="window.open('https://www.instagram.com/reel/DLN6h9NyQTB/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')">
+                <img src="./assets/img/tache3.png" alt="Avec le sauvage">
+                <div class="film-overlay">
+                    <div class="film-info">
+                        <h3>Avec le sauvage</h3>
+                        <p>Production J&J</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TÂCHE 2 -->
+            <div class="film-card film-vertical" onclick="window.open('https://www.instagram.com/reel/DK0sbKlTiw2/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')">
+                <img src="./assets/img/tache2.png" alt="Tatonnement">
+                <div class="film-overlay">
+                    <div class="film-info">
+                        <h3>Tatonnement</h3>
+                        <p>Production J&J</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TÂCHE 1 -->
+            <div class="film-card film-vertical" onclick="window.open('https://www.instagram.com/reel/DKiiLYKT7h2/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')">
+                <img src="./assets/img/tache1.png" alt="En bons termes">
+                <div class="film-overlay">
+                    <div class="film-info">
+                        <h3>En bons termes</h3>
+                        <p>Production J&J</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <h2 style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;">MOYEN MÉTRAGE</h2>
+        <p style="color:#888; letter-spacing:2px; font-size:0.9rem;">EN PROGRESSION...</p>
     </div>
 </div>
    
@@ -590,64 +639,161 @@
 </div>
 
 
+    <!-- PHOTOGRAPHIE -->
+    <div id="photographie" class="splash-section">
+        <a href="#home" class="close-splash">FERMER</a>
+        <div class="splash-content"><h1 style="color:var(--primary-red);">PHOTOGRAPHIE</h1></div>
+    </div>
+
+
     <!-- CLOUD -->
     <div id="cloud-page" class="splash-section">
         <a href="#home" class="close-splash">FERMER</a>
         <div class="splash-content"><h1 style="color:var(--primary-red);">CLOUD</h1></div>
     </div>
 
-    <!-- SAVOIR -->
-    <div id="savoir-page" class="splash-section">
-        <a href="#home" class="close-splash">FERMER</a>
-        <div class="splash-content">
-            <h1 style="color:var(--primary-red);">ANIMATION - PARASCOLAIRE PRIMAIRE/SECONDAIRE&nbsp;</h1>
-            <select class="mobile-savoir-nav" onchange="switchSavoir(this.value)">
-              <option value="step-1">Accueil Savoir</option>
-                <option value="step-2">Histoire du cinéma</option>
-                <option value="step-3">Théorie du cinéma</option>
-          </select>
+    <!-- ANIMATION PARASCOLAIRE -->
+<div id="savoir-page" class="splash-section">
+    <a href="#home" class="close-splash">FERMER</a>
+    <div class="splash-content">
 
-            <div id="step-1" class="savoir-step">
-                <p>En apprendre plus sur le cinéma !</p>
-                <div class="savoir-grid">
-                    <div class="savoir-item" onclick="switchSavoir('step-2')"><div class="savoir-img-container"><img src="./assets/img/votre-image-histoire.jpg" alt="Histoire"></div><div class="savoir-overlay"><h4>Histoire du cinéma</h4><p>Découvrir les courants</p></div></div>
-                    <div class="savoir-item" onclick="switchSavoir('step-3')"><div class="savoir-img-container"><img src="./assets/img/votre-image-theorie.jpg" alt="Théorie"></div><div class="savoir-overlay"><h4>Théorie du cinéma</h4><p>Apprendre à créer un film</p></div></div>
-                </div>
+        <!-- EN-TÊTE -->
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:40px; margin-bottom:60px;">
+            <div>
+                <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 12px;">ATELIERS MULTIMÉDIA</p>
+                <h1 style="color:var(--primary-red); margin:0 0 16px;">LE MONDE DU CINÉMA<br>À VOTRE ÉCOLE</h1>
+                <p style="max-width:520px; color:#888; font-size:0.9rem; line-height:1.8;">Nous voulons partager notre passion à travers la pédagogie. Depuis près de 20 ans, nous offrons des ateliers stimulants aux écoles et aux camps de jour à travers le Québec et l'Ontario.</p>
+                <a href="mailto:ybmedia44@gmail.com" class="cta-btn" style="margin-top:10px;">NOUS CONTACTER</a>
             </div>
+            <div style="width:300px; height:200px; background:#111; border:1px solid var(--primary-red); border-radius:8px; overflow:hidden; flex-shrink:0;">
+                <!-- REMPLACEZ PAR UNE VRAIE IMAGE : <img src="./assets/img/votre-image.jpg" style="width:100%; height:100%; object-fit:cover;"> -->
+                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#444; font-size:0.75rem; letter-spacing:2px;">PHOTO ICI</div>
+            </div>
+        </div>
 
-            <div id="step-2" class="savoir-step hidden">
-                <button onclick="switchSavoir('step-1')" style="margin-bottom:20px; cursor:pointer; background:none; border:1px solid var(--primary-red); color:var(--text-color); padding:5px 15px; border-radius:3px;">← Retour</button>
-                <h3>Histoire du cinéma</h3>
-                <div class="savoir-grid">
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder1.jpg"></div><div class="savoir-overlay"><h4>L'histoire du cinéma</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder2.jpg"></div><div class="savoir-overlay"><h4>Notre cinéma québécois</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder3.jpg"></div><div class="savoir-overlay"><h4>Le cinéma de monstres</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder4.jpg"></div><div class="savoir-overlay"><h4>Ciné. d'auteur européen</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder5.jpg"></div><div class="savoir-overlay"><h4>Le cinéma mexicain</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder6.jpg"></div><div class="savoir-overlay"><h4>Le cinéma asiatique</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder7.jpg"></div><div class="savoir-overlay"><h4>Ciné. de genre italien</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder8.jpg"></div><div class="savoir-overlay"><h4>Le cinéma moderne</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder9.jpg"></div><div class="savoir-overlay"><h4>Du cinéma politique</h4><p>Cliquez pour ouvrir</p></div></div>
-                </div>
-            </div>
+        <!-- NOTRE MISSION -->
+        <div style="border-top:2px solid var(--primary-red); padding-top:40px; margin-bottom:60px;">
+            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 16px;">NOTRE MISSION</p>
+            <p style="max-width:800px; font-size:1rem; line-height:1.9;">Offrez à vos jeunes une immersion complète dans l'univers des médias — histoire du cinéma, théorie de la réalisation, ateliers pratiques avec équipement professionnel. Les participants deviennent tour à tour réalisateurs, techniciens ou comédiens.</p>
+        </div>
 
-            <div id="step-3" class="savoir-step hidden">
-                <button onclick="switchSavoir('step-1')" style="margin-bottom:20px; cursor:pointer; background:none; border:1px solid var(--primary-red); color:var(--text-color); padding:5px 15px; border-radius:3px;">← Retour</button>
-                <h3>Théorie du cinéma</h3>
-                <div class="savoir-grid">
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder10.jpg"></div><div class="savoir-overlay"><h4>Les bases du cinéma</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder11.jpg"></div><div class="savoir-overlay"><h4>Les genres du cinéma</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder12.jpg"></div><div class="savoir-overlay"><h4>Les bases du scénario</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder13.jpg"></div><div class="savoir-overlay"><h4>L'image au cinéma</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder14.jpg"></div><div class="savoir-overlay"><h4>Le montage au cinéma</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder15.jpg"></div><div class="savoir-overlay"><h4>Vendre son cinéma</h4><p>Cliquez pour ouvrir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder16.jpg"></div><div class="savoir-overlay"><h4>Placeholder 7</h4><p>Texte à définir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder17.jpg"></div><div class="savoir-overlay"><h4>Placeholder 8</h4><p>Texte à définir</p></div></div>
-                    <div class="savoir-item" onclick="window.open('#')"><div class="savoir-img-container"><img src="./assets/img/placeholder18.jpg"></div><div class="savoir-overlay"><h4>Placeholder 9</h4><p>Texte à définir</p></div></div>
+        <!-- 3 COLONNES D'ATELIERS -->
+        <div style="border-top:2px solid var(--primary-red); padding-top:40px; margin-bottom:60px;">
+            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 30px;">NOS ATELIERS</p>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:30px;">
+
+                <div style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
+                    <div style="width:100%; height:140px; background:#111; border-radius:6px; margin-bottom:16px; overflow:hidden;">
+                        <!-- IMAGE PLACEHOLDER -->
+                        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#444; font-size:0.7rem; letter-spacing:2px;">PHOTO ICI</div>
+                    </div>
+                    <h4 style="color:var(--primary-red); margin:0 0 12px;">CRÉATION VIDÉO</h4>
+                    <ul style="font-size:0.85rem; color:#888; line-height:2; margin:0; padding-left:16px;">
+                        <li>Secrets du fond vert</li>
+                        <li>Secrets de l'animation 2D</li>
+                        <li>Réalisation d'un court-métrage</li>
+                        <li>Manipulation de matériel Pro</li>
+                    </ul>
                 </div>
+
+                <div style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
+                    <div style="width:100%; height:140px; background:#111; border-radius:6px; margin-bottom:16px; overflow:hidden;">
+                        <!-- IMAGE PLACEHOLDER -->
+                        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#444; font-size:0.7rem; letter-spacing:2px;">PHOTO ICI</div>
+                    </div>
+                    <h4 style="color:var(--primary-red); margin:0 0 12px;">HISTOIRE DU CINÉMA</h4>
+                    <ul style="font-size:0.85rem; color:#888; line-height:2; margin:0; padding-left:16px;">
+                        <li>Histoire des débuts du cinéma</li>
+                        <li>Courants cinématographiques</li>
+                        <li>Histoire du cinéma local</li>
+                        <li>Histoire d'Hollywood</li>
+                    </ul>
+                </div>
+
+                <div style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
+                    <div style="width:100%; height:140px; background:#111; border-radius:6px; margin-bottom:16px; overflow:hidden;">
+                        <!-- IMAGE PLACEHOLDER -->
+                        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#444; font-size:0.7rem; letter-spacing:2px;">PHOTO ICI</div>
+                    </div>
+                    <h4 style="color:var(--primary-red); margin:0 0 12px;">THÉORIE DE LA RÉALISATION</h4>
+                    <ul style="font-size:0.85rem; color:#888; line-height:2; margin:0; padding-left:16px;">
+                        <li>Les différents types de plans</li>
+                        <li>La base du scénario</li>
+                        <li>La base du jeu de scène</li>
+                        <li>Derrière les caméras</li>
+                    </ul>
+                </div>
+
             </div>
-      </div>
+        </div>
+
+        <!-- FORFAITS -->
+        <div style="border-top:2px solid var(--primary-red); padding-top:40px; margin-bottom:60px;">
+            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 30px;">NOS FORFAITS</p>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:24px;">
+
+                <div style="border:1px solid var(--primary-red); border-radius:8px; padding:28px;">
+                    <h3 style="margin:0 0 12px;">VISITE UNIQUE</h3>
+                    <p style="color:#888; font-size:0.85rem; line-height:1.8; margin:0;">Une rencontre ponctuelle et intensive où les jeunes apprennent des notions inoubliables et vivent une expérience immersive.</p>
+                </div>
+
+                <div style="border:2px solid var(--primary-red); border-radius:8px; padding:28px; background:var(--primary-red); color:white;">
+                    <h3 style="margin:0 0 12px; color:white;">VISITE RÉGULIÈRE</h3>
+                    <p style="font-size:0.85rem; line-height:1.8; margin:0; color:rgba(255,255,255,0.85);">Des ateliers récurrents permettant à vos jeunes de réaliser un court-métrage sur le long terme et d'approfondir leurs connaissances.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- TARIFS -->
+        <div style="border-top:2px solid var(--primary-red); padding-top:40px; margin-bottom:60px;">
+            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 30px;">NOS TARIFS</p>
+            <div style="overflow-x:auto;">
+                <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+                    <thead>
+                        <tr style="border-bottom:2px solid var(--primary-red);">
+                            <th style="text-align:left; padding:12px 16px; font-weight:800; letter-spacing:1px;">ATELIER</th>
+                            <th style="text-align:center; padding:12px 16px; color:var(--primary-red);">15–20 JEUNES</th>
+                            <th style="text-align:center; padding:12px 16px; color:var(--primary-red);">21–35 JEUNES</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom:1px solid var(--card-border);">
+                            <td style="padding:14px 16px;">Création de vidéo cinématographique</td>
+                            <td style="text-align:center; padding:14px 16px; font-weight:800;">15$ / élève</td>
+                            <td style="text-align:center; padding:14px 16px; font-weight:800;">19$ / élève</td>
+                        </tr>
+                        <tr style="border-bottom:1px solid var(--card-border);">
+                            <td style="padding:14px 16px;">Histoire du cinéma</td>
+                            <td style="text-align:center; padding:14px 16px; font-weight:800;">14$ / élève</td>
+                            <td style="text-align:center; padding:14px 16px; font-weight:800;">18$ / élève</td>
+                        </tr>
+                        <tr>
+                            <td style="padding:14px 16px;">Théorie de la réalisation</td>
+                            <td style="text-align:center; padding:14px 16px; font-weight:800;">14$ / élève</td>
+                            <td style="text-align:center; padding:14px 16px; font-weight:800;">18$ / élève</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p style="color:#888; font-size:0.8rem; margin-top:16px;">Frais de déplacement : 0,43$ / km au départ de Farnham. Tarifs toujours négociables — appelez-nous !</p>
+        </div>
+
+        <!-- CONTACT -->
+        <div style="border-top:2px solid var(--primary-red); padding-top:40px; padding-bottom:40px;">
+            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 16px;">CONTACTEZ-NOUS</p>
+            <div style="display:flex; flex-wrap:wrap; gap:20px; align-items:center;">
+                <div>
+                    <p style="margin:0; font-weight:800;">productionamorfati.com</p>
+                    <p style="margin:4px 0 0; color:#888;">514 430-1670</p>
+                </div>
+                <a href="mailto:productionamorfati.com" class="cta-btn">ÉCRIRE UN MESSAGE</a>
+                <a href="tel:4505781397" class="cta-btn" style="background:transparent; color:var(--primary-red); border:2px solid var(--primary-red); box-shadow:none;">APPELER</a>
+        
+        </div>
+
     </div>
+</div>
 
     <!-- BLOG -->
     <div id="blog" class="splash-section">
@@ -682,6 +828,73 @@
         function closeLightbox() {
             document.getElementById('lightbox').style.display = 'none';
         }
+
+        /* --- INTRO CINÉMATIQUE J&J PILOTÉE PAR LE SCROLL --- */
+        function initJJIntro() {
+            const page = document.getElementById('jj-page');
+            if (!page) return;
+            const intro = page.querySelector('.jj-intro');
+            if (!intro) return;
+            const phases = Array.from(page.querySelectorAll('.jj-phase'));
+            const words = Array.from(page.querySelectorAll('.jj-word'));
+            const cue = page.querySelector('.jj-scroll-cue');
+
+            // Fenêtre [début, fin] d'apparition de chaque phrase (progression 0 → 1)
+            const bands = [
+                { start: -0.08, end: 0.32 },
+                { start:  0.28, end: 0.60 },
+                { start:  0.56, end: 1.01 }   // dernière phrase : reste affichée
+            ];
+            const fade = 0.07;            // douceur des fondus
+            const wStart = 0.66, wEnd = 0.93; // plage d'apparition des mots
+            const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+
+            function update() {
+                const vh = page.clientHeight || window.innerHeight;
+                const scrollable = Math.max(1, intro.offsetHeight - vh);
+                const p = clamp(page.scrollTop / scrollable, 0, 1);
+
+                phases.forEach((el, i) => {
+                    const b = bands[i];
+                    const last = i === phases.length - 1;
+                    const inOp = clamp((p - b.start) / fade, 0, 1);
+                    const outOp = last ? 1 : clamp((b.end - p) / fade, 0, 1);
+                    const op = Math.min(inOp, outOp);
+                    const c = (b.start + b.end) / 2;
+                    const half = (b.end - b.start) / 2;
+                    const d = clamp((p - c) / half, -1.2, 1.2); // -1 = entre par le bas, +1 = sort par le haut
+                    el.style.opacity = op;
+                    el.style.transform = `translateY(${-d * 40}px) scale(${1 - Math.abs(d) * 0.06})`;
+                    el.style.pointerEvents = op > 0.05 ? 'auto' : 'none';
+                });
+
+                // Apparition des mots un par un
+                const n = words.length;
+                words.forEach((w, i) => {
+                    const t = wStart + (i / n) * (wEnd - wStart);
+                    const local = clamp((p - t) / 0.045, 0, 1);
+                    w.style.opacity = local;
+                    w.style.transform = `translateY(${(1 - local) * 18}px)`;
+                });
+
+                // Indice « défilez » visible seulement tout au début
+                if (cue) cue.style.opacity = clamp(1 - p / 0.06, 0, 1);
+            }
+
+            let ticking = false;
+            function onScroll() {
+                if (!ticking) { requestAnimationFrame(() => { update(); ticking = false; }); ticking = true; }
+            }
+            page.addEventListener('scroll', onScroll, { passive: true });
+            window.addEventListener('resize', update);
+            window.addEventListener('load', update);
+            window.addEventListener('hashchange', () => {
+                if (location.hash === '#jj-page') { page.scrollTop = 0; requestAnimationFrame(update); }
+            });
+            if (location.hash === '#jj-page') page.scrollTop = 0;
+            update();
+        }
+        document.addEventListener('DOMContentLoaded', initJJIntro);
     </script>
 </body>
 </html>
