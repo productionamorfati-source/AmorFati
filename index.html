@@ -11,7 +11,7 @@
     <meta property="og:url" content="https://productionamorfati.com/">
     <meta property="og:title" content="Amor Fati | Portfolio">
     <meta property="og:description" content="Découvrez mes dernières réalisations, illustrations et projets de production visuelle.">
-    <meta property="og:image" content="./assets/img/Jackalop.png">
+    <meta property="og:image" content="https://productionamorfati.com/assets/img/Jackalop.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&display=swap" rel="stylesheet">
@@ -117,6 +117,48 @@
         #photo-lightbox .pl-artist { color: var(--primary-red); font-size: 0.8rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin: 0; text-align: center; }
         #photo-lightbox .pl-hint { color: rgba(255,255,255,0.4); font-size: 0.72rem; margin-top: 20px; }
         .photo-lb-close { position: absolute; top: 24px; right: 30px; color: #fff; font-size: 2rem; font-weight: 800; cursor: pointer; line-height: 1; }
+
+        /* --- MUSIQUE : GRILLE D'ALBUMS + TRACKLIST --- */
+        .album-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 30px; margin-top: 40px; }
+        .album-card { cursor: pointer; border-radius: 10px; overflow: hidden; background: var(--bg-color); border: 1px solid var(--card-border); transition: transform .4s ease, border-color .4s ease, box-shadow .4s ease; }
+        .album-card:hover { transform: translateY(-8px); border-color: var(--primary-red); box-shadow: 0 14px 30px rgba(0,0,0,0.25); }
+        .album-cover { position: relative; aspect-ratio: 1/1; overflow: hidden; background: #000; }
+        .album-cover img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease, filter .5s ease; }
+        .album-card:hover .album-cover img { transform: scale(1.06); filter: brightness(0.5); }
+        .album-play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .4s ease; }
+        .album-play span { width: 58px; height: 58px; border-radius: 50%; background: var(--primary-red); color: #fff; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; padding-left: 4px; box-shadow: 0 6px 18px rgba(0,0,0,0.4); }
+        .album-card:hover .album-play { opacity: 1; }
+        .album-card-info { padding: 16px 18px; }
+        .album-card-info h3 { margin: 0 0 4px; font-size: 1rem; letter-spacing: 1px; }
+        .album-card-info p { margin: 0; color: #888; font-size: 0.78rem; letter-spacing: 1px; }
+
+        .album-modal { display: none; position: fixed; inset: 0; z-index: 9999; background: rgba(0,0,0,0.85); align-items: center; justify-content: center; padding: 30px; box-sizing: border-box; }
+        .album-modal.open { display: flex; }
+        .album-panel { position: relative; background: var(--bg-color); border: 1px solid var(--primary-red); border-radius: 14px; width: 100%; max-width: 620px; max-height: 86vh; overflow-y: auto; box-shadow: 0 30px 80px rgba(0,0,0,0.6); animation: albumIn .4s cubic-bezier(.22,.61,.36,1); }
+        @keyframes albumIn { from { opacity: 0; transform: translateY(24px) scale(.98); } to { opacity: 1; transform: none; } }
+        .album-modal-close { position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border-radius: 50%; border: none; background: var(--primary-red); color: #fff; font-size: 1.05rem; font-weight: 800; cursor: pointer; z-index: 2; }
+        .album-head { display: flex; gap: 22px; padding: 28px 28px 20px; flex-wrap: wrap; }
+        .album-head img { width: 130px; height: 130px; object-fit: cover; border-radius: 8px; flex-shrink: 0; box-shadow: 0 8px 20px rgba(0,0,0,0.3); }
+        .album-meta { flex: 1; min-width: 180px; }
+        .album-meta .lbl { color: var(--primary-red); font-size: 0.7rem; letter-spacing: 3px; margin: 0 0 6px; font-weight: 700; }
+        .album-meta h2 { margin: 0 0 8px; font-size: 1.5rem; }
+        .album-meta .yr { color: #888; font-size: 0.8rem; margin: 0 0 12px; text-transform: none; }
+        .album-meta .desc { color: #888; font-size: 0.82rem; line-height: 1.7; margin: 0; text-transform: none; font-weight: 400; }
+        .tracklist { list-style: none; margin: 0; padding: 8px 20px 26px; }
+        .track { display: flex; align-items: center; gap: 16px; padding: 12px 14px; border-radius: 8px; cursor: pointer; transition: background .25s ease; }
+        .track:hover { background: rgba(220,50,50,0.10); }
+        .track .num { color: #888; font-weight: 800; font-size: 0.85rem; width: 22px; text-align: right; }
+        .track .t-title { flex: 1; font-weight: 700; font-size: 0.9rem; letter-spacing: .5px; }
+        .track .t-play { color: var(--primary-red); font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; opacity: 0; transition: opacity .25s ease; white-space: nowrap; }
+        .track:hover .t-play { opacity: 1; }
+        @media (max-width: 600px) { .album-head img { width: 90px; height: 90px; } .album-meta h2 { font-size: 1.2rem; } }
+
+        /* singles en liste */
+        .singles-list { list-style: none; margin: 24px 0 0; padding: 6px; border: 1px solid var(--card-border); border-radius: 12px; }
+        .singles-list .track { border-bottom: 1px solid var(--card-border); }
+        .singles-list .track:last-child { border-bottom: none; }
+        .singles-list .track .num { color: var(--primary-red); font-size: 1rem; width: auto; }
+        .singles-list .t-title em { color: #888; font-weight: 400; font-style: normal; font-size: 0.8rem; text-transform: none; letter-spacing: 0; margin-left: 6px; }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 1002px) {
@@ -266,6 +308,47 @@
 .jj-chevron { width: 14px; height: 14px; border-right: 2px solid var(--primary-red); border-bottom: 2px solid var(--primary-red); animation: jjBob 1.6s ease-in-out infinite; }
 @keyframes jjBob { 0%,100% { transform: rotate(45deg) translate(-2px,-2px); opacity: .35; } 50% { transform: rotate(45deg) translate(2px,2px); opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .jj-intro { display: none; } }
+
+        /* --- ANIMATIONS PAGE CONTRAT (révélation au scroll) --- */
+        .jj-reveal { opacity: 0; transform: translateY(38px); transition: opacity .85s cubic-bezier(.22,.61,.36,1), transform .85s cubic-bezier(.22,.61,.36,1); }
+        .jj-reveal.in { opacity: 1; transform: none; }
+        .jj-reveal.from-right { transform: translateX(55px); }
+        .jj-reveal.from-right.in { transform: none; }
+        .jj-reveal[data-delay="1"] { transition-delay: .12s; }
+        .jj-reveal[data-delay="2"] { transition-delay: .24s; }
+        .jj-reveal[data-delay="3"] { transition-delay: .36s; }
+
+        .jj-list li { opacity: 0; transform: translateX(-20px); transition: opacity .6s ease, transform .6s ease; }
+        .jj-list.in li { opacity: 1; transform: none; }
+        .jj-list.in li:nth-child(1) { transition-delay: .20s; }
+        .jj-list.in li:nth-child(2) { transition-delay: .36s; }
+        .jj-list.in li:nth-child(3) { transition-delay: .52s; }
+
+        .jj-title { position: relative; display: inline-block; }
+        .jj-title::after { content: ""; position: absolute; left: 0; bottom: -12px; height: 4px; width: 0; background: var(--primary-red); border-radius: 2px; transition: width 1.1s cubic-bezier(.22,.61,.36,1) .25s; }
+        .jj-title.in::after { width: 100%; }
+
+        .jj-stagger > * { opacity: 0; }
+        .jj-stagger.in > * { opacity: 1; animation: jjRise .65s cubic-bezier(.22,.61,.36,1) backwards; }
+        .jj-stagger.in > *:nth-child(2) { animation-delay: .09s; }
+        .jj-stagger.in > *:nth-child(3) { animation-delay: .18s; }
+        .jj-stagger.in > *:nth-child(4) { animation-delay: .27s; }
+        .jj-stagger.in > *:nth-child(5) { animation-delay: .36s; }
+        .jj-stagger.in > *:nth-child(6) { animation-delay: .45s; }
+        .jj-stagger.in > *:nth-child(7) { animation-delay: .54s; }
+        @keyframes jjRise { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+
+        .cta-btn.jj-cta { position: relative; overflow: hidden; }
+        .cta-btn.jj-cta::after { content: ""; position: absolute; top: 0; left: -130%; width: 55%; height: 100%; background: linear-gradient(120deg, transparent, rgba(255,255,255,0.5), transparent); transform: skewX(-22deg); animation: jjShine 3.4s ease-in-out infinite; }
+        @keyframes jjShine { 0%, 55% { left: -130%; } 100% { left: 150%; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .jj-reveal, .jj-list li { opacity: 1 !important; transform: none !important; transition: none !important; }
+            .jj-stagger > * { opacity: 1 !important; }
+            .jj-stagger.in > * { animation: none !important; }
+            .jj-title::after { transition: none; width: 100%; }
+            .cta-btn.jj-cta::after { display: none; }
+        }
     </style>
 </head>
 
@@ -364,34 +447,34 @@
         </div>
 
         <div class="splash-content">
-            <h1 style="color:var(--primary-red);">SERVICE D'ACQUISITION DE CLIENTS</h1>
+            <h1 class="jj-reveal jj-title" style="color:var(--primary-red);">SERVICE D'ACQUISITION DE CLIENTS</h1>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:60px; margin-top:40px;">
                 <div>
-                    <h2>Un investissement, pas une dépense.</h2>
-                    <p>Chaque dollar investi dans votre image, c'est un dollar qui travaille pour vous. Chez J&J, nous transformons votre présence en ligne en véritable machine à attirer des clients : du contenu pensé pour capter l'attention, créer l'envie, et convertir vos visiteurs en réservations concrètes. Nos clients qui passent au contenu professionnel voient systématiquement leur achalandage et leur visibilité grimper, mois après mois.</p>
-                    <h3>Pourquoi choisir notre solution ?</h3>
-                    <ul>
+                    <h2 class="jj-reveal jj-title">Un investissement, pas une dépense.</h2>
+                    <p class="jj-reveal" data-delay="1">Chaque dollar investi dans votre image, c'est un dollar qui travaille pour vous. Chez J&J, nous transformons votre présence en ligne en véritable machine à attirer des clients : du contenu pensé pour capter l'attention, créer l'envie, et convertir vos visiteurs en réservations concrètes. Nos clients qui passent au contenu professionnel voient systématiquement leur achalandage et leur visibilité grimper, mois après mois.</p>
+                    <h3 class="jj-reveal" data-delay="1">Pourquoi choisir notre solution ?</h3>
+                    <ul class="jj-list jj-reveal" data-delay="2">
                         <li><strong>Qualité Cinéma :</strong> Captations professionnelles (4K, Gimbal, Audio Pro) qui démarquent votre marque de la concurrence.</li>
                         <li><strong>Tarif compétitif :</strong> Qualité supérieure à un prix 50% moins cher que le marché, pour un retour sur investissement maximal.</li>
                         <li><strong>Résultats concrets :</strong> Plus de visibilité, plus de réservations, plus de clients fidèles — chaque vidéo devient un actif qui rapporte sur le long terme.</li>
                     </ul>
-                    <a href="#tarifs-page" class="cta-btn">Consulter nos forfaits</a>
+                    <a href="#tarifs-page" class="cta-btn jj-cta jj-reveal" data-delay="3">Consulter nos forfaits</a>
                 </div>
-                <div>
+                <div class="jj-reveal from-right" data-delay="1">
                     <img src="./assets/img/couverture777.png" alt="Projet 777" style="width:100%; margin-bottom:20px; border-radius:10px; box-shadow:0 10px 20px rgba(0,0,0,0.1);">
                     <img src="./assets/img/jojo1.png" alt="Projet Jojo" style="width:100%; border-radius:10px; box-shadow:0 10px 20px rgba(0,0,0,0.1);">
                 </div>
             </div>
 
-            <h3 style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;">L'ÉQUIPE</h3>
-            <div class="services-circles-container" style="margin-bottom:80px;">
+            <h3 class="jj-reveal" style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;">L'ÉQUIPE</h3>
+            <div class="services-circles-container jj-stagger" style="margin-bottom:80px;">
                 <a href="https://www.instagram.com/jason_s_draw/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>JASON</strong><span>LAURIN</span></a>
                 <a href="https://www.instagram.com/yacancallmejo/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>JORDAN</strong><span>PAUL</span></a>
 				<a href="https://www.instagram.com/true._ivy?igsh=MWRpajlwcGU1dXNhcw==" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>ÉLIZABEL</strong><span>ROY</span></a>
             </div>
 
-            <h3 style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;">Projets Récents Service d'Acquisition de Clients</h3>
-            <div class="scroll-wrapper">
+            <h3 class="jj-reveal" style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;">Projets Récents Service d'Acquisition de Clients</h3>
+            <div class="scroll-wrapper jj-stagger">
                 <div class="project-card" onclick="window.open('https://www.instagram.com/reel/DYiwM9euzUq/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')"><div class="card-img"><img src="./assets/img/cafecrepes2.png" alt="Vidéo Beau Réveil"></div><div class="card-info"><h4>Beau Réveil</h4><p>J&J Marketing</p></div></div>
                 <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/ZappL48qgbQ', '_blank')"><div class="card-img"><img src="./assets/img/couverture777.png" alt="Vidéo 777"></div><div class="card-info"><h4>Friperie 777</h4><p>J&J Marketing</p></div></div>
                 <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/lZZNtsFhsY4', '_blank')"><div class="card-img"><img src="./assets/img/jojo1.png" alt="Vidéo Jojo"></div><div class="card-info"><h4>Bistro à Jojo</h4><p>J&J Event</p></div></div>
@@ -629,42 +712,146 @@
         <h1 style="color:var(--primary-red);">MUSIQUE / LABEL</h1>
         <h2 style="color:var(--primary-red);">GHOST KING / ON THE TRACK</h2>
 
-        <!-- ALBUM -->
+        <!-- ALBUMS -->
         <div style="margin-top:60px; border-top:2px solid var(--primary-red); padding-top:40px;">
-            <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:30px; margin-bottom:40px;">
-                <div>
-                    <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 8px;">ALBUM</p>
-                    <h2 style="margin:0;">SOUL RESSURECTION</h2>
-                    <p style="color:#888; font-size:0.85rem; margin:8px 0 0;">2025 · 10 titres</p>
-                </div>
-                <p style="max-width:500px; font-size:0.9rem; line-height:1.8; color:#888;">Premier projet du Ghost King, il aborde des sujets sensibles tel que l'hétérocuriosité, la violence et la gestion de ses vices.</p>
-            </div>
+            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 8px;">ALBUMS</p>
+            <p style="color:#888; font-size:0.85rem; margin:0;">Cliquez sur une pochette pour voir la tracklist.</p>
 
-            <div class="illus-grid">
-                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/0yQXN2tmFywdMosL6dUrDx', '_blank')"><img src="./assets/img/soul.png" alt="Pas Content"><div class="illus-hover"><p>PAS CONTENT</p></div></div>
-                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/6WVyjInPdzeEJC3xASAwFl', '_blank')"><img src="./assets/img/soul.png" alt="New Year"><div class="illus-hover"><p>NEW YEAR</p></div></div>
-                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/0ulN8gCM1dCtMqkOvfgrXt', '_blank')"><img src="./assets/img/soul.png" alt="Wobble Bounce"><div class="illus-hover"><p>WOBBLE BOUNCE</p></div></div>
-                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/4OgkRUy030KhLPCf7qeOm2', '_blank')"><img src="./assets/img/soul.png" alt="Pure Vitesse"><div class="illus-hover"><p>PURE VITESSE</p></div></div>
-                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/46S49IeebcrXuz7Q9qfbCa', '_blank')"><img src="./assets/img/soul.png" alt="Bitches and Femboys"><div class="illus-hover"><p>BITCHES AND FEMBOYS</p></div></div>
-                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/0o9h9ECVMwHcFXmWnGXi6s', '_blank')"><img src="./assets/img/soul.png" alt="119 Glocks"><div class="illus-hover"><p>119 GLOCKS</p></div></div>
-                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/4h7WNnrfwrXnXS5KtDKy9i', '_blank')"><img src="./assets/img/soul.png" alt="Okay"><div class="illus-hover"><p>OKAY</p></div></div>
-                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/2YFpinvfmmB7TmCzHVHgOQ', '_blank')"><img src="./assets/img/soul.png" alt="UFO"><div class="illus-hover"><p>U.F.O (UNIDENTIFIED FEMBOY ORIFICES)</p></div></div>
-                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/7bv9zvv60XIaymEJ4wl0b9', '_blank')"><img src="./assets/img/soul.png" alt="Shake 4 Kirk"><div class="illus-hover"><p>SHAKE 4 KIRK</p></div></div>
-                <div class="illus-card" onclick="window.open('https://open.spotify.com/track/3k0wyQN9GnYUHzmalz23h6', '_blank')"><img src="./assets/img/soul.png" alt="Femboy Obsession"><div class="illus-hover"><p>FEMBOY OBSESSION</p></div></div>
-                <!-- POUR AJOUTER UNE PISTE : copiez un illus-card, changez le lien Spotify, alt et titre -->
+            <!-- =====================================================
+                 POUR AJOUTER UN ALBUM (2 étapes) :
+                 1. Copiez un bloc .album-card ci-dessous — changez openAlbum('ID'),
+                    la pochette (src) et le titre / l'année.
+                 2. Copiez un <template class="album-data" data-album="ID"> plus bas
+                    (juste avant la fenêtre modale) et remplissez la tracklist.
+                 >>> L'ID doit être IDENTIQUE entre la carte et le template. <<<
+            ===================================================== -->
+
+            <div class="album-grid">
+
+                <!-- ALBUM 1 -->
+                <div class="album-card" onclick="openAlbum('soul-ressurection')">
+                    <div class="album-cover">
+                        <img src="./assets/img/soul.png" alt="Soul Ressurection">
+                        <div class="album-play"><span>▶</span></div>
+                    </div>
+                    <div class="album-card-info"><h3>SOUL RESSURECTION</h3><p>2025 · 10 titres</p></div>
+                </div>
+
+                <!-- ALBUM 2 -->
+                <div class="album-card" onclick="openAlbum('who-killed-ghost')">
+                    <div class="album-cover">
+                        <img src="./assets/img/who-killed-ghost.jpg" alt="Who Killed Ghost">
+                        <div class="album-play"><span>▶</span></div>
+                    </div>
+                    <div class="album-card-info"><h3>WHO KILLED GHOST</h3><p>2026 · 10 titres</p></div>
+                </div>
+
             </div>
         </div>
 
         <!-- SINGLES -->
         <div style="margin-top:80px; border-top:2px solid var(--primary-red); padding-top:40px;">
-            <div style="margin-bottom:40px;">
+            <div style="margin-bottom:8px;">
                 <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 8px;">SINGLES</p>
                 <h2 style="margin:0;">TITRES INDÉPENDANTS</h2>
             </div>
-            <div class="illus-grid">
-                <div class="illus-card" onclick="window.open('LIEN_SPOTIFY', '_blank')"><img src="./assets/img/soul.png" alt="TITRE"><div class="illus-hover"><p>TITRE</p></div></div>
-                <div class="illus-card" onclick="window.open('LIEN_SPOTIFY', '_blank')"><img src="./assets/img/soul.png" alt="TITRE"><div class="illus-hover"><p>TITRE</p></div></div>
-                <!-- POUR AJOUTER UN SINGLE : copiez un illus-card, changez le lien Spotify, alt et titre -->
+            <p style="color:#888; font-size:0.85rem; margin:0;">Cliquez sur une pochette pour écouter.</p>
+
+            <!-- POUR AJOUTER UN SINGLE : copiez un bloc .album-card, changez le lien (window.open), la pochette et le titre. -->
+            <div class="album-grid" style="margin-top:24px;">
+
+                <div class="album-card" onclick="window.open('https://music.youtube.com/watch?v=V_6XRpVQ_cA','_blank')">
+                    <div class="album-cover"><img src="./assets/img/single-soju-party.jpg" alt="Soju Party"><div class="album-play"><span>▶</span></div></div>
+                    <div class="album-card-info"><h3>Soju Party</h3><p>feat. Prodboolinn</p></div>
+                </div>
+
+                <div class="album-card" onclick="window.open('https://music.youtube.com/watch?v=7muqrXZxnbg','_blank')">
+                    <div class="album-cover"><img src="./assets/img/single-assassins.jpg" alt="Assassins"><div class="album-play"><span>▶</span></div></div>
+                    <div class="album-card-info"><h3>Assassins</h3><p>feat. Slattmysoull</p></div>
+                </div>
+
+                <div class="album-card" onclick="window.open('https://music.youtube.com/watch?v=dXm68mXZQOI','_blank')">
+                    <div class="album-cover"><img src="./assets/img/single-ben-flex.jpg" alt="Ben Flex"><div class="album-play"><span>▶</span></div></div>
+                    <div class="album-card-info"><h3>Ben Flex</h3><p>Single</p></div>
+                </div>
+
+                <div class="album-card" onclick="window.open('https://music.youtube.com/watch?v=0BJ9wXQSYPw','_blank')">
+                    <div class="album-cover"><img src="./assets/img/single-cold-step.jpg" alt="Cold Step"><div class="album-play"><span>▶</span></div></div>
+                    <div class="album-card-info"><h3>Cold Step</h3><p>Single</p></div>
+                </div>
+
+                <!-- LIENS MANQUANTS : remplacez LIEN_YT_MUSIC par le vrai lien YouTube Music -->
+                <div class="album-card" onclick="window.open('https://music.youtube.com/watch?v=9O3YBq7ljXs','_blank')">
+                    <div class="album-cover"><img src="./assets/img/single-montreal-nord.jpg" alt="Montréal Nord"><div class="album-play"><span>▶</span></div></div>
+                    <div class="album-card-info"><h3>Montréal Nord</h3><p>Single</p></div>
+                </div>
+
+                <div class="album-card" onclick="window.open('https://music.youtube.com/watch?v=PiP8LC4zIrk','_blank')">
+                    <div class="album-cover"><img src="./assets/img/single-anniversaire.jpg" alt="Anniversaire"><div class="album-play"><span>▶</span></div></div>
+                    <div class="album-card-info"><h3>Anniversaire</h3><p>Single</p></div>
+                </div>
+
+                <div class="album-card" onclick="window.open('https://music.youtube.com/playlist?list=OLAK5uy_kfcLYKW3aZgDcjxGqq4Iz1ea_x66-dKQg','_blank')">
+                    <div class="album-cover"><img src="./assets/img/single-saps-ptite-dance.jpg" alt="SAPS / P'tite Dance"><div class="album-play"><span>▶</span></div></div>
+                    <div class="album-card-info"><h3>SAPS / P'tite Dance</h3><p>Double feature</p></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- =========== DONNÉES DES TRACKLISTS (une <template> par album) =========== -->
+        <template class="album-data" data-album="soul-ressurection">
+            <div class="album-head">
+                <img src="./assets/img/soul.png" alt="Soul Ressurection">
+                <div class="album-meta">
+                    <p class="lbl">ALBUM</p>
+                    <h2>SOUL RESSURECTION</h2>
+                    <p class="yr">2025 · 10 titres</p>
+                    <p class="desc">Premier projet du Ghost King, il aborde des sujets sensibles tel que l'hétérocuriosité, la violence et la gestion de ses vices.</p>
+                </div>
+            </div>
+            <ul class="tracklist">
+                <li class="track" onclick="window.open('https://open.spotify.com/track/0yQXN2tmFywdMosL6dUrDx','_blank')"><span class="num">1</span><span class="t-title">Pas Content</span><span class="t-play">▶ SPOTIFY</span></li>
+                <li class="track" onclick="window.open('https://open.spotify.com/track/6WVyjInPdzeEJC3xASAwFl','_blank')"><span class="num">2</span><span class="t-title">New Year</span><span class="t-play">▶ SPOTIFY</span></li>
+                <li class="track" onclick="window.open('https://open.spotify.com/track/0ulN8gCM1dCtMqkOvfgrXt','_blank')"><span class="num">3</span><span class="t-title">Wobble Bounce</span><span class="t-play">▶ SPOTIFY</span></li>
+                <li class="track" onclick="window.open('https://open.spotify.com/track/4OgkRUy030KhLPCf7qeOm2','_blank')"><span class="num">4</span><span class="t-title">Pure Vitesse</span><span class="t-play">▶ SPOTIFY</span></li>
+                <li class="track" onclick="window.open('https://open.spotify.com/track/46S49IeebcrXuz7Q9qfbCa','_blank')"><span class="num">5</span><span class="t-title">Bitches and Femboys</span><span class="t-play">▶ SPOTIFY</span></li>
+                <li class="track" onclick="window.open('https://open.spotify.com/track/0o9h9ECVMwHcFXmWnGXi6s','_blank')"><span class="num">6</span><span class="t-title">119 Glocks</span><span class="t-play">▶ SPOTIFY</span></li>
+                <li class="track" onclick="window.open('https://open.spotify.com/track/4h7WNnrfwrXnXS5KtDKy9i','_blank')"><span class="num">7</span><span class="t-title">Okay</span><span class="t-play">▶ SPOTIFY</span></li>
+                <li class="track" onclick="window.open('https://open.spotify.com/track/2YFpinvfmmB7TmCzHVHgOQ','_blank')"><span class="num">8</span><span class="t-title">U.F.O (Unidentified Femboy Orifices)</span><span class="t-play">▶ SPOTIFY</span></li>
+                <li class="track" onclick="window.open('https://open.spotify.com/track/7bv9zvv60XIaymEJ4wl0b9','_blank')"><span class="num">9</span><span class="t-title">Shake 4 Kirk</span><span class="t-play">▶ SPOTIFY</span></li>
+                <li class="track" onclick="window.open('https://open.spotify.com/track/3k0wyQN9GnYUHzmalz23h6','_blank')"><span class="num">10</span><span class="t-title">Femboy Obsession</span><span class="t-play">▶ SPOTIFY</span></li>
+            </ul>
+        </template>
+
+        <template class="album-data" data-album="who-killed-ghost">
+            <div class="album-head">
+                <img src="./assets/img/who-killed-ghost.jpg" alt="Who Killed Ghost">
+                <div class="album-meta">
+                    <p class="lbl">ALBUM</p>
+                    <h2>WHO KILLED GHOST</h2>
+                    <p class="yr">2026 · 10 titres</p>
+                </div>
+            </div>
+            <ul class="tracklist">
+                <li class="track" onclick="window.open('https://music.youtube.com/watch?v=Bfxu7P0lQwU','_blank')"><span class="num">1</span><span class="t-title">No Swiping</span><span class="t-play">▶ YT MUSIC</span></li>
+                <li class="track" onclick="window.open('https://music.youtube.com/watch?v=wiKJdlznvtQ','_blank')"><span class="num">2</span><span class="t-title">Headshot</span><span class="t-play">▶ YT MUSIC</span></li>
+                <li class="track" onclick="window.open('https://music.youtube.com/watch?v=5qyolK0kdxE','_blank')"><span class="num">3</span><span class="t-title">PURE CHAOS</span><span class="t-play">▶ YT MUSIC</span></li>
+                <li class="track" onclick="window.open('https://music.youtube.com/watch?v=JDbYB1db_kc','_blank')"><span class="num">4</span><span class="t-title">Aquaphobe</span><span class="t-play">▶ YT MUSIC</span></li>
+                <li class="track" onclick="window.open('https://music.youtube.com/watch?v=0lzkNnUhe94','_blank')"><span class="num">5</span><span class="t-title">Double Tap</span><span class="t-play">▶ YT MUSIC</span></li>
+                <li class="track" onclick="window.open('https://music.youtube.com/watch?v=6S0zmcMDdlI','_blank')"><span class="num">6</span><span class="t-title">Back It Up</span><span class="t-play">▶ YT MUSIC</span></li>
+                <li class="track" onclick="window.open('https://music.youtube.com/watch?v=tR9dK8ldAiQ','_blank')"><span class="num">7</span><span class="t-title">Femboy Swag</span><span class="t-play">▶ YT MUSIC</span></li>
+                <li class="track" onclick="window.open('https://music.youtube.com/watch?v=LA-izuf50iw','_blank')"><span class="num">8</span><span class="t-title">MAD Chill</span><span class="t-play">▶ YT MUSIC</span></li>
+                <li class="track" onclick="window.open('https://music.youtube.com/watch?v=2i1BJp7_Nhk','_blank')"><span class="num">9</span><span class="t-title">HIM</span><span class="t-play">▶ YT MUSIC</span></li>
+                <li class="track" onclick="window.open('https://music.youtube.com/watch?v=NRUUK553iHo','_blank')"><span class="num">10</span><span class="t-title">HIM (Million Dollar Mansion larp)</span><span class="t-play">▶ YT MUSIC</span></li>
+            </ul>
+        </template>
+
+        <!-- ===== FENÊTRE MODALE TRACKLIST (ne pas dupliquer) ===== -->
+        <div id="album-modal" class="album-modal" onclick="closeAlbum(event)">
+            <div class="album-panel" onclick="event.stopPropagation()">
+                <button class="album-modal-close" onclick="closeAlbum()" aria-label="Fermer">✕</button>
+                <div id="album-modal-body"></div>
             </div>
         </div>
 
@@ -695,18 +882,18 @@
                     <span>CLOUD 330</span>
                 </div>
                 <div class="photo-grid">
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/carlos-mon-mur.jpg', 'Mon mur', 'Carlos-Enrique')">
-                        <img src="./assets/img/photo/carlos-mon-mur.jpg" alt="Mon mur — Carlos-Enrique" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/carlos-mon-mur.webp', 'Mon mur', 'Carlos-Enrique')">
+                        <img src="./assets/img/photo/carlos-mon-mur.webp" alt="Mon mur — Carlos-Enrique" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Mon mur</p><p class="p-artist">Carlos-Enrique</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/carlos-the-glace.jpg', 'Thé glacé', 'Carlos-Enrique')">
-                        <img src="./assets/img/photo/carlos-the-glace.jpg" alt="Thé glacé — Carlos-Enrique" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/carlos-the-glace.webp', 'Thé glacé', 'Carlos-Enrique')">
+                        <img src="./assets/img/photo/carlos-the-glace.webp" alt="Thé glacé — Carlos-Enrique" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Thé glacé</p><p class="p-artist">Carlos-Enrique</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/carlos-motion8-page3.jpg', 'Motion8 — page 3', 'Carlos-Enrique')">
-                        <img src="./assets/img/photo/carlos-motion8-page3.jpg" alt="Motion8 page 3 — Carlos-Enrique" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/carlos-motion8-page3.webp', 'Motion8 — page 3', 'Carlos-Enrique')">
+                        <img src="./assets/img/photo/carlos-motion8-page3.webp" alt="Motion8 page 3 — Carlos-Enrique" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Motion8 — page 3</p><p class="p-artist">Carlos-Enrique</p></div>
                     </div>
@@ -720,65 +907,105 @@
                     <span>SÉRIE NIAGARA FALLS</span>
                 </div>
                 <div class="photo-grid">
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-1.jpg', 'Niagara Falls 1', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-1.jpg" alt="Niagara Falls 1 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-1.webp', 'Niagara Falls 1', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-1.webp" alt="Niagara Falls 1 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 1</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-2.jpg', 'Niagara Falls 2', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-2.jpg" alt="Niagara Falls 2 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-2.webp', 'Niagara Falls 2', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-2.webp" alt="Niagara Falls 2 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 2</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-3.jpg', 'Niagara Falls 3', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-3.jpg" alt="Niagara Falls 3 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-3.webp', 'Niagara Falls 3', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-3.webp" alt="Niagara Falls 3 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 3</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-4.jpg', 'Niagara Falls 4', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-4.jpg" alt="Niagara Falls 4 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-4.webp', 'Niagara Falls 4', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-4.webp" alt="Niagara Falls 4 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 4</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-5.jpg', 'Niagara Falls 5', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-5.jpg" alt="Niagara Falls 5 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-5.webp', 'Niagara Falls 5', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-5.webp" alt="Niagara Falls 5 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 5</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-6.jpg', 'Niagara Falls 6', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-6.jpg" alt="Niagara Falls 6 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-6.webp', 'Niagara Falls 6', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-6.webp" alt="Niagara Falls 6 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 6</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-7.jpg', 'Niagara Falls 7', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-7.jpg" alt="Niagara Falls 7 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-7.webp', 'Niagara Falls 7', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-7.webp" alt="Niagara Falls 7 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 7</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-8.jpg', 'Niagara Falls 8', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-8.jpg" alt="Niagara Falls 8 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-8.webp', 'Niagara Falls 8', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-8.webp" alt="Niagara Falls 8 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 8</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-9.jpg', 'Niagara Falls 9', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-9.jpg" alt="Niagara Falls 9 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-9.webp', 'Niagara Falls 9', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-9.webp" alt="Niagara Falls 9 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 9</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-10.jpg', 'Niagara Falls 10', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-10.jpg" alt="Niagara Falls 10 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-10.webp', 'Niagara Falls 10', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-10.webp" alt="Niagara Falls 10 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 10</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-11.jpg', 'Niagara Falls 11', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-11.jpg" alt="Niagara Falls 11 — Jonah" loading="lazy">
-                        <div class="photo-expand">⤢</div>
-                        <div class="photo-overlay"><p class="p-title">Niagara Falls 11</p><p class="p-artist">Jonah</p></div>
-                    </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-12.jpg', 'Niagara Falls 12', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-12.jpg" alt="Niagara Falls 12 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-12.webp', 'Niagara Falls 12', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-12.webp" alt="Niagara Falls 12 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 12</p><p class="p-artist">Jonah</p></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===================== ARTISTE : JORDAN PAUL ===================== -->
+            <div class="photo-artist">
+                <div class="photo-artist-head">
+                    <h2>Jordan Paul</h2>
+                    <span>@YACANCALLMEJO</span>
+                </div>
+                <div class="photo-grid">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jordan-bless-da-blue-line.webp', 'Bless Da Blue Line', 'Jordan Paul')">
+                        <img src="./assets/img/photo/jordan-bless-da-blue-line.webp" alt="Bless Da Blue Line — Jordan Paul" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Bless Da Blue Line</p><p class="p-artist">Jordan Paul</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jordan-monofeelz.webp', 'MonoFeelz', 'Jordan Paul')">
+                        <img src="./assets/img/photo/jordan-monofeelz.webp" alt="MonoFeelz — Jordan Paul" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">MonoFeelz</p><p class="p-artist">Jordan Paul</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jordan-mother-on-screen.webp', 'Mother On Screen', 'Jordan Paul')">
+                        <img src="./assets/img/photo/jordan-mother-on-screen.webp" alt="Mother On Screen — Jordan Paul" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Mother On Screen</p><p class="p-artist">Jordan Paul</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jordan-hidden-art.webp', 'Hidden Art', 'Jordan Paul')">
+                        <img src="./assets/img/photo/jordan-hidden-art.webp" alt="Hidden Art — Jordan Paul" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Hidden Art</p><p class="p-artist">Jordan Paul</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jordan-geese.webp', 'Geese! Take a Swim', 'Jordan Paul')">
+                        <img src="./assets/img/photo/jordan-geese.webp" alt="Geese! Take a Swim — Jordan Paul" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Geese! Take a Swim</p><p class="p-artist">Jordan Paul</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jordan-two-oceans.webp', 'Two Oceans', 'Jordan Paul')">
+                        <img src="./assets/img/photo/jordan-two-oceans.webp" alt="Two Oceans — Jordan Paul" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Two Oceans</p><p class="p-artist">Jordan Paul</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jordan-pick-up.webp', 'Pick up!', 'Jordan Paul')">
+                        <img src="./assets/img/photo/jordan-pick-up.webp" alt="Pick up! — Jordan Paul" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Pick up!</p><p class="p-artist">Jordan Paul</p></div>
                     </div>
                 </div>
             </div>
@@ -936,9 +1163,9 @@
                     <p style="margin:0; font-weight:800;">productionamorfati.com</p>
                     <p style="margin:4px 0 0; color:#888;">514 430-1670</p>
                 </div>
-                <a href="mailto:productionamorfati.com" class="cta-btn">ÉCRIRE UN MESSAGE</a>
-                <a href="tel:4505781397" class="cta-btn" style="background:transparent; color:var(--primary-red); border:2px solid var(--primary-red); box-shadow:none;">APPELER</a>
-        
+                <a href="mailto:productionamorfati@gmail.com" class="cta-btn">ÉCRIRE UN MESSAGE</a>
+                <a href="tel:5144301670" class="cta-btn" style="background:transparent; color:var(--primary-red); border:2px solid var(--primary-red); box-shadow:none;">APPELER</a>
+            </div>
         </div>
 
     </div>
@@ -986,8 +1213,19 @@
         function closePhoto() {
             document.getElementById('photo-lightbox').style.display = 'none';
         }
+        function openAlbum(id) {
+            const tpl = document.querySelector('.album-data[data-album="' + id + '"]');
+            if (!tpl) return;
+            document.getElementById('album-modal-body').innerHTML = tpl.innerHTML;
+            const modal = document.getElementById('album-modal');
+            modal.classList.add('open');
+            modal.querySelector('.album-panel').scrollTop = 0;
+        }
+        function closeAlbum() {
+            document.getElementById('album-modal').classList.remove('open');
+        }
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') { closePhoto(); closeLightbox(); }
+            if (e.key === 'Escape') { closePhoto(); closeLightbox(); closeAlbum(); }
         });
 
         /* --- INTRO CINÉMATIQUE J&J PILOTÉE PAR LE SCROLL --- */
@@ -1056,6 +1294,28 @@
             update();
         }
         document.addEventListener('DOMContentLoaded', initJJIntro);
+
+        /* --- RÉVÉLATION AU SCROLL DE LA PAGE CONTRAT --- */
+        function initJJReveal() {
+            const page = document.getElementById('jj-page');
+            if (!page) return;
+            const targets = page.querySelectorAll('.jj-reveal, .jj-list, .jj-title, .jj-stagger');
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            if (reduce || !('IntersectionObserver' in window)) {
+                targets.forEach(el => el.classList.add('in'));
+                return;
+            }
+            const io = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('in');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { root: page, threshold: 0.18 });
+            targets.forEach(el => io.observe(el));
+        }
+        document.addEventListener('DOMContentLoaded', initJJReveal);
     </script>
 </body>
 </html>
