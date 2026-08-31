@@ -18,8 +18,8 @@
 
     <style>
         /* --- VARIABLES --- */
-        :root { --primary-red: #dc3232; --text-color: #1a1a1a; --bg-color: #ffffff; --grid-line: rgba(220,50,50,0.15); --grid-bold: rgba(220,50,50,0.35); --sidebar-bg: rgba(255,255,255,0.98); --scroll-track: rgba(0,0,0,0.05); --card-border: rgba(128,128,128,0.2); --hero-veil: rgba(226,226,228,0.94); }
-        [data-theme="dark"] { --text-color: #f0f0f0; --bg-color: #121212; --grid-line: rgba(220,50,50,0.1); --grid-bold: rgba(220,50,50,0.2); --sidebar-bg: rgba(20,20,20,0.98); --scroll-track: rgba(255,255,255,0.05); --card-border: rgba(255,255,255,0.1); --hero-veil: rgba(6,6,7,0.9); }
+        :root { --primary-red: #dc3232; --text-color: #1a1a1a; --bg-color: #ffffff; --grid-line: rgba(220,50,50,0.15); --grid-bold: rgba(220,50,50,0.35); --sidebar-bg: rgba(255,255,255,0.98); --scroll-track: rgba(0,0,0,0.05); --card-border: rgba(128,128,128,0.2); --hero-veil: rgba(226,226,228,0.94); --shadow-soft: 0 1px 2px rgba(18,18,22,0.04), 0 6px 18px rgba(18,18,22,0.06); --shadow-lift: 0 6px 14px rgba(18,18,22,0.08), 0 18px 38px rgba(18,18,22,0.12); --shadow-panel: 4px 0 28px rgba(18,18,22,0.06); }
+        [data-theme="dark"] { --text-color: #f0f0f0; --bg-color: #121212; --grid-line: rgba(220,50,50,0.1); --grid-bold: rgba(220,50,50,0.2); --sidebar-bg: rgba(20,20,20,0.98); --scroll-track: rgba(255,255,255,0.05); --card-border: rgba(255,255,255,0.1); --hero-veil: rgba(6,6,7,0.9); --shadow-soft: 0 1px 2px rgba(0,0,0,0.35), 0 6px 18px rgba(0,0,0,0.42); --shadow-lift: 0 6px 14px rgba(0,0,0,0.45), 0 18px 38px rgba(0,0,0,0.55); --shadow-panel: 4px 0 28px rgba(0,0,0,0.45); }
 
         html { background-color: var(--bg-color); transition: background-color 0.4s ease; }
         body { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; color: var(--text-color); background-color: transparent; transition: color 0.4s ease; overflow-x: hidden; scroll-behavior: smooth; }
@@ -84,7 +84,7 @@
         /* --- SPLASH SECTIONS --- */
         .splash-section { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-color); z-index: 5000; clip-path: circle(0% at 50% 50%); transition: clip-path 0.7s ease-in-out; visibility: hidden; overflow-y: auto; }
         .splash-section:target { clip-path: circle(150% at 50% 50%); visibility: visible; }
-        .splash-content { max-width: 1200px; margin: 0 auto; padding: 120px 40px 80px 280px; transition: padding 0.4s ease; }
+        .splash-content { max-width: 1200px; margin: 0 auto; padding: 120px 40px 80px 280px; transition: padding 0.4s ease; position: relative; z-index: 1; }
         .close-splash { position: fixed; top: 40px; right: 60px; font-weight: 800; color: var(--primary-red); border: 2px solid var(--primary-red); padding: 10px 25px; z-index: 5001; background: var(--bg-color); border-radius: 5px; }
 
         /* --- RED OVERLAY --- */
@@ -381,13 +381,35 @@
         .scolaire-contact-actions .cta-btn { margin-top: 0; }
         .cta-btn.ghost { background: transparent; color: var(--primary-red) !important; border: 2px solid var(--primary-red); box-shadow: none; }
         .cta-btn.ghost:hover { background: var(--primary-red); color: #fff !important; box-shadow: 0 8px 20px rgba(220,50,50,0.35); }
-        .scolaire-contact-card { margin: 0; padding: 8px 28px; border: 1px solid var(--card-border); border-left: 3px solid var(--primary-red); border-radius: 10px; background: rgba(220,50,50,0.035); }
+        .scolaire-contact-card { margin: 0; padding: 8px 28px; border: 1px solid var(--card-border); border-left: 3px solid var(--primary-red); border-radius: 10px; background-color: var(--bg-color); background-image: linear-gradient(rgba(220,50,50,0.035), rgba(220,50,50,0.035)); }
         .scolaire-contact-row { padding: 18px 0; border-bottom: 1px solid var(--card-border); }
         .scolaire-contact-row:last-child { border-bottom: 0; }
         .scolaire-contact-row dt { color: var(--primary-red); font-size: 0.62rem; letter-spacing: 2.5px; font-weight: 800; margin-bottom: 7px; }
         .scolaire-contact-row dd { margin: 0; font-size: 0.92rem; font-weight: 700; overflow-wrap: anywhere; }
         .scolaire-contact-row dd a:hover { color: var(--primary-red); }
         .scolaire-contact-row dd small { display: block; margin-top: 5px; color: #888; font-size: 0.76rem; font-weight: 400; letter-spacing: 0.4px; }
+
+        /* --- QUADRILLÉ : VISIBLE SUR TOUTES LES PAGES --- */
+        /* les pages splash sont opaques ; on leur redonne la même trame que l'accueil */
+        .splash-section::before { content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none; background-image: linear-gradient(var(--grid-bold) 1px, transparent 1px), linear-gradient(90deg, var(--grid-bold) 1px, transparent 1px), linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px); background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px; }
+
+        /* --- PROFONDEUR : OMBRE DOUCE SUR LES SURFACES DU SITE --- */
+        .service-bubble, .project-card, .savoir-item, .illus-card, .photo-card,
+        .album-card, .films-grid, .atelier-card, .forfait-card, .scolaire-contact-card,
+        .singles-list, .mobile-savoir-nav, .theme-switch,
+        .close-splash { box-shadow: var(--shadow-soft); }
+
+        /* surfaces opaques : le quadrillé passe DERRIÈRE les cartes, pas au travers */
+        .atelier-card, .forfait-card, .singles-list, .illus-card { background-color: var(--bg-color); }
+
+        .savoir-item, .illus-card, .photo-card, .films-grid, .atelier-card,
+        .forfait-card { transition: box-shadow 0.4s ease; }
+
+        .service-bubble:hover, .project-card:hover, .savoir-item:hover, .illus-card:hover,
+        .photo-card:hover, .album-card:hover, .atelier-card:hover,
+        .forfait-card:hover { box-shadow: var(--shadow-lift); }
+
+        @media (min-width: 1003px) { .sidebar { box-shadow: var(--shadow-panel); } }
     </style>
 </head>
 
@@ -725,16 +747,52 @@
                     <div class="illus-hover"><p>On est là</p></div>
                 </div>
 
-                <!-- IMAGE 2 — à remplir -->
+                <!-- IMAGE 2 -->
                 <div class="illus-card" onclick="openLightbox('./assets/img/dessin2.png', 'Peru and Jordanie', 'https://www.instagram.com/p/DX7MFZhkXKy/?igsh=MTE5NG1oZWo2anVweQ==')">
                     <img src="./assets/img/dessin2.png" alt="Illustration">
                     <div class="illus-hover"><p>Peru and Jordanie</p></div>
                 </div>
 
-                <!-- IMAGE 3 — à remplir -->
-                <div class="illus-card" onclick="openLightbox('./assets/img/vrai-nom-image-3.jpg', 'Titre ici', 'LIEN_INSTAGRAM')">
-                    <img src="./assets/img/vrai-nom-image-3.jpg" alt="Illustration">
-                    <div class="illus-hover"><p>Titre ici</p></div>
+                <!-- IMAGE 3 -->
+                <div class="illus-card" onclick="openLightbox('./assets/img/illustration/duo.jpg', 'Duo', '')">
+                    <img src="./assets/img/illustration/duo.jpg" alt="Deux personnages aux teintes violettes sur fond vert et jaune fluo étoilé" loading="lazy">
+                    <div class="illus-hover"><p>Duo</p></div>
+                </div>
+
+                <!-- IMAGE 4 -->
+                <div class="illus-card" onclick="openLightbox('./assets/img/illustration/patins.jpg', 'Patins', '')">
+                    <img src="./assets/img/illustration/patins.jpg" alt="Patineur en patins à roues alignées sur fond magenta et vert fluo" loading="lazy">
+                    <div class="illus-hover"><p>Patins</p></div>
+                </div>
+
+                <!-- IMAGE 5 -->
+                <div class="illus-card" onclick="openLightbox('./assets/img/illustration/loser.jpg', 'Loser', '')">
+                    <img src="./assets/img/illustration/loser.jpg" alt="Portrait d'un punk aux cheveux bleus en manteau rose, graffiti « LOSER » en arrière-plan" loading="lazy">
+                    <div class="illus-hover"><p>Loser</p></div>
+                </div>
+
+                <!-- IMAGE 6 -->
+                <div class="illus-card" onclick="openLightbox('./assets/img/illustration/get-laid.jpg', 'Get Laid', '')">
+                    <img src="./assets/img/illustration/get-laid.jpg" alt="Personnage à la casquette rouge devant un mur de briques, chandail « GET LAID »" loading="lazy">
+                    <div class="illus-hover"><p>Get Laid</p></div>
+                </div>
+
+                <!-- IMAGE 7 -->
+                <div class="illus-card" onclick="openLightbox('./assets/img/illustration/chambre-verte.jpg', 'Chambre verte', '')">
+                    <img src="./assets/img/illustration/chambre-verte.jpg" alt="Personnage assis en tailleur dans une chambre verte, cadre et horloge au mur" loading="lazy">
+                    <div class="illus-hover"><p>Chambre verte</p></div>
+                </div>
+
+                <!-- IMAGE 8 -->
+                <div class="illus-card" onclick="openLightbox('./assets/img/illustration/explosion.jpg', 'Explosion', '')">
+                    <img src="./assets/img/illustration/explosion.jpg" alt="Femme en manteau vert criant devant une voiture en flammes, style pixel" loading="lazy">
+                    <div class="illus-hover"><p>Explosion</p></div>
+                </div>
+
+                <!-- IMAGE 9 -->
+                <div class="illus-card" onclick="openLightbox('./assets/img/illustration/halftone.jpg', 'Halftone', '')">
+                    <img src="./assets/img/illustration/halftone.jpg" alt="Visage abstrait en trame de points, orange et bleu" loading="lazy">
+                    <div class="illus-hover"><p>Halftone</p></div>
                 </div>
 
             </div>
@@ -1147,12 +1205,12 @@
             <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 30px;">NOS FORFAITS</p>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:24px;">
 
-                <div style="border:1px solid var(--primary-red); border-radius:8px; padding:28px;">
+                <div class="forfait-card" style="border:1px solid var(--primary-red); border-radius:8px; padding:28px;">
                     <h3 style="margin:0 0 12px;">VISITE UNIQUE</h3>
                     <p style="color:#888; font-size:0.85rem; line-height:1.8; margin:0;">Une rencontre ponctuelle et intensive où les jeunes apprennent des notions inoubliables et vivent une expérience immersive.</p>
                 </div>
 
-                <div style="border:2px solid var(--primary-red); border-radius:8px; padding:28px; background:var(--primary-red); color:white;">
+                <div class="forfait-card" style="border:2px solid var(--primary-red); border-radius:8px; padding:28px; background:var(--primary-red); color:white;">
                     <h3 style="margin:0 0 12px; color:white;">VISITE RÉGULIÈRE</h3>
                     <p style="font-size:0.85rem; line-height:1.8; margin:0; color:rgba(255,255,255,0.85);">Des ateliers récurrents permettant à vos jeunes de réaliser un court-métrage sur le long terme et d'approfondir leurs connaissances.</p>
                 </div>
@@ -1258,7 +1316,9 @@
         function openLightbox(src, titre, lien) {
             document.getElementById('lightbox-img').src = src;
             document.getElementById('lightbox-title').textContent = titre;
-            document.getElementById('lightbox-link').href = lien;
+            const lienEl = document.getElementById('lightbox-link');
+            lienEl.href = lien || '#';
+            lienEl.hidden = !lien;   // sans lien Instagram, on cache le bouton au lieu d'offrir un lien mort
             document.getElementById('lightbox').style.display = 'flex';
         }
         function closeLightbox() {
