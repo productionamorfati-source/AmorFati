@@ -18,14 +18,17 @@
 
     <style>
         /* --- VARIABLES --- */
-        :root { --primary-red: #dc3232; --text-color: #1a1a1a; --bg-color: #ffffff; --grid-line: rgba(220,50,50,0.15); --grid-bold: rgba(220,50,50,0.35); --sidebar-bg: rgba(255,255,255,0.98); --scroll-track: rgba(0,0,0,0.05); --card-border: rgba(128,128,128,0.2); }
-        [data-theme="dark"] { --text-color: #f0f0f0; --bg-color: #121212; --grid-line: rgba(220,50,50,0.1); --grid-bold: rgba(220,50,50,0.2); --sidebar-bg: rgba(20,20,20,0.98); --scroll-track: rgba(255,255,255,0.05); --card-border: rgba(255,255,255,0.1); }
+        :root { --primary-red: #dc3232; --text-color: #1a1a1a; --bg-color: #ffffff; --grid-line: rgba(220,50,50,0.15); --grid-bold: rgba(220,50,50,0.35); --sidebar-bg: rgba(255,255,255,0.98); --scroll-track: rgba(0,0,0,0.05); --card-border: rgba(128,128,128,0.2); --hero-veil: rgba(226,226,228,0.94); }
+        [data-theme="dark"] { --text-color: #f0f0f0; --bg-color: #121212; --grid-line: rgba(220,50,50,0.1); --grid-bold: rgba(220,50,50,0.2); --sidebar-bg: rgba(20,20,20,0.98); --scroll-track: rgba(255,255,255,0.05); --card-border: rgba(255,255,255,0.1); --hero-veil: rgba(6,6,7,0.9); }
 
-        body, html { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; color: var(--text-color); background-color: var(--bg-color); background-image: linear-gradient(var(--grid-bold) 1px, transparent 1px), linear-gradient(90deg, var(--grid-bold) 1px, transparent 1px), linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px); background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px; background-attachment: fixed; transition: background-color 0.4s ease, color 0.4s ease; overflow-x: hidden; scroll-behavior: smooth; }
+        html { background-color: var(--bg-color); transition: background-color 0.4s ease; }
+        body { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; color: var(--text-color); background-color: transparent; transition: color 0.4s ease; overflow-x: hidden; scroll-behavior: smooth; }
+        body::before { content: ""; position: fixed; inset: 0; z-index: -2; pointer-events: none; background-image: linear-gradient(var(--grid-bold) 1px, transparent 1px), linear-gradient(90deg, var(--grid-bold) 1px, transparent 1px), linear-gradient(var(--grid-line) 1px, transparent 1px), linear-gradient(90deg, var(--grid-line) 1px, transparent 1px); background-size: 100px 100px, 100px 100px, 20px 20px, 20px 20px; }
         h1, h2, h3, h4 { font-weight: 800; text-transform: uppercase; margin: 0 0 20px 0; }
         p { line-height: 1.6; font-weight: 400; margin-bottom: 20px; }
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { line-height: 1.8; margin-bottom: 20px; }
+        #starfield { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 
         .cta-btn { display: inline-block; margin-top: 20px; padding: 15px 35px; background-color: var(--primary-red); color: white !important; font-weight: 800; text-transform: uppercase; border-radius: 5px; letter-spacing: 1px; box-shadow: 0 5px 15px rgba(220,50,50,0.3); }
         .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(220,50,50,0.5); }
@@ -49,8 +52,22 @@
 
         /* --- LAYOUT --- */
         .main-content { margin-left: 240px; padding: 60px 80px; min-height: 100vh; transition: margin 0.4s ease; }
-        .hero { min-height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-        h1.big-title { font-size: 5.5rem; letter-spacing: 12px; margin: 0; line-height: 1; }
+        .hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; padding: 40px 0; }
+        .hero::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 58% 46% at 50% 43%, var(--hero-veil), transparent 72%); }
+        .hero > * { position: relative; z-index: 1; }
+        .hero-eyebrow { color: var(--primary-red); font-weight: 700; font-size: clamp(0.62rem, 1.3vw, 0.82rem); letter-spacing: 6px; text-transform: uppercase; margin: 0 0 clamp(18px, 3.5vh, 34px); }
+        h1.big-title { font-size: clamp(4rem, 19vw, 15rem); letter-spacing: 2px; margin: 0; line-height: 0.84; font-weight: 800; }
+        .hero-rule { width: 64px; height: 4px; background: var(--primary-red); border-radius: 2px; margin-top: clamp(24px, 4vh, 40px); }
+        .hero-tagline { margin: clamp(18px, 3vh, 28px) 0 0; color: var(--text-color); opacity: 0.6; font-weight: 400; font-size: clamp(0.72rem, 1.9vw, 1rem); letter-spacing: 4px; text-transform: uppercase; }
+        .hero .services-circles-container { margin-top: clamp(40px, 6vh, 70px); animation-delay: .44s; }
+        .hero-cue { position: absolute; left: calc(50% - 8px); bottom: 26px; width: 16px; height: 16px; border-right: 2px solid var(--primary-red); border-bottom: 2px solid var(--primary-red); animation: jjBob 1.6s ease-in-out infinite; }
+        .hero-eyebrow, .hero .big-title, .hero-rule, .hero-tagline, .hero .services-circles-container { animation: heroIn .9s cubic-bezier(.22,.61,.36,1) backwards; }
+        .hero-eyebrow { animation-delay: .05s; }
+        .hero .big-title { animation-delay: .14s; }
+        .hero-rule { animation-delay: .26s; }
+        .hero-tagline { animation-delay: .34s; }
+        @keyframes heroIn { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+        @media (prefers-reduced-motion: reduce) { .hero-eyebrow, .hero .big-title, .hero-rule, .hero-tagline, .hero .services-circles-container, .hero-cue { animation: none; } }
 
         .services-circles-container { display: flex; gap: 40px; margin-top: 60px; justify-content: center; flex-wrap: wrap; }
         .service-bubble { width: 140px; height: 140px; border: 3px solid var(--primary-red); border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; color: var(--text-color); font-weight: 800; transition: 0.4s; letter-spacing: 1px; background: var(--bg-color); }
@@ -167,7 +184,6 @@
             #mobile-menu-toggle:checked ~ .sidebar { transform: translateX(0); }
             .main-content { margin-left: 0; padding: 80px 20px 40px 20px; }
             .splash-content { padding: 100px 20px 40px 20px; }
-            h1.big-title { font-size: 3rem; letter-spacing: 5px; }
             .project-card { min-width: 280px; }
             .trigger-red { left: 20px; bottom: 20px; width: 50px; height: 50px; }
             .theme-switch { bottom: 20px; right: 20px; font-size: 0.6rem; padding: 8px 12px; }
@@ -177,7 +193,6 @@
             .photo-grid { columns: 2; }
         }
         @media (max-width: 600px) {
-            h1.big-title { font-size: 2.2rem; letter-spacing: 2px; }
             .services-circles-container { gap: 20px; }
             .service-bubble { width: 100px; height: 100px; font-size: 0.8rem; }
             .project-card { min-width: 240px; }
@@ -353,6 +368,7 @@
 </head>
 
 <body>
+    <canvas id="starfield" aria-hidden="true"></canvas>
     <button class="theme-switch" onclick="toggleTheme()" aria-label="Changer le thème">MODE</button>
 
     <input type="checkbox" id="mobile-menu-toggle">
@@ -380,11 +396,15 @@
     <!-- PAGE PRINCIPALE -->
     <div class="main-content" id="home">
         <section class="hero">
-            <h1 class="big-title">AMOR FATI</h1>
+            <p class="hero-eyebrow">Direction Artistique &amp; Production Visuelle</p>
+            <h1 class="big-title">AMOR<br>FATI</h1>
+            <div class="hero-rule"></div>
+            <p class="hero-tagline">Réalisation · Illustration · Musique</p>
             <div class="services-circles-container">
                 <a href="#jj-page" class="service-bubble">CONTRAT</a>
                 <a href="#savoir-page" class="service-bubble">ANIMATION SCOLAIRE</a>
             </div>
+            <div class="hero-cue" aria-hidden="true"></div>
         </section>
 
         <h3>Dernières Sorties</h3>
@@ -1316,6 +1336,138 @@
             targets.forEach(el => io.observe(el));
         }
         document.addEventListener('DOMContentLoaded', initJJReveal);
+
+        /* --- WOBBLE : cliquer-glisser sur le fond déplace légèrement la page d'accueil --- */
+        (function () {
+            const stage = document.getElementById('home');
+            if (!stage) return;
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            let dragging = false, sx = 0, sy = 0;   // point de départ du curseur
+            let tx = 0, ty = 0;                       // cible du déplacement
+            let x = 0, y = 0, vx = 0, vy = 0;         // position + vitesse actuelles
+            let raf = null;
+            const FACTOR = 0.06;   // fraction du déplacement appliquée (très léger)
+            const MAX = 14;        // amplitude maximale en px
+            const K = 0.10, D = 0.78; // ressort : raideur / amortissement -> effet wobbly
+            const clamp = (v, m) => Math.max(-m, Math.min(m, v));
+
+            function loop() {
+                vx = (vx + (tx - x) * K) * D; x += vx;
+                vy = (vy + (ty - y) * K) * D; y += vy;
+                stage.style.transform = 'translate(' + x.toFixed(2) + 'px,' + y.toFixed(2) + 'px)';
+                if (dragging || Math.abs(vx) > 0.02 || Math.abs(vy) > 0.02 || Math.abs(tx - x) > 0.02 || Math.abs(ty - y) > 0.02) {
+                    raf = requestAnimationFrame(loop);
+                } else {
+                    stage.style.transform = '';
+                    raf = null;
+                }
+            }
+            function kick() { if (!raf) raf = requestAnimationFrame(loop); }
+
+            document.addEventListener('pointerdown', (e) => {
+                if (e.pointerType !== 'mouse' || e.button !== 0) return;   // souris uniquement
+                if (!e.target.closest('#home')) return;                    // seulement la page d'accueil
+                if (e.target.closest('a, button, input, select, textarea, label, [onclick]')) return; // pas les éléments cliquables
+                dragging = true; sx = e.clientX; sy = e.clientY;
+                document.body.style.userSelect = 'none';
+                kick();
+            });
+            document.addEventListener('pointermove', (e) => {
+                if (!dragging) return;
+                tx = clamp((e.clientX - sx) * FACTOR, MAX);
+                ty = clamp((e.clientY - sy) * FACTOR, MAX);
+            });
+            function release() {
+                if (!dragging) return;
+                dragging = false; tx = 0; ty = 0;   // retour en place -> le ressort rebondit (wobble)
+                document.body.style.userSelect = '';
+                kick();
+            }
+            document.addEventListener('pointerup', release);
+            document.addEventListener('pointercancel', release);
+            window.addEventListener('blur', release);
+        })();
+
+        /* --- CHAMP D'ÉTOILES ROUGES : flottent lentement, s'écartent au clic --- */
+        (function () {
+            const canvas = document.getElementById('starfield');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const COUNT = 100;
+            const color = (getComputedStyle(document.documentElement).getPropertyValue('--primary-red').trim() || '#dc3232');
+            let W = 0, H = 0, dpr = 1, stars = [];
+            const rand = (a, b) => a + Math.random() * (b - a);
+
+            function resize() {
+                dpr = Math.min(window.devicePixelRatio || 1, 2);
+                W = window.innerWidth; H = window.innerHeight;
+                canvas.width = W * dpr; canvas.height = H * dpr;
+                canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+            function makeStars() {
+                stars = [];
+                for (let i = 0; i < COUNT; i++) {
+                    stars.push({
+                        x: Math.random() * W, y: Math.random() * H,
+                        r: rand(2.5, 8),
+                        bvx: rand(-0.18, 0.18), bvy: rand(-0.18, 0.18),
+                        ivx: 0, ivy: 0,
+                        rot: Math.random() * Math.PI * 2, vr: rand(-0.01, 0.01),
+                        a: rand(0.25, 0.8)
+                    });
+                }
+            }
+            function drawStar(s) {
+                ctx.save();
+                ctx.translate(s.x, s.y);
+                ctx.rotate(s.rot);
+                ctx.beginPath();
+                const spikes = 5, outer = s.r, inner = s.r * 0.44;
+                for (let i = 0; i < spikes * 2; i++) {
+                    const rad = (i % 2 === 0) ? outer : inner;
+                    const ang = (Math.PI / spikes) * i - Math.PI / 2;
+                    const px = Math.cos(ang) * rad, py = Math.sin(ang) * rad;
+                    i === 0 ? ctx.moveTo(px, py) : ctx.lineTo(px, py);
+                }
+                ctx.closePath();
+                ctx.globalAlpha = s.a;
+                ctx.fillStyle = color;
+                ctx.fill();
+                ctx.restore();
+            }
+            function frame() {
+                ctx.clearRect(0, 0, W, H);
+                for (const s of stars) {
+                    s.ivx *= 0.94; s.ivy *= 0.94;
+                    s.x += s.bvx + s.ivx; s.y += s.bvy + s.ivy;
+                    s.rot += s.vr;
+                    const m = s.r + 4;
+                    if (s.x < -m) s.x = W + m; else if (s.x > W + m) s.x = -m;
+                    if (s.y < -m) s.y = H + m; else if (s.y > H + m) s.y = -m;
+                    drawStar(s);
+                }
+                requestAnimationFrame(frame);
+            }
+            function drawStatic() { ctx.clearRect(0, 0, W, H); for (const s of stars) drawStar(s); }
+
+            const R = 170, PUSH = 9;
+            document.addEventListener('pointerdown', (e) => {
+                const cx = e.clientX, cy = e.clientY;
+                for (const s of stars) {
+                    const dx = s.x - cx, dy = s.y - cy, d2 = dx * dx + dy * dy;
+                    if (d2 < R * R) {
+                        const d = Math.sqrt(d2) || 1, f = (1 - d / R) * PUSH;
+                        s.ivx += (dx / d) * f; s.ivy += (dy / d) * f;
+                    }
+                }
+            });
+            window.addEventListener('resize', () => { resize(); makeStars(); if (reduce) drawStatic(); });
+            resize(); makeStars();
+            if (reduce) drawStatic(); else requestAnimationFrame(frame);
+        })();
     </script>
 </body>
 </html>
