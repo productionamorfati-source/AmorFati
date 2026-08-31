@@ -364,6 +364,30 @@
             .jj-title::after { transition: none; width: 100%; }
             .cta-btn.jj-cta::after { display: none; }
         }
+
+        /* --- ANIMATION SCOLAIRE : JACKALOPES FLOTTANTS --- */
+        .jackalope-float { width: 360px; height: 230px; max-width: 100%; flex-shrink: 0; display: block; border-radius: 12px; cursor: pointer; background: radial-gradient(ellipse 72% 72% at 50% 50%, rgba(220,50,50,0.09), transparent 72%); }
+
+        /* --- ANIMATION SCOLAIRE : PHOTOS D'ATELIERS --- */
+        .atelier-photo { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+        .atelier-card:hover .atelier-photo { transform: scale(1.07); }
+
+        /* --- ANIMATION SCOLAIRE : BLOC CONTACT --- */
+        .scolaire-contact { border-top: 2px solid var(--primary-red); padding: 46px 0 70px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 44px; align-items: start; }
+        .scolaire-eyebrow { color: var(--primary-red); font-size: 0.75rem; letter-spacing: 3px; font-weight: 700; margin: 0 0 18px; }
+        .scolaire-contact h2 { font-size: clamp(1.5rem, 3.6vw, 2.2rem); line-height: 1.14; letter-spacing: 1px; margin: 0 0 18px; }
+        .scolaire-contact-lead { max-width: 460px; color: #888; font-size: 0.92rem; line-height: 1.85; margin: 0; }
+        .scolaire-contact-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 26px; }
+        .scolaire-contact-actions .cta-btn { margin-top: 0; }
+        .cta-btn.ghost { background: transparent; color: var(--primary-red) !important; border: 2px solid var(--primary-red); box-shadow: none; }
+        .cta-btn.ghost:hover { background: var(--primary-red); color: #fff !important; box-shadow: 0 8px 20px rgba(220,50,50,0.35); }
+        .scolaire-contact-card { margin: 0; padding: 8px 28px; border: 1px solid var(--card-border); border-left: 3px solid var(--primary-red); border-radius: 10px; background: rgba(220,50,50,0.035); }
+        .scolaire-contact-row { padding: 18px 0; border-bottom: 1px solid var(--card-border); }
+        .scolaire-contact-row:last-child { border-bottom: 0; }
+        .scolaire-contact-row dt { color: var(--primary-red); font-size: 0.62rem; letter-spacing: 2.5px; font-weight: 800; margin-bottom: 7px; }
+        .scolaire-contact-row dd { margin: 0; font-size: 0.92rem; font-weight: 700; overflow-wrap: anywhere; }
+        .scolaire-contact-row dd a:hover { color: var(--primary-red); }
+        .scolaire-contact-row dd small { display: block; margin-top: 5px; color: #888; font-size: 0.76rem; font-weight: 400; letter-spacing: 0.4px; }
     </style>
 </head>
 
@@ -1058,13 +1082,11 @@
             <div>
                 <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 12px;">ATELIERS MULTIMÉDIA</p>
                 <h1 style="color:var(--primary-red); margin:0 0 16px;">LE MONDE DU CINÉMA<br>À VOTRE ÉCOLE</h1>
-                <p style="max-width:520px; color:#888; font-size:0.9rem; line-height:1.8;">Nous voulons partager notre passion à travers la pédagogie. Depuis près de 20 ans, nous offrons des ateliers stimulants aux écoles et aux camps de jour à travers le Québec et l'Ontario.</p>
-                <a href="mailto:ybmedia44@gmail.com" class="cta-btn" style="margin-top:10px;">NOUS CONTACTER</a>
+                <p style="max-width:520px; color:#888; font-size:0.9rem; line-height:1.8;">Nous voulons partager notre passion à travers la pédagogie. Nous travaillons avec des gens dont l'expertise remonte à plus de vingt ans, pour offrir des ateliers stimulants aux écoles et aux camps de jour à travers le Québec et l'Ontario.</p>
+                <a href="mailto:productionamorfati@gmail.com" class="cta-btn" style="margin-top:10px;">NOUS CONTACTER</a>
             </div>
-            <div style="width:300px; height:200px; background:#111; border:1px solid var(--primary-red); border-radius:8px; overflow:hidden; flex-shrink:0;">
-                <!-- REMPLACEZ PAR UNE VRAIE IMAGE : <img src="./assets/img/votre-image.jpg" style="width:100%; height:100%; object-fit:cover;"> -->
-                <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#444; font-size:0.75rem; letter-spacing:2px;">PHOTO ICI</div>
-            </div>
+            <!-- TROUPEAU DE JACKALOPES FLOTTANTS -->
+            <canvas id="jackalope-float" class="jackalope-float" aria-hidden="true"></canvas>
         </div>
 
         <!-- NOTRE MISSION -->
@@ -1078,10 +1100,9 @@
             <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 30px;">NOS ATELIERS</p>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:30px;">
 
-                <div style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
+                <div class="atelier-card" style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
                     <div style="width:100%; height:140px; background:#111; border-radius:6px; margin-bottom:16px; overflow:hidden;">
-                        <!-- IMAGE PLACEHOLDER -->
-                        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#444; font-size:0.7rem; letter-spacing:2px;">PHOTO ICI</div>
+                        <img class="atelier-photo" src="./assets/img/scolaire/atelier-creation-video.jpg" alt="Appareil photo encadré de deux flashs de studio" loading="lazy">
                     </div>
                     <h4 style="color:var(--primary-red); margin:0 0 12px;">CRÉATION VIDÉO</h4>
                     <ul style="font-size:0.85rem; color:#888; line-height:2; margin:0; padding-left:16px;">
@@ -1092,10 +1113,9 @@
                     </ul>
                 </div>
 
-                <div style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
+                <div class="atelier-card" style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
                     <div style="width:100%; height:140px; background:#111; border-radius:6px; margin-bottom:16px; overflow:hidden;">
-                        <!-- IMAGE PLACEHOLDER -->
-                        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#444; font-size:0.7rem; letter-spacing:2px;">PHOTO ICI</div>
+                        <img class="atelier-photo" src="./assets/img/scolaire/atelier-histoire-cinema.jpg" alt="Chambre photographique géante manipulée par deux hommes, archive noir et blanc" loading="lazy">
                     </div>
                     <h4 style="color:var(--primary-red); margin:0 0 12px;">HISTOIRE DU CINÉMA</h4>
                     <ul style="font-size:0.85rem; color:#888; line-height:2; margin:0; padding-left:16px;">
@@ -1106,10 +1126,9 @@
                     </ul>
                 </div>
 
-                <div style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
+                <div class="atelier-card" style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
                     <div style="width:100%; height:140px; background:#111; border-radius:6px; margin-bottom:16px; overflow:hidden;">
-                        <!-- IMAGE PLACEHOLDER -->
-                        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:#444; font-size:0.7rem; letter-spacing:2px;">PHOTO ICI</div>
+                        <img class="atelier-photo" src="./assets/img/scolaire/atelier-realisation.jpg" alt="Claquette de tournage posée sur une nappe rayée" loading="lazy">
                     </div>
                     <h4 style="color:var(--primary-red); margin:0 0 12px;">THÉORIE DE LA RÉALISATION</h4>
                     <ul style="font-size:0.85rem; color:#888; line-height:2; margin:0; padding-left:16px;">
@@ -1176,16 +1195,37 @@
         </div>
 
         <!-- CONTACT -->
-        <div style="border-top:2px solid var(--primary-red); padding-top:40px; padding-bottom:40px;">
-            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 16px;">CONTACTEZ-NOUS</p>
-            <div style="display:flex; flex-wrap:wrap; gap:20px; align-items:center;">
-                <div>
-                    <p style="margin:0; font-weight:800;">productionamorfati.com</p>
-                    <p style="margin:4px 0 0; color:#888;">514 430-1670</p>
+        <div class="scolaire-contact">
+
+            <div class="scolaire-contact-intro">
+                <p class="scolaire-eyebrow">CONTACTEZ-NOUS</p>
+                <h2>PRÊT À TOURNER<br>AVEC VOS JEUNES ?</h2>
+                <p class="scolaire-contact-lead">Dites-nous l'âge du groupe, le nombre de participants et le temps dont vous disposez — on bâtit l'atelier autour de vous.</p>
+                <div class="scolaire-contact-actions">
+                    <a href="mailto:productionamorfati@gmail.com" class="cta-btn">ÉCRIRE UN MESSAGE</a>
+                    <a href="tel:5144301670" class="cta-btn ghost">APPELER</a>
                 </div>
-                <a href="mailto:productionamorfati@gmail.com" class="cta-btn">ÉCRIRE UN MESSAGE</a>
-                <a href="tel:5144301670" class="cta-btn" style="background:transparent; color:var(--primary-red); border:2px solid var(--primary-red); box-shadow:none;">APPELER</a>
             </div>
+
+            <dl class="scolaire-contact-card">
+                <div class="scolaire-contact-row">
+                    <dt>COURRIEL</dt>
+                    <dd><a href="mailto:productionamorfati@gmail.com">productionamorfati@gmail.com</a></dd>
+                </div>
+                <div class="scolaire-contact-row">
+                    <dt>TÉLÉPHONE</dt>
+                    <dd><a href="tel:5144301670">514 430-1670</a></dd>
+                </div>
+                <div class="scolaire-contact-row">
+                    <dt>SITE</dt>
+                    <dd><a href="https://productionamorfati.com">productionamorfati.com</a></dd>
+                </div>
+                <div class="scolaire-contact-row">
+                    <dt>TERRITOIRE</dt>
+                    <dd>Québec &amp; Ontario<small>Déplacements au départ de Farnham</small></dd>
+                </div>
+            </dl>
+
         </div>
 
     </div>
@@ -1467,6 +1507,87 @@
             window.addEventListener('resize', () => { resize(); makeStars(); if (reduce) drawStatic(); });
             resize(); makeStars();
             if (reduce) drawStatic(); else requestAnimationFrame(frame);
+        })();
+
+        /* --- JACKALOPES FLOTTANTS (ANIMATION SCOLAIRE) : même dérive que les étoiles --- */
+        (function () {
+            const canvas = document.getElementById('jackalope-float');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const COUNT = 7;
+            let W = 0, H = 0, dpr = 1, herd = [], started = false;
+            const rand = (a, b) => a + Math.random() * (b - a);
+
+            const sprite = new Image();
+            sprite.src = './assets/img/Jackalop.png';
+
+            function resize() {
+                const r = canvas.getBoundingClientRect();
+                W = r.width; H = r.height;
+                if (!W || !H) return;
+                dpr = Math.min(window.devicePixelRatio || 1, 2);
+                canvas.width = W * dpr; canvas.height = H * dpr;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+            function makeHerd() {
+                herd = [];
+                const ratio = sprite.naturalHeight / sprite.naturalWidth || 0.577;
+                for (let i = 0; i < COUNT; i++) {
+                    const w = rand(70, 150);
+                    herd.push({
+                        x: Math.random() * W, y: Math.random() * H,
+                        w: w, h: w * ratio,
+                        bvx: rand(-0.22, 0.22), bvy: rand(-0.14, 0.14),
+                        ivx: 0, ivy: 0,
+                        rot: rand(-0.2, 0.2), vr: rand(-0.004, 0.004),
+                        a: rand(0.3, 0.9)
+                    });
+                }
+            }
+            function drawJackalope(j) {
+                ctx.save();
+                ctx.translate(j.x, j.y);
+                ctx.rotate(j.rot);
+                if (j.bvx + j.ivx < 0) ctx.scale(-1, 1);   // il court dans le sens où il flotte
+                ctx.globalAlpha = j.a;
+                ctx.drawImage(sprite, -j.w / 2, -j.h / 2, j.w, j.h);
+                ctx.restore();
+            }
+            function frame() {
+                ctx.clearRect(0, 0, W, H);
+                for (const j of herd) {
+                    j.ivx *= 0.94; j.ivy *= 0.94;
+                    j.x += j.bvx + j.ivx; j.y += j.bvy + j.ivy;
+                    j.rot += j.vr;
+                    if (j.rot > 0.28 || j.rot < -0.28) j.vr *= -1;
+                    const mx = j.w, my = j.h;
+                    if (j.x < -mx) j.x = W + mx; else if (j.x > W + mx) j.x = -mx;
+                    if (j.y < -my) j.y = H + my; else if (j.y > H + my) j.y = -my;
+                    drawJackalope(j);
+                }
+                requestAnimationFrame(frame);
+            }
+            function drawStatic() { ctx.clearRect(0, 0, W, H); for (const j of herd) drawJackalope(j); }
+
+            const R = 130, PUSH = 8;
+            canvas.addEventListener('pointerdown', (e) => {
+                const r = canvas.getBoundingClientRect();
+                const cx = e.clientX - r.left, cy = e.clientY - r.top;
+                for (const j of herd) {
+                    const dx = j.x - cx, dy = j.y - cy, d2 = dx * dx + dy * dy;
+                    if (d2 < R * R) {
+                        const d = Math.sqrt(d2) || 1, f = (1 - d / R) * PUSH;
+                        j.ivx += (dx / d) * f; j.ivy += (dy / d) * f;
+                    }
+                }
+            });
+            window.addEventListener('resize', () => { resize(); makeHerd(); if (reduce) drawStatic(); });
+            sprite.onload = () => {
+                resize(); makeHerd();
+                if (reduce) { drawStatic(); return; }
+                if (!started) { started = true; requestAnimationFrame(frame); }
+            };
         })();
     </script>
 </body>
