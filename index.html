@@ -29,6 +29,8 @@
         a { text-decoration: none; color: inherit; transition: 0.3s; }
         ul { line-height: 1.8; margin-bottom: 20px; }
         #starfield { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
+        #notefield { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        #musique > .splash-content { position: relative; z-index: 1; }
 
         .cta-btn { display: inline-block; margin-top: 20px; padding: 15px 35px; background-color: var(--primary-red); color: white !important; font-weight: 800; text-transform: uppercase; border-radius: 5px; letter-spacing: 1px; box-shadow: 0 5px 15px rgba(220,50,50,0.3); }
         .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(220,50,50,0.5); }
@@ -809,6 +811,7 @@
 
   <!-- MUSIQUE -->
 <div id="musique" class="splash-section">
+    <canvas id="notefield" aria-hidden="true"></canvas>
     <a href="#home" class="close-splash">FERMER</a>
     <div class="splash-content">
         <h1 style="color:var(--primary-red);">MUSIQUE / LABEL</h1>
@@ -1648,6 +1651,85 @@
                 if (reduce) { drawStatic(); return; }
                 if (!started) { started = true; requestAnimationFrame(frame); }
             };
+        })();
+
+        /* --- NOTES DE MUSIQUE FLOTTANTES (fond de la page Musique) --- */
+        (function () {
+            const canvas = document.getElementById('notefield');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            const COUNT = 100;
+            const color = (getComputedStyle(document.documentElement).getPropertyValue('--primary-red').trim() || '#dc3232');
+            const glyphs = ['♪', '♫', '♩', '♬'];
+            let W = 0, H = 0, dpr = 1, notes = [], raf = null;
+            const rand = (a, b) => a + Math.random() * (b - a);
+            const isActive = () => location.hash === '#musique';
+
+            function resize() {
+                dpr = Math.min(window.devicePixelRatio || 1, 2);
+                W = window.innerWidth; H = window.innerHeight;
+                canvas.width = W * dpr; canvas.height = H * dpr;
+                canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+            function make() {
+                notes = [];
+                for (let i = 0; i < COUNT; i++) {
+                    notes.push({
+                        x: Math.random() * W, y: Math.random() * H,
+                        s: rand(13, 30),
+                        g: glyphs[(Math.random() * glyphs.length) | 0],
+                        bvx: rand(-0.18, 0.18), bvy: rand(-0.18, 0.18),
+                        ivx: 0, ivy: 0,
+                        rot: rand(-0.3, 0.3), vr: rand(-0.008, 0.008),
+                        a: rand(0.25, 0.8)
+                    });
+                }
+            }
+            function drawNote(n) {
+                ctx.save();
+                ctx.translate(n.x, n.y);
+                ctx.rotate(n.rot);
+                ctx.globalAlpha = n.a;
+                ctx.fillStyle = color;
+                ctx.font = n.s + 'px "Segoe UI Symbol","Apple Symbols","Arial Unicode MS",sans-serif';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(n.g, 0, 0);
+                ctx.restore();
+            }
+            function step() {
+                ctx.clearRect(0, 0, W, H);
+                for (const n of notes) {
+                    n.ivx *= 0.94; n.ivy *= 0.94;
+                    n.x += n.bvx + n.ivx; n.y += n.bvy + n.ivy;
+                    n.rot += n.vr;
+                    const m = n.s + 6;
+                    if (n.x < -m) n.x = W + m; else if (n.x > W + m) n.x = -m;
+                    if (n.y < -m) n.y = H + m; else if (n.y > H + m) n.y = -m;
+                    drawNote(n);
+                }
+                raf = requestAnimationFrame(step);
+            }
+            function drawStatic() { ctx.clearRect(0, 0, W, H); for (const n of notes) drawNote(n); }
+            function start() { if (reduce) { drawStatic(); return; } if (!raf) raf = requestAnimationFrame(step); }
+            function stop() { if (raf) { cancelAnimationFrame(raf); raf = null; } }
+
+            const R = 170, PUSH = 9;
+            document.addEventListener('pointerdown', (e) => {
+                if (!isActive()) return;
+                const cx = e.clientX, cy = e.clientY;
+                for (const n of notes) {
+                    const dx = n.x - cx, dy = n.y - cy, d2 = dx * dx + dy * dy;
+                    if (d2 < R * R) { const d = Math.sqrt(d2) || 1, f = (1 - d / R) * PUSH; n.ivx += (dx / d) * f; n.ivy += (dy / d) * f; }
+                }
+            });
+            window.addEventListener('resize', () => { resize(); make(); if (isActive()) start(); });
+            window.addEventListener('hashchange', () => { if (isActive()) { resize(); start(); } else { stop(); } });
+
+            resize(); make();
+            if (isActive()) start();
         })();
     </script>
 </body>
