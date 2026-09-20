@@ -18,7 +18,7 @@
 
     <style>
         /* --- VARIABLES --- */
-        :root { --primary-red: #dc3232; --text-color: #1a1a1a; --bg-color: #ffffff; --grid-line: rgba(220,50,50,0.15); --grid-bold: rgba(220,50,50,0.35); --sidebar-bg: rgba(255,255,255,0.98); --scroll-track: rgba(0,0,0,0.05); --card-border: rgba(128,128,128,0.2); --hero-veil: rgba(226,226,228,0.94); --shadow-soft: 0 1px 2px rgba(18,18,22,0.04), 0 6px 18px rgba(18,18,22,0.06); --shadow-lift: 0 6px 14px rgba(18,18,22,0.08), 0 18px 38px rgba(18,18,22,0.12); --shadow-panel: 4px 0 28px rgba(18,18,22,0.06); }
+        :root { --primary-red: #dc3232; --text-color: #1a1a1a; --bg-color: #ffffff; --grid-line: rgba(220,50,50,0.15); --grid-bold: rgba(220,50,50,0.35); --sidebar-bg: rgba(255,255,255,0.98); --scroll-track: rgba(0,0,0,0.05); --card-border: rgba(128,128,128,0.2); --hero-veil: rgba(226,226,228,0.94); --shadow-soft: 0 1px 2px rgba(18,18,22,0.04), 0 6px 18px rgba(18,18,22,0.06); --shadow-lift: 0 6px 14px rgba(18,18,22,0.08), 0 18px 38px rgba(18,18,22,0.12); --shadow-panel: 4px 0 28px rgba(18,18,22,0.06); --sidebar-w: 240px; }
         [data-theme="dark"] { --text-color: #f0f0f0; --bg-color: #121212; --grid-line: rgba(220,50,50,0.1); --grid-bold: rgba(220,50,50,0.2); --sidebar-bg: rgba(20,20,20,0.98); --scroll-track: rgba(255,255,255,0.05); --card-border: rgba(255,255,255,0.1); --hero-veil: rgba(6,6,7,0.9); --shadow-soft: 0 1px 2px rgba(0,0,0,0.35), 0 6px 18px rgba(0,0,0,0.42); --shadow-lift: 0 6px 14px rgba(0,0,0,0.45), 0 18px 38px rgba(0,0,0,0.55); --shadow-panel: 4px 0 28px rgba(0,0,0,0.45); }
 
         html { background-color: var(--bg-color); transition: background-color 0.4s ease; }
@@ -40,9 +40,12 @@
         ::-webkit-scrollbar-thumb { background: var(--primary-red); border-radius: 4px; }
 
         /* --- SIDEBAR --- */
-        .sidebar { height: 100vh; width: 240px; position: fixed; top: 0; left: 0; background-color: var(--sidebar-bg); border-right: 2px solid var(--primary-red); display: flex; flex-direction: column; padding: 50px 0 0 40px; z-index: 9999; backdrop-filter: blur(5px); transition: transform 0.4s ease; }
-        .logo-img { width: 120px; margin-bottom: 60px; transition: 0.5s; cursor: pointer; }
+        .sidebar { height: 100vh; width: var(--sidebar-w); overflow: hidden; position: fixed; top: 0; left: 0; background-color: var(--sidebar-bg); border-right: 2px solid var(--primary-red); display: flex; flex-direction: column; padding: 50px 0 0 40px; z-index: 9999; backdrop-filter: blur(5px); transition: transform 0.4s ease; }
+        .sidebar-top { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 60px; }
+        .logo-img { width: 120px; display: block; transition: 0.5s; cursor: pointer; }
         .logo-img:hover { transform: scale(1.05); }
+        .logo-switch { flex-shrink: 0; width: 34px; height: 34px; margin-top: 4px; border-radius: 50%; border: 2px solid var(--primary-red); background: var(--bg-color); color: var(--primary-red); font-size: 1rem; line-height: 1; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: transform .3s ease, background .3s ease, color .3s ease; }
+        .logo-switch:hover { background: var(--primary-red); color: #fff; transform: scale(1.12) rotate(180deg); }
         .sidebar a.nav-link { text-decoration: none; color: #888; margin-bottom: 25px; font-weight: 700; font-size: 0.8rem; letter-spacing: 2px; transition: 0.4s; display: block; }
         .sidebar a.nav-link:hover { color: var(--primary-red); padding-left: 10px; }
 
@@ -53,7 +56,7 @@
         .theme-switch:hover { background: var(--primary-red); color: white; }
 
         /* --- LAYOUT --- */
-        .main-content { margin-left: 240px; padding: 60px 80px; min-height: 100vh; transition: margin 0.4s ease; }
+        .main-content { margin-left: var(--sidebar-w); padding: 60px 80px; min-height: 100vh; transition: margin 0.4s ease; }
         .hero { min-height: 92vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: relative; padding: 40px 0; }
         .hero::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; background: radial-gradient(ellipse 58% 46% at 50% 43%, var(--hero-veil), transparent 72%); }
         .hero > * { position: relative; z-index: 1; }
@@ -86,14 +89,8 @@
         /* --- SPLASH SECTIONS --- */
         .splash-section { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: var(--bg-color); z-index: 5000; clip-path: circle(0% at 50% 50%); transition: clip-path 0.7s ease-in-out; visibility: hidden; overflow-y: auto; }
         .splash-section:target { clip-path: circle(150% at 50% 50%); visibility: visible; }
-        .splash-content { max-width: 1200px; margin: 0 auto; padding: 120px 40px 80px 280px; transition: padding 0.4s ease; position: relative; z-index: 1; }
+        .splash-content { max-width: 1200px; margin: 0 auto; padding: 120px 40px 80px calc(var(--sidebar-w) + 40px); transition: padding 0.4s ease; position: relative; z-index: 1; }
         .close-splash { position: fixed; top: 40px; right: 60px; font-weight: 800; color: var(--primary-red); border: 2px solid var(--primary-red); padding: 10px 25px; z-index: 5001; background: var(--bg-color); border-radius: 5px; }
-
-        /* --- RED OVERLAY --- */
-        .trigger-red { position: fixed; bottom: 50px; left: 80px; width: 70px; height: 70px; background-color: var(--primary-red); border-radius: 50%; cursor: pointer; z-index: 10000; border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.3s; }
-        #red-toggle { display: none; }
-        .red-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: var(--primary-red); z-index: 8000; display: flex; flex-direction: column; justify-content: center; align-items: center; clip-path: circle(0% at 120px calc(100% - 90px)); transition: 0.8s ease-in-out; }
-        #red-toggle:checked ~ .red-overlay { clip-path: circle(150% at 120px calc(100% - 90px)); }
 
         /* --- SAVOIR GRID --- */
         .savoir-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); grid-auto-flow: dense; gap: 20px; margin-top: 40px; }
@@ -209,7 +206,6 @@
             .main-content { margin-left: 0; padding: 80px 20px 40px 20px; }
             .splash-content { padding: 100px 20px 40px 20px; }
             .project-card { min-width: 280px; }
-            .trigger-red { left: 20px; bottom: 20px; width: 50px; height: 50px; }
             .theme-switch { bottom: 20px; right: 20px; font-size: 0.6rem; padding: 8px 12px; }
             .close-splash { top: 20px; right: 20px; padding: 8px 15px; font-size: 0.7rem; }
             .mobile-savoir-nav { display: block; }
@@ -437,123 +433,502 @@
         .forfait-card:hover { box-shadow: var(--shadow-lift); }
 
         @media (min-width: 1003px) { .sidebar { box-shadow: var(--shadow-panel); } }
+
+        /* ===================== PAGE D'ENTRÉE (LANDING) ===================== */
+        #landing { position: fixed; inset: 0; z-index: 20000; background: var(--bg-color); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 40px 20px; overflow: hidden; }
+        #landing::before { content: ""; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 62% 55% at 50% 45%, var(--hero-veil), transparent 74%); }
+        #landing > * { position: relative; z-index: 1; }
+        body[data-mode] #landing { opacity: 0; visibility: hidden; transform: scale(1.04); transition: opacity .7s ease, transform .7s ease, visibility 0s .7s; }
+
+        .landing-logo { width: clamp(120px, 20vw, 210px); margin: 0 0 clamp(20px, 4vh, 38px); animation: landLogo 1.15s cubic-bezier(.22,.9,.3,1) backwards; }
+        @keyframes landLogo { 0% { opacity: 0; transform: scale(.55) translateY(26px); filter: blur(6px); } 60% { opacity: 1; filter: blur(0); } 100% { opacity: 1; transform: none; } }
+
+        .landing-title { font-size: clamp(2.4rem, 9vw, 6rem); font-weight: 800; letter-spacing: 3px; line-height: .9; margin: 0; text-transform: uppercase; animation: landUp .8s cubic-bezier(.22,.61,.36,1) .55s backwards; }
+        .landing-rule { width: 60px; height: 4px; background: var(--primary-red); border-radius: 2px; margin: clamp(20px, 3.4vh, 32px) 0 clamp(14px, 2.4vh, 24px); animation: landRule .7s cubic-bezier(.22,.61,.36,1) .8s backwards; }
+        @keyframes landRule { from { opacity: 0; width: 0; } to { opacity: 1; width: 60px; } }
+        .landing-kicker { color: #888; font-size: clamp(.64rem, 1.5vw, .8rem); letter-spacing: 5px; font-weight: 700; text-transform: uppercase; margin: 0 0 clamp(34px, 6vh, 60px); animation: landUp .8s cubic-bezier(.22,.61,.36,1) .95s backwards; }
+
+        .landing-choices { display: flex; gap: clamp(18px, 3vw, 34px); flex-wrap: wrap; justify-content: center; width: 100%; max-width: 780px; }
+        .landing-choice { flex: 1 1 300px; max-width: 360px; background: var(--bg-color); border: 2px solid var(--primary-red); border-radius: 14px; padding: clamp(26px, 4vw, 38px) clamp(20px, 3vw, 30px); cursor: pointer; text-align: left; color: var(--text-color); transition: transform .4s cubic-bezier(.22,.61,.36,1), box-shadow .4s ease, background .4s ease; position: relative; overflow: hidden; animation: landUp .85s cubic-bezier(.22,.61,.36,1) backwards; }
+        .landing-choice:nth-child(1) { animation-delay: 1.15s; }
+        .landing-choice:nth-child(2) { animation-delay: 1.32s; }
+        .landing-choice:hover { transform: translateY(-9px); box-shadow: 0 18px 40px rgba(220,50,50,0.28); background: var(--primary-red); color: #fff; }
+        .landing-choice .lc-num { font-size: .68rem; letter-spacing: 3px; font-weight: 800; color: var(--primary-red); transition: color .4s ease; }
+        .landing-choice:hover .lc-num { color: rgba(255,255,255,.75); }
+        .landing-choice h2 { font-size: clamp(1.1rem, 2.4vw, 1.45rem); letter-spacing: 1.5px; margin: 14px 0 10px; }
+        .landing-choice p { font-size: .82rem; line-height: 1.7; color: #888; margin: 0; font-weight: 400; text-transform: none; transition: color .4s ease; }
+        .landing-choice:hover p { color: rgba(255,255,255,.85); }
+        .landing-choice .lc-go { display: inline-block; margin-top: 18px; font-size: .7rem; font-weight: 800; letter-spacing: 2px; color: var(--primary-red); transition: color .4s ease, transform .4s ease; }
+        .landing-choice:hover .lc-go { color: #fff; transform: translateX(6px); }
+        @keyframes landUp { from { opacity: 0; transform: translateY(26px); } to { opacity: 1; transform: none; } }
+
+        /* Bouton « retour à l'entrée » dans la barre latérale */
+
+        /* Affichage des liens selon le mode choisi */
+        .nav-collectif, .nav-services { display: none !important; }
+        body[data-mode="collectif"] .nav-collectif { display: block !important; }
+        body[data-mode="services"]  .nav-services  { display: block !important; }
+
+        /* Tant qu'aucun mode n'est choisi, on masque le site derrière l'entrée */
+        body:not([data-mode]) .sidebar,
+        body:not([data-mode]) .main-content,
+        body:not([data-mode]) .theme-switch,
+        body:not([data-mode]) .mobile-menu-btn { opacity: 0; pointer-events: none; }
+
+        @media (prefers-reduced-motion: reduce) {
+            .landing-logo, .landing-title, .landing-rule, .landing-kicker, .landing-choice { animation: none !important; }
+        }
+        @media (max-width: 600px) {
+            .landing-choices { gap: 14px; }
+            .landing-choice { flex: 1 1 100%; padding: 22px 20px; }
+        }
+
+        /* --- BARRE DÉFILANTE « MOSAÏQUE » : formats libres, hauteur commune --- */
+        .mix-wrapper { display: flex; align-items: flex-end; gap: 18px; overflow-x: auto; padding: 34px 10px 46px; -webkit-overflow-scrolling: touch; scroll-snap-type: x proximity; }
+        .mix-card { position: relative; flex: 0 0 auto; height: clamp(190px, 27vh, 290px); border-radius: 10px; overflow: hidden; cursor: pointer; background: #000; border: 1px solid var(--card-border); scroll-snap-align: start; transition: transform .45s cubic-bezier(.22,.61,.36,1), border-color .45s ease, box-shadow .45s ease; }
+        .mix-card img { height: 100%; width: auto; display: block; max-width: none; transition: transform .6s ease, filter .6s ease; }
+        .mix-card:hover { transform: translateY(-9px); border-color: var(--primary-red); box-shadow: var(--shadow-lift); }
+        .mix-card:hover img { transform: scale(1.06); filter: brightness(.5); }
+        .mix-overlay { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 14px 16px; opacity: 0; transition: opacity .4s ease; background: linear-gradient(transparent 42%, rgba(0,0,0,0.85)); }
+        .mix-card:hover .mix-overlay { opacity: 1; }
+        .mix-overlay .m-cat { color: var(--primary-red); font-size: .6rem; font-weight: 800; letter-spacing: 2.5px; text-transform: uppercase; margin: 0 0 4px; }
+        .mix-overlay .m-title { color: #fff; font-size: .88rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; margin: 0; }
+        .mix-hint { color: #888; font-size: .72rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin: 6px 0 0; }
+        @media (max-width: 600px) { .mix-wrapper { gap: 12px; padding: 24px 6px 36px; } .mix-card { height: 160px; } }
+
+        /* Contenu d'accueil propre à chaque mode */
+        .mode-collectif, .mode-services { display: none; }
+        body[data-mode="collectif"] .mode-collectif { display: block; }
+        body[data-mode="services"]  .mode-services  { display: block; }
+
+        /* --- SÉLECTEUR DE LANGUE --- */
+        .lang-pick { display: flex; gap: 10px; align-items: center; justify-content: center; margin-top: clamp(30px, 5vh, 52px); animation: landUp .8s cubic-bezier(.22,.61,.36,1) 1.5s backwards; }
+        .lang-pick .lp-label { color: #888; font-size: .6rem; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; margin-right: 4px; }
+        .lang-btn { background: transparent; border: 1.5px solid var(--card-border); color: #888; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: .68rem; letter-spacing: 2px; padding: 8px 16px; border-radius: 30px; cursor: pointer; transition: all .3s ease; }
+        .lang-btn:hover { border-color: var(--primary-red); color: var(--primary-red); }
+        .lang-btn.active { background: var(--primary-red); border-color: var(--primary-red); color: #fff; }
+
+        /* Bascule de langue dans la barre latérale */
+        .sidebar-lang { display: flex; gap: 8px; margin-top: 28px; }
+        .sidebar-lang .lang-btn { padding: 6px 12px; font-size: .62rem; }
+
+        /* --- POIGNÉE DE REDIMENSIONNEMENT DE LA BARRE LATÉRALE --- */
+        .sidebar-resizer { position: absolute; top: 0; right: 0; width: 10px; height: 100%; cursor: col-resize; z-index: 20; touch-action: none; }
+        .sidebar-resizer::after { content: ""; position: absolute; top: 0; right: 0; width: 3px; height: 100%; background: var(--primary-red); opacity: 0; transition: opacity .25s ease; }
+        .sidebar-resizer:hover::after, body.sb-resizing .sidebar-resizer::after { opacity: 1; }
+        .sidebar-resizer::before { content: ""; position: absolute; top: 50%; right: 2px; width: 4px; height: 44px; margin-top: -22px; border-radius: 3px; background: var(--primary-red); opacity: .35; transition: opacity .25s ease; }
+        .sidebar-resizer:hover::before { opacity: 1; }
+
+        /* Pendant le glissement : pas de transition, sinon ça traîne */
+        body.sb-resizing, body.sb-resizing * { user-select: none !important; }
+        body.sb-resizing .sidebar, body.sb-resizing .main-content, body.sb-resizing .splash-content { transition: none !important; }
+
+        /* Barre repliée : on la cache et on offre une languette pour la rouvrir */
+        body[data-sb="collapsed"] .sidebar { transform: translateX(-100%); }
+        .sidebar-reopen { display: none; position: fixed; top: 50%; left: 0; transform: translateY(-50%); z-index: 9998; background: var(--primary-red); color: #fff; border: none; border-radius: 0 10px 10px 0; padding: 18px 9px; cursor: pointer; font-size: 1rem; line-height: 1; box-shadow: 0 6px 18px rgba(0,0,0,.25); transition: padding .25s ease; }
+        .sidebar-reopen:hover { padding: 18px 14px; }
+        body[data-sb="collapsed"] .sidebar-reopen { display: block; }
+        @media (max-width: 1002px) { .sidebar-resizer, .sidebar-reopen { display: none !important; } }
+
+        /* --- PARASCOLAIRE : PANNEAUX LISIBLES SUR LA TRAME --- */
+        .scolaire-panel { background-color: var(--bg-color); border: 1px solid var(--card-border); border-top: 3px solid var(--primary-red); border-radius: 12px; padding: clamp(24px, 3.4vw, 38px) clamp(20px, 3vw, 34px); margin-bottom: 40px; box-shadow: var(--shadow-soft); transition: box-shadow .4s ease; }
+        .scolaire-panel:hover { box-shadow: var(--shadow-lift); }
+        .scolaire-panel > p:last-child, .scolaire-panel > div:last-child { margin-bottom: 0; }
+        .scolaire-head { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 40px; }
+
+        /* --- WOBBLE DOUX : le site respire --- */
+        @keyframes softWobble {
+            0%, 100% { transform: rotate(-0.3deg) translateY(0); }
+            50%      { transform: rotate(0.3deg) translateY(-4px); }
+        }
+        .wobble { animation: softWobble 6s ease-in-out infinite; }
+        /* chaque élément décalé, sinon tout bouge au même rythme */
+        .wobble:nth-of-type(2) { animation-duration: 7.2s; animation-delay: -1.4s; }
+        .wobble:nth-of-type(3) { animation-duration: 5.4s; animation-delay: -2.8s; }
+        .wobble:nth-of-type(4) { animation-duration: 6.6s; animation-delay: -0.7s; }
+        .wobble:nth-of-type(5) { animation-duration: 8s;   animation-delay: -3.5s; }
+        .wobble:nth-of-type(6) { animation-duration: 5.8s; animation-delay: -2.1s; }
+        .wobble:nth-of-type(7) { animation-duration: 7.6s; animation-delay: -4.2s; }
+        .wobble:nth-of-type(8) { animation-duration: 6.2s; animation-delay: -1.9s; }
+        .wobble:nth-of-type(9) { animation-duration: 7s;   animation-delay: -5s; }
+        /* au survol on rend la main aux effets existants (agrandissement des bulles) */
+        .service-bubble.wobble:hover { animation: none; }
+        .scolaire-panel.wobble:hover, .atelier-card.wobble:hover, .forfait-card.wobble:hover { animation-duration: 1.8s; }
+        @media (prefers-reduced-motion: reduce) { .wobble { animation: none !important; } }
+
+        /* ===================== ÉQUIPE : CARTES PHOTO ===================== */
+        .team-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 26px; margin: 44px 0 80px; }
+        .team-card { flex: 1 1 190px; max-width: 230px; }
+        .team-card { position: relative; display: block; border-radius: 14px; overflow: hidden; background: var(--bg-color); border: 1px solid var(--card-border); box-shadow: var(--shadow-soft); cursor: pointer; color: var(--text-color); transition: transform .45s cubic-bezier(.22,.61,.36,1), box-shadow .45s ease, border-color .45s ease; animation: softWobble 6.4s ease-in-out infinite; }
+        .team-card:nth-child(2n)  { animation-duration: 7.3s; animation-delay: -1.6s; }
+        .team-card:nth-child(3n)  { animation-duration: 5.7s; animation-delay: -3.2s; }
+        .team-card:nth-child(4n)  { animation-duration: 8.1s; animation-delay: -0.9s; }
+        .team-card:nth-child(5n)  { animation-duration: 6.9s; animation-delay: -4.4s; }
+        .team-card:hover { animation-play-state: paused; transform: translateY(-12px) rotate(-1deg) scale(1.03); border-color: var(--primary-red); box-shadow: 0 20px 44px rgba(220,50,50,0.3); z-index: 2; }
+
+        .team-photo { position: relative; aspect-ratio: 3/4; overflow: hidden; background: linear-gradient(160deg, #2a2a2e, #141416); }
+        .team-photo img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; filter: saturate(1.12) contrast(1.04) brightness(1.01); transition: transform .6s cubic-bezier(.22,.61,.36,1), filter .5s ease; }
+        .team-card:hover .team-photo img { transform: scale(1.09); filter: saturate(1.25) contrast(1.07) brightness(1.03); }
+        /* voile rouge qui se lève au survol */
+        .team-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(transparent 45%, rgba(220,50,50,.85)); opacity: 0; transition: opacity .45s ease; }
+        .team-card:hover .team-photo::after { opacity: 1; }
+        /* photo manquante : on voit quand même l'initiale */
+        .team-photo .team-fallback { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 2.6rem; font-weight: 800; color: rgba(255,255,255,.18); letter-spacing: 2px; }
+
+        .team-info { padding: 16px 16px 18px; position: relative; z-index: 1; background: var(--bg-color); transition: background .45s ease; }
+        .team-card:hover .team-info { background: var(--primary-red); }
+        .team-name { margin: 0 0 5px; font-size: .92rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; transition: color .45s ease; }
+        .team-role { margin: 0; font-size: .68rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--primary-red); transition: color .45s ease; }
+        .team-card:hover .team-name { color: #fff; }
+        .team-card:hover .team-role { color: rgba(255,255,255,.85); }
+        .team-ig { position: absolute; top: 12px; right: 12px; z-index: 2; width: 30px; height: 30px; border-radius: 50%; background: rgba(0,0,0,.5); color: #fff; display: flex; align-items: center; justify-content: center; font-size: .78rem; opacity: 0; transform: translateY(-6px); transition: opacity .4s ease, transform .4s ease; }
+        .team-card:hover .team-ig { opacity: 1; transform: none; }
+
+        @media (prefers-reduced-motion: reduce) { .team-card { animation: none !important; } }
+        @media (max-width: 600px) { .team-grid { gap: 16px; } .team-card { flex: 1 1 140px; max-width: 170px; } }
     </style>
 </head>
 
 <body>
+    <!-- ===================== PAGE D'ENTRÉE ===================== -->
+    <div id="landing">
+        <img src="./assets/img/Jackalop.png" alt="Amor Fati" class="landing-logo">
+        <h1 class="landing-title">AMOR FATI</h1>
+        <div class="landing-rule"></div>
+        <p class="landing-kicker" data-en="Pick your way in">Choisissez votre entrée</p>
+
+        <div class="landing-choices">
+            <div class="landing-choice" onclick="enterMode('collectif')" role="button" tabindex="0">
+                <span class="lc-num">01</span>
+                <h2 data-en="Art Collective">Collectif Artistique</h2>
+                <p data-en="Short films, illustration, photography, music and 3D renders — everything the collective puts out.">Courts métrages, illustration, photographie, musique et rendus 3D — les créations du collectif.</p>
+                <span class="lc-go" data-en="ENTER &nbsp;&rarr;">ENTRER &nbsp;&rarr;</span>
+            </div>
+            <div class="landing-choice" onclick="enterMode('services')" role="button" tabindex="0">
+                <span class="lc-num">02</span>
+                <h2 data-en="Our Services">Nos Services</h2>
+                <p data-en="Ad production for your business, plus multimedia workshops for schools.">Production publicitaire pour votre entreprise et ateliers multimédia pour les écoles.</p>
+                <span class="lc-go" data-en="ENTER &nbsp;&rarr;">ENTRER &nbsp;&rarr;</span>
+            </div>
+        </div>
+
+        <div class="lang-pick">
+            <span class="lp-label" data-en="Language">Langue</span>
+            <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
+            <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+        </div>
+    </div>
+
     <canvas id="starfield" aria-hidden="true"></canvas>
     <button class="theme-switch" onclick="toggleTheme()" aria-label="Changer le thème">MODE</button>
 
     <input type="checkbox" id="mobile-menu-toggle">
     <label for="mobile-menu-toggle" class="mobile-menu-btn">☰</label>
 
-    <input type="checkbox" id="red-toggle">
-    <label for="red-toggle" class="trigger-red"></label>
-    <div class="red-overlay">
-        <label for="red-toggle" style="color:white; cursor:pointer; font-size:3rem; font-weight:800; position:absolute; top:40px; right:40px;">✕</label>
-        <div style="text-align:center;">
-            <a href="#blog" class="nav-link" style="color:white; text-decoration:none; font-size:3rem; display:block; margin:20px 0; font-weight:800;" onclick="document.getElementById('red-toggle').checked=false">BLOG</a>
-            <a href="mailto:productionamorfati@gmail.com" style="color:white; text-decoration:none; font-size:1.5rem; display:block; margin-top:40px; font-weight:400;">CONTACT PRO</a>
-        </div>
-    </div>
-
     <!-- SIDEBAR -->
+    <button class="sidebar-reopen" onclick="expandSidebar()" title="Rouvrir le menu" aria-label="Rouvrir le menu">&#9654;</button>
     <nav class="sidebar">
-        <a href="#home" onclick="document.getElementById('mobile-menu-toggle').checked=false"><img src="./assets/img/Jackalop.png" alt="Amor Fati Logo" class="logo-img"></a>
-        <a href="#shorts" class="nav-link" onclick="document.getElementById('mobile-menu-toggle').checked=false">COURT MÉTRAGE</a>
-        <a href="#illus" class="nav-link" onclick="document.getElementById('mobile-menu-toggle').checked=false">ILLUSTRATION</a>
-        <a href="#photographie" class="nav-link" onclick="document.getElementById('mobile-menu-toggle').checked=false">PHOTOGRAPHIE</a>
-        <a href="#musique" class="nav-link" onclick="document.getElementById('mobile-menu-toggle').checked=false">MUSIQUE</a>
-        <a href="#render" class="nav-link" onclick="document.getElementById('mobile-menu-toggle').checked=false">3D RENDERING</a>
+        <div class="sidebar-resizer" id="sidebar-resizer" title="Glissez pour redimensionner &middot; double-clic pour réinitialiser"></div>
+        <div class="sidebar-top">
+            <a href="#home" onclick="document.getElementById('mobile-menu-toggle').checked=false"><img src="./assets/img/Jackalop.png" alt="Amor Fati Logo" class="logo-img"></a>
+            <button class="logo-switch" onclick="backToLanding(event)" title="Changer d'entrée" aria-label="Revenir au choix d'entrée">&#8646;</button>
+        </div>
+        <!-- Liens du COLLECTIF ARTISTIQUE -->
+        <a href="#shorts" class="nav-link nav-collectif" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="SHORT FILMS">COURT MÉTRAGE</a>
+        <a href="#illus" class="nav-link nav-collectif" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="ILLUSTRATION">ILLUSTRATION</a>
+        <a href="#photographie" class="nav-link nav-collectif" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="PHOTOGRAPHY">PHOTOGRAPHIE</a>
+        <a href="#musique" class="nav-link nav-collectif" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="MUSIC">MUSIQUE</a>
+        <a href="#render" class="nav-link nav-collectif" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="3D RENDERING">3D RENDERING</a>
+
+        <!-- Liens des SERVICES -->
+        <a href="#jj-page" class="nav-link nav-services" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="ADVERTISING">PUBLICITÉ</a>
+        <a href="#savoir-page" class="nav-link nav-services" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="SCHOOL WORKSHOPS">PARASCOLAIRE</a>
+
+        <div class="sidebar-lang">
+            <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
+            <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+        </div>
+
     </nav>
 
     <!-- PAGE PRINCIPALE -->
     <div class="main-content" id="home">
         <section class="hero">
-            <p class="hero-eyebrow">Direction Artistique &amp; Production Visuelle</p>
+            <p class="hero-eyebrow" data-en="Art Direction &amp; Visual Production">Direction Artistique &amp; Production Visuelle</p>
             <h1 class="big-title">AMOR<br>FATI</h1>
             <div class="hero-rule"></div>
-            <p class="hero-tagline">Réalisation · Illustration · Musique</p>
-            <div class="services-circles-container">
-                <a href="#jj-page" class="service-bubble">CONTRAT</a>
-                <a href="#savoir-page" class="service-bubble">ANIMATION SCOLAIRE</a>
-            </div>
+            <p class="hero-tagline" data-en="Filmmaking · Illustration · Music">Réalisation · Illustration · Musique</p>
             <div class="hero-cue" aria-hidden="true"></div>
         </section>
 
-        <h3>Dernières Sorties</h3>
-        <div class="scroll-wrapper">
-            <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/ZappL48qgbQ', '_blank')">
-                <div class="card-img"><img src="./assets/img/couverture777.png" alt="Vidéo Friperie 777" loading="lazy"></div>
-                <div class="card-info"><h4>Friperie 777</h4><p>J&J Marketing</p></div>
+        <div class="mode-collectif">
+        <h3 data-en="Collective Highlights">Aperçu du collectif</h3>
+        <p class="mix-hint" data-en="Scroll → &nbsp;click to open a section">Faites défiler → &nbsp;cliquez pour ouvrir la section</p>
+        <div class="mix-wrapper">
+            <div class="mix-card" onclick="location.hash='#render'">
+                <img src="./assets/img/render/render-cavalier.webp" alt="Cavalier — 3D Rendering" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="3D Rendering">3D Rendering</p><p class="m-title">Cavalier</p></div>
             </div>
-            <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/lZZNtsFhsY4', '_blank')">
-                <div class="card-img"><img src="./assets/img/jojo1.png" alt="Vidéo Bistro à Jojo" loading="lazy"></div>
-                <div class="card-info"><h4>Bistro à Jojo</h4><p>J&J Marketing</p></div>
+
+            <div class="mix-card" onclick="location.hash='#shorts'">
+                <img src="./assets/img/carpediem.png" alt="Carpe Diem — Court métrage" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="Short Film">Court métrage</p><p class="m-title">Carpe Diem</p></div>
             </div>
-            <div class="project-card" onclick="window.open('https://www.youtube.com/watch?v=5gc4kjuLFOo', '_blank')">
-                <div class="card-img"><img src="./assets/img/DSC3055.png" alt="Vidéo Café & Crêpes" loading="lazy"></div>
-                <div class="card-info"><h4>Café & Crêpes</h4><p>J&J Marketing</p></div>
+
+            <div class="mix-card" onclick="location.hash='#illus'">
+                <img src="./assets/img/illustration/duo.jpg" alt="Duo — Illustration" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="Illustration">Illustration</p><p class="m-title">Duo</p></div>
             </div>
-           <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/1hRdDMp_rv4', '_blank')">
-                <div class="card-img"><img src="./assets/img/piranha.png" alt="Vidéo Piranha Bar" loading="lazy"></div>
-                <div class="card-info"><h4>Piranha bar</h4><p>J&J Marketing</p></div>
+
+            <div class="mix-card" onclick="location.hash='#render'">
+                <img src="./assets/img/render/render-lyra.webp" alt="Lyra — 3D Rendering" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="3D Rendering">3D Rendering</p><p class="m-title">Lyra</p></div>
+            </div>
+
+            <div class="mix-card" onclick="location.hash='#photographie'">
+                <img src="./assets/img/photo/jordan-bless-da-blue-line.webp" alt="Bless Da Blue Line — Photographie" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="Photography">Photographie</p><p class="m-title">Bless Da Blue Line</p></div>
+            </div>
+
+            <div class="mix-card" onclick="location.hash='#musique'">
+                <img src="./assets/img/soul.png" alt="Soul Ressurection — Musique" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="Music">Musique</p><p class="m-title">Soul Ressurection</p></div>
+            </div>
+
+            <div class="mix-card" onclick="location.hash='#render'">
+                <img src="./assets/img/render/render-chevalier-fleches.webp" alt="Le Chevalier — 3D Rendering" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="3D Rendering">3D Rendering</p><p class="m-title">Le Chevalier</p></div>
+            </div>
+
+            <div class="mix-card" onclick="location.hash='#illus'">
+                <img src="./assets/img/dessin1.png" alt="On est là — Illustration" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="Illustration">Illustration</p><p class="m-title">On est là</p></div>
+            </div>
+
+            <div class="mix-card" onclick="location.hash='#shorts'">
+                <img src="./assets/img/rdls2.png" alt="Reel de l&#39;oie sauvage — Court métrage" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="Short Film">Court métrage</p><p class="m-title">Reel de l&#39;oie sauvage</p></div>
+            </div>
+
+            <div class="mix-card" onclick="location.hash='#photographie'">
+                <img src="./assets/img/photo/carlos-mon-mur.webp" alt="Mon mur — Photographie" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="Photography">Photographie</p><p class="m-title">Mon mur</p></div>
+            </div>
+
+            <div class="mix-card" onclick="location.hash='#render'">
+                <img src="./assets/img/render/render-ippo.webp" alt="Ippo — 3D Rendering" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="3D Rendering">3D Rendering</p><p class="m-title">Ippo</p></div>
+            </div>
+
+            <div class="mix-card" onclick="location.hash='#musique'">
+                <img src="./assets/img/who-killed-ghost.jpg" alt="Who Killed Ghost — Musique" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="Music">Musique</p><p class="m-title">Who Killed Ghost</p></div>
+            </div>
+
+            <div class="mix-card" onclick="location.hash='#illus'">
+                <img src="./assets/img/illustration/explosion.jpg" alt="Explosion — Illustration" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="Illustration">Illustration</p><p class="m-title">Explosion</p></div>
+            </div>
+
+            <div class="mix-card" onclick="location.hash='#photographie'">
+                <img src="./assets/img/photo/jonah-niagara-5.webp" alt="Niagara Falls — Photographie" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="Photography">Photographie</p><p class="m-title">Niagara Falls</p></div>
+            </div>
+
+            <div class="mix-card" onclick="location.hash='#shorts'">
+                <img src="./assets/img/SDC.png" alt="Scandale à Montréal — Court métrage" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="Short Film">Court métrage</p><p class="m-title">Scandale à Montréal</p></div>
+            </div>
+
+            <div class="mix-card" onclick="location.hash='#render'">
+                <img src="./assets/img/render/render-salon-oublie.webp" alt="Salon Oublié — 3D Rendering" loading="lazy">
+                <div class="mix-overlay"><p class="m-cat" data-en="3D Rendering">3D Rendering</p><p class="m-title">Salon Oublié</p></div>
+            </div>
+        </div>
+        </div>
+
+        <div class="mode-services">
+            <h3 data-en="Latest Work">Dernières Sorties</h3>
+            <div class="scroll-wrapper">
+                <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/ZappL48qgbQ', '_blank')">
+                    <div class="card-img"><img src="./assets/img/couverture777.png" alt="Vidéo Friperie 777" loading="lazy"></div>
+                    <div class="card-info"><h4>Friperie 777</h4><p data-en="J&J Marketing">J&J Marketing</p></div>
+                </div>
+                <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/lZZNtsFhsY4', '_blank')">
+                    <div class="card-img"><img src="./assets/img/jojo1.png" alt="Vidéo Bistro à Jojo" loading="lazy"></div>
+                    <div class="card-info"><h4>Bistro à Jojo</h4><p data-en="J&J Marketing">J&J Marketing</p></div>
+                </div>
+                <div class="project-card" onclick="window.open('https://www.youtube.com/watch?v=5gc4kjuLFOo', '_blank')">
+                    <div class="card-img"><img src="./assets/img/DSC3055.png" alt="Vidéo Café &amp; Crêpes" loading="lazy"></div>
+                    <div class="card-info"><h4>Café &amp; Crêpes</h4><p data-en="J&J Marketing">J&J Marketing</p></div>
+                </div>
+                <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/1hRdDMp_rv4', '_blank')">
+                    <div class="card-img"><img src="./assets/img/piranha.png" alt="Vidéo Piranha Bar" loading="lazy"></div>
+                    <div class="card-info"><h4>Piranha bar</h4><p data-en="J&J Marketing">J&J Marketing</p></div>
+                </div>
             </div>
         </div>
 
-        <h3 style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px; text-align:center;">L'ÉQUIPE</h3>
-        <div class="services-circles-container" style="margin-bottom:80px;">
-            <a href="https://www.instagram.com/jason_s_draw/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>JASON</strong><span>LAURIN</span></a>
-            <a href="https://www.instagram.com/yacancallmejo/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>JORDAN</strong><span>PAUL</span></a>
-            <a href="https://www.instagram.com/ghxst__king/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>GHOST</strong><span>KING</span></a>
-            <a href="https://www.instagram.com/_.cloud._330/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>CLOUD</strong><span></span></a>
-            <a href="https://www.instagram.com/mitchattwo/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>MITCH</strong><span>MONDESTIN</span></a>
-            <a href="https://www.instagram.com/jonahmarcy/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>JONATHAN</strong><span>VAILLANCOURT</span></a>
-            <a href="https://www.instagram.com/mikeolivier_/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>MIKE</strong><span>SOUFFRONT</span></a>
-            <a href="https://www.instagram.com/true._ivy?igsh=MWRpajlwcGU1dXNhcw==/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>ELIZABEL</strong><span>ROY</span></a>
-            <a href="https://www.instagram.com/lyno.444/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>MATHÉO</strong><span>F.</span></a>
+        <h3 style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px; text-align:center;" data-en="THE TEAM">L'ÉQUIPE</h3>
+        <div class="team-grid">
+            <a href="https://www.instagram.com/jason_s_draw/" target="_blank" rel="noopener" class="team-card">
+                <div class="team-photo">
+                    <span class="team-fallback">J</span>
+                    <img src="./assets/img/equipe/jason.png" alt="Jason Laurin" loading="lazy"
+                         onerror="this.style.display='none'">
+                </div>
+                <span class="team-ig">&#9673;</span>
+                <div class="team-info">
+                    <p class="team-name">Jason Laurin</p>
+                    <p class="team-role" data-en="Co-founder">Cofondateur</p>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/jonahmarcy/" target="_blank" rel="noopener" class="team-card">
+                <div class="team-photo">
+                    <span class="team-fallback">J</span>
+                    <img src="./assets/img/equipe/jonathan.png" alt="Jonathan Vaillancourt" loading="lazy"
+                         onerror="this.style.display='none'">
+                </div>
+                <span class="team-ig">&#9673;</span>
+                <div class="team-info">
+                    <p class="team-name">Jonathan Vaillancourt</p>
+                    <p class="team-role" data-en="Co-founder">Cofondateur</p>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/lyno.444/" target="_blank" rel="noopener" class="team-card">
+                <div class="team-photo">
+                    <span class="team-fallback">M</span>
+                    <img src="./assets/img/equipe/matheo.png" alt="Mathéo F." loading="lazy"
+                         onerror="this.style.display='none'">
+                </div>
+                <span class="team-ig">&#9673;</span>
+                <div class="team-info">
+                    <p class="team-name">Mathéo F.</p>
+                    <p class="team-role" data-en="VFX Artist">VFX Artist</p>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/yacancallmejo/" target="_blank" rel="noopener" class="team-card">
+                <div class="team-photo">
+                    <span class="team-fallback">J</span>
+                    <img src="./assets/img/equipe/jordan.png" alt="Jordan Paul" loading="lazy"
+                         onerror="this.style.display='none'">
+                </div>
+                <span class="team-ig">&#9673;</span>
+                <div class="team-info">
+                    <p class="team-name">Jordan Paul</p>
+                    <p class="team-role" data-en="Photo / Videographer">Photo / Vidéographe</p>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/true._ivy" target="_blank" rel="noopener" class="team-card">
+                <div class="team-photo">
+                    <span class="team-fallback">E</span>
+                    <img src="./assets/img/equipe/elizabel.png" alt="Elizabel Roy" loading="lazy"
+                         onerror="this.style.display='none'">
+                </div>
+                <span class="team-ig">&#9673;</span>
+                <div class="team-info">
+                    <p class="team-name">Elizabel Roy</p>
+                    <p class="team-role" data-en="Photo / Videographer">Photo / Vidéographe</p>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/mitchattwo/" target="_blank" rel="noopener" class="team-card">
+                <div class="team-photo">
+                    <span class="team-fallback">M</span>
+                    <img src="./assets/img/equipe/mitch.png" alt="Mitch Mondestin" loading="lazy"
+                         onerror="this.style.display='none'">
+                </div>
+                <span class="team-ig">&#9673;</span>
+                <div class="team-info">
+                    <p class="team-name">Mitch Mondestin</p>
+                    <p class="team-role" data-en="Director">Réalisateur</p>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/ghxst__king/" target="_blank" rel="noopener" class="team-card">
+                <div class="team-photo">
+                    <span class="team-fallback">J</span>
+                    <img src="./assets/img/equipe/jerry.png" alt="Jerry — Ghost King" loading="lazy"
+                         onerror="this.style.display='none'">
+                </div>
+                <span class="team-ig">&#9673;</span>
+                <div class="team-info">
+                    <p class="team-name">Jerry — Ghost King</p>
+                    <p class="team-role" data-en="SoundCloud Artist">SoundCloud Artist</p>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/_.cloud._330/" target="_blank" rel="noopener" class="team-card">
+                <div class="team-photo">
+                    <span class="team-fallback">C</span>
+                    <img src="./assets/img/equipe/carlos.png" alt="Carlos-Enrique" loading="lazy"
+                         onerror="this.style.display='none'">
+                </div>
+                <span class="team-ig">&#9673;</span>
+                <div class="team-info">
+                    <p class="team-name">Carlos-Enrique</p>
+                    <p class="team-role" data-en="Graphic Designer">Graphiste</p>
+                </div>
+            </a>
+
+            <a href="https://www.instagram.com/mikeolivier_/" target="_blank" rel="noopener" class="team-card">
+                <div class="team-photo">
+                    <span class="team-fallback">M</span>
+                    <img src="./assets/img/equipe/mike.png" alt="Mike Souffront" loading="lazy"
+                         onerror="this.style.display='none'">
+                </div>
+                <span class="team-ig">&#9673;</span>
+                <div class="team-info">
+                    <p class="team-name">Mike Souffront</p>
+                    <p class="team-role" data-en="Editor">Monteur</p>
+                </div>
+            </a>
         </div>
     </div>
 
     <!-- J&J PAGE -->
     <div id="jj-page" class="splash-section">
-        <a href="#home" class="close-splash">FERMER</a>
+        <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
 
         <!-- INTRO CINÉMATIQUE (pilotée par le scroll) -->
         <div class="jj-intro">
             <div class="jj-intro-sticky">
                 <div class="jj-phase">
-                    <p class="jj-text">Vous voulez investir dans votre <span class="hl">entreprise</span>.</p>
+                    <p class="jj-text" data-en="You want to invest in your <span class='hl'>business</span>.">Vous voulez investir dans votre <span class="hl">entreprise</span>.</p>
                 </div>
                 <div class="jj-phase">
-                    <p class="jj-text">Chaque dollar investi avec nous vous <span class="hl">revient</span>.</p>
+                    <p class="jj-text" data-en="Every dollar you put in with us <span class='hl'>comes back</span>.">Chaque dollar investi avec nous vous <span class="hl">revient</span>.</p>
                 </div>
                 <div class="jj-phase">
-                    <p class="jj-lead">Occupez-vous de ce que vous savez faire.<br>De notre côté, on s'occupe de vos :</p>
+                    <p class="jj-lead" data-en="You focus on what you do best.<br>We'll take care of your:">Occupez-vous de ce que vous savez faire.<br>De notre côté, on s&#39;occupe de vos :</p>
                     <div class="jj-words">
-                        <span class="jj-word">réseaux sociaux</span>
-                        <span class="jj-word">site web</span>
-                        <span class="jj-word">design publicitaire</span>
-                        <span class="jj-word">et plus encore.</span>
+                        <span class="jj-word" data-en="social media">réseaux sociaux</span>
+                        <span class="jj-word" data-en="website">site web</span>
+                        <span class="jj-word" data-en="ad design">design publicitaire</span>
+                        <span class="jj-word" data-en="and more.">et plus encore.</span>
                     </div>
                 </div>
-                <div class="jj-scroll-cue"><span>DÉFILEZ</span><div class="jj-chevron"></div></div>
+                <div class="jj-scroll-cue"><span data-en="SCROLL">DÉFILEZ</span><div class="jj-chevron"></div></div>
             </div>
         </div>
 
         <div class="splash-content">
-            <h1 class="jj-reveal jj-title" style="color:var(--primary-red);">SERVICE D'ACQUISITION DE CLIENTS</h1>
+            <h1 class="jj-reveal jj-title" style="color:var(--primary-red);" data-en="CLIENT ACQUISITION SERVICE">SERVICE D&#39;ACQUISITION DE CLIENTS</h1>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:60px; margin-top:40px;">
                 <div>
-                    <h2 class="jj-reveal jj-title">Un investissement, pas une dépense.</h2>
-                    <p class="jj-reveal" data-delay="1">Chaque dollar investi dans votre image, c'est un dollar qui travaille pour vous. Chez J&J, nous transformons votre présence en ligne en véritable machine à attirer des clients : du contenu pensé pour capter l'attention, créer l'envie, et convertir vos visiteurs en réservations concrètes. Nos clients qui passent au contenu professionnel voient systématiquement leur achalandage et leur visibilité grimper, mois après mois.</p>
-                    <h3 class="jj-reveal" data-delay="1">Pourquoi choisir notre solution ?</h3>
+                    <h2 class="jj-reveal jj-title" data-en="An investment, not an expense.">Un investissement, pas une dépense.</h2>
+                    <p class="jj-reveal" data-delay="1" data-en="Every dollar you put into your image is a dollar working for you. At J&J, we turn your online presence into a real client-generating machine: content built to grab attention, spark desire, and turn viewers into actual bookings. Clients who switch to professional content see their traffic and visibility climb, month after month.">Chaque dollar investi dans votre image, c&#39;est un dollar qui travaille pour vous. Chez J&J, nous transformons votre présence en ligne en véritable machine à attirer des clients : du contenu pensé pour capter l&#39;attention, créer l&#39;envie, et convertir vos visiteurs en réservations concrètes. Nos clients qui passent au contenu professionnel voient systématiquement leur achalandage et leur visibilité grimper, mois après mois.</p>
+                    <h3 class="jj-reveal" data-delay="1" data-en="Why go with us?">Pourquoi choisir notre solution ?</h3>
                     <ul class="jj-list jj-reveal" data-delay="2">
-                        <li><strong>Qualité Cinéma :</strong> Captations professionnelles (4K, Gimbal, Audio Pro) qui démarquent votre marque de la concurrence.</li>
-                        <li><strong>Tarif compétitif :</strong> Qualité supérieure à un prix 50% moins cher que le marché, pour un retour sur investissement maximal.</li>
-                        <li><strong>Résultats concrets :</strong> Plus de visibilité, plus de réservations, plus de clients fidèles — chaque vidéo devient un actif qui rapporte sur le long terme.</li>
+                        <li data-en="<strong>Cinema quality:</strong> Professional shoots (4K, gimbal, pro audio) that set your brand apart from the competition."><strong>Qualité Cinéma :</strong> Captations professionnelles (4K, Gimbal, Audio Pro) qui démarquent votre marque de la concurrence.</li>
+                        <li data-en="<strong>Competitive pricing:</strong> Better quality at 50% below market rate, for maximum return on your investment."><strong>Tarif compétitif :</strong> Qualité supérieure à un prix 50% moins cher que le marché, pour un retour sur investissement maximal.</li>
+                        <li data-en="<strong>Real results:</strong> More visibility, more bookings, more loyal customers — every video becomes an asset that pays off long term."><strong>Résultats concrets :</strong> Plus de visibilité, plus de réservations, plus de clients fidèles — chaque vidéo devient un actif qui rapporte sur le long terme.</li>
                     </ul>
-                    <a href="#tarifs-page" class="cta-btn jj-cta jj-reveal" data-delay="3">Consulter nos forfaits</a>
+                    <a href="#tarifs-page" class="cta-btn jj-cta jj-reveal" data-delay="3" data-en="See our packages">Consulter nos forfaits</a>
                 </div>
                 <div class="jj-reveal from-right" data-delay="1">
                     <img src="./assets/img/couverture777.png" alt="Projet 777" style="width:100%; margin-bottom:20px; border-radius:10px; box-shadow:0 10px 20px rgba(0,0,0,0.1);">
@@ -561,32 +936,32 @@
                 </div>
             </div>
 
-            <h3 class="jj-reveal" style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;">L'ÉQUIPE</h3>
+            <h3 class="jj-reveal" style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;" data-en="THE TEAM">L&#39;ÉQUIPE</h3>
             <div class="services-circles-container jj-stagger" style="margin-bottom:80px;">
-                <a href="https://www.instagram.com/jason_s_draw/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>JASON</strong><span>LAURIN</span></a>
-                <a href="https://www.instagram.com/yacancallmejo/" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>JORDAN</strong><span>PAUL</span></a>
-				<a href="https://www.instagram.com/true._ivy?igsh=MWRpajlwcGU1dXNhcw==" target="_blank" class="service-bubble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>ÉLIZABEL</strong><span>ROY</span></a>
+                <a href="https://www.instagram.com/jason_s_draw/" target="_blank" class="service-bubble wobble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>JASON</strong><span>LAURIN</span></a>
+                <a href="https://www.instagram.com/yacancallmejo/" target="_blank" class="service-bubble wobble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>JORDAN</strong><span>PAUL</span></a>
+				<a href="https://www.instagram.com/true._ivy?igsh=MWRpajlwcGU1dXNhcw==" target="_blank" class="service-bubble wobble" style="flex-direction:column; text-align:center; font-size:0.7rem; gap:5px;"><strong>ÉLIZABEL</strong><span>ROY</span></a>
             </div>
 
-            <h3 class="jj-reveal" style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;">Projets Récents Service d'Acquisition de Clients</h3>
+            <h3 class="jj-reveal" style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;" data-en="Recent Client Acquisition Work">Projets Récents Service d&#39;Acquisition de Clients</h3>
             <div class="scroll-wrapper jj-stagger">
-                <div class="project-card" onclick="window.open('https://www.instagram.com/reel/DYiwM9euzUq/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')"><div class="card-img"><img src="./assets/img/cafecrepes2.png" alt="Vidéo Beau Réveil"></div><div class="card-info"><h4>Beau Réveil</h4><p>J&J Marketing</p></div></div>
-                <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/ZappL48qgbQ', '_blank')"><div class="card-img"><img src="./assets/img/couverture777.png" alt="Vidéo 777"></div><div class="card-info"><h4>Friperie 777</h4><p>J&J Marketing</p></div></div>
-                <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/lZZNtsFhsY4', '_blank')"><div class="card-img"><img src="./assets/img/jojo1.png" alt="Vidéo Jojo"></div><div class="card-info"><h4>Bistro à Jojo</h4><p>J&J Event</p></div></div>
-                <div class="project-card" onclick="window.open('https://www.youtube.com/watch?v=5gc4kjuLFOo', '_blank')"><div class="card-img"><img src="./assets/img/DSC3055.png" alt="Vidéo Crêpes"></div><div class="card-info"><h4>Café & Crêpes</h4><p>J&J Marketing</p></div></div>
+                <div class="project-card" onclick="window.open('https://www.instagram.com/reel/DYiwM9euzUq/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')"><div class="card-img"><img src="./assets/img/cafecrepes2.png" alt="Vidéo Beau Réveil"></div><div class="card-info"><h4>Beau Réveil</h4><p data-en="J&J Marketing">J&J Marketing</p></div></div>
+                <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/ZappL48qgbQ', '_blank')"><div class="card-img"><img src="./assets/img/couverture777.png" alt="Vidéo 777"></div><div class="card-info"><h4>Friperie 777</h4><p data-en="J&J Marketing">J&J Marketing</p></div></div>
+                <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/lZZNtsFhsY4', '_blank')"><div class="card-img"><img src="./assets/img/jojo1.png" alt="Vidéo Jojo"></div><div class="card-info"><h4>Bistro à Jojo</h4><p data-en="J&J Event">J&J Event</p></div></div>
+                <div class="project-card" onclick="window.open('https://www.youtube.com/watch?v=5gc4kjuLFOo', '_blank')"><div class="card-img"><img src="./assets/img/DSC3055.png" alt="Vidéo Crêpes"></div><div class="card-info"><h4>Café & Crêpes</h4><p data-en="J&J Marketing">J&J Marketing</p></div></div>
             </div>
         </div>
     </div>
 
     <!-- FORFAITS -->
     <div id="tarifs-page" class="splash-section">
-        <a href="#jj-page" class="close-splash">RETOUR</a>
+        <a href="#jj-page" class="close-splash" data-en="BACK">RETOUR</a>
         <div class="splash-content" style="text-align:center;">
             <h1 style="color:var(--primary-red);">NOS FORFAITS / OUR PACKAGES</h1>
             <p>Cliquez pour ouvrir le document PDF / Click to open PDF</p>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:20px; margin-top:40px; padding:0 10px;">
-                <div class="project-card" onclick="window.open('./assets/pdf/forfait-unique.pdf', '_blank')" style="cursor:pointer; padding:15px; min-width:0;"><div style="font-size:40px; margin-bottom:10px;">📄</div><h4>Forfait Unique</h4></div>
-                <div class="project-card" onclick="window.open('./assets/pdf/forfait-long.pdf', '_blank')" style="cursor:pointer; padding:15px; min-width:0;"><div style="font-size:40px; margin-bottom:10px;">📄</div><h4>Forfait Long Terme</h4></div>
+                <div class="project-card" onclick="window.open('./assets/pdf/forfait-unique.pdf', '_blank')" style="cursor:pointer; padding:15px; min-width:0;"><div style="font-size:40px; margin-bottom:10px;">📄</div><h4 data-en="One-Time Package">Forfait Unique</h4></div>
+                <div class="project-card" onclick="window.open('./assets/pdf/forfait-long.pdf', '_blank')" style="cursor:pointer; padding:15px; min-width:0;"><div style="font-size:40px; margin-bottom:10px;">📄</div><h4 data-en="Long-Term Package">Forfait Long Terme</h4></div>
                 <div class="project-card" onclick="window.open('./assets/pdf/forfaitlongenglish.pdf', '_blank')" style="cursor:pointer; padding:15px; min-width:0;"><div style="font-size:40px; margin-bottom:10px;">📄</div><h4>Long Term Package</h4></div>
                 <div class="project-card" onclick="window.open('./assets/pdf/forfaitcontratuniqueenglish.pdf', '_blank')" style="cursor:pointer; padding:15px; min-width:0;"><div style="font-size:40px; margin-bottom:10px;">📄</div><h4>Short Term Package</h4></div>
             </div>
@@ -599,12 +974,12 @@
 
     <!-- COURTS MÉTRAGES -->
 <div id="shorts" class="splash-section">
-    <a href="#home" class="close-splash">FERMER</a>
+    <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
     <div class="splash-content">
-        <h1 style="color:var(--primary-red);">COURTS MÉTRAGES</h1>
+        <h1 style="color:var(--primary-red);" data-en="SHORT FILMS">COURTS MÉTRAGES</h1>
         <p style="color:#888; letter-spacing:2px; font-size:0.85rem;">PRODUCTION AMOR FATI</p>
 
-        <h2 style="margin-top:60px;">COURT MÉTRAGE</h2>
+        <h2 style="margin-top:60px;" data-en="SHORT FILM">COURT MÉTRAGE</h2>
         <div class="films-grid">
 
             <!-- ================================
@@ -622,7 +997,7 @@
                 <div class="film-overlay">
                     <div class="film-info">
                         <h3>Carpe Diem</h3>
-                        <p>Réal. Mitch Mondestin · Court métrage</p>
+                        <p data-en="Dir. Mitch Mondestin · Short film">Réal. Mitch Mondestin · Court métrage</p>
                     </div>
                 </div>
             </div>
@@ -633,7 +1008,7 @@
                 <div class="film-overlay">
                     <div class="film-info">
                         <h3>Reel de l'oie sauvage</h3>
-                        <p>X min · Court métrage</p>
+                        <p data-en="X min · Short film">X min · Court métrage</p>
                     </div>
                 </div>
             </div>
@@ -643,7 +1018,7 @@
                 <div class="film-overlay">
                     <div class="film-info">
                         <h3>Scandale à Montréal</h3>
-                        <p>Réal. Jonathan Vaillancourt · Court métrage</p>
+                        <p data-en="Dir. Jonathan Vaillancourt · Short film">Réal. Jonathan Vaillancourt · Court métrage</p>
                     </div>
                 </div>
             </div>
@@ -651,7 +1026,7 @@
 
         </div>
 
-        <h2 style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;">TÂCHE CONNEXE</h2>
+        <h2 style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;" data-en="RELATED WORK">TÂCHE CONNEXE</h2>
         <div class="films-grid connexe-grid">
 
             <!-- ================================
@@ -665,7 +1040,7 @@
                 <div class="film-overlay">
                     <div class="film-info">
                         <h3>BlockHead</h3>
-                        <p>Production J&J</p>
+                        <p data-en="J&J Production">Production J&J</p>
                     </div>
                 </div>
             </div>
@@ -676,7 +1051,7 @@
                 <div class="film-overlay">
                     <div class="film-info">
                         <h3>Tympan</h3>
-                        <p>Production J&J</p>
+                        <p data-en="J&J Production">Production J&J</p>
                     </div>
                 </div>
             </div>
@@ -687,7 +1062,7 @@
                 <div class="film-overlay">
                     <div class="film-info">
                         <h3>Note à vous-même</h3>
-                        <p>Production J&J</p>
+                        <p data-en="J&J Production">Production J&J</p>
                     </div>
                 </div>
             </div>
@@ -698,7 +1073,7 @@
                 <div class="film-overlay">
                     <div class="film-info">
                         <h3>Crainte</h3>
-                        <p>Production J&J</p>
+                        <p data-en="J&J Production">Production J&J</p>
                     </div>
                 </div>
             </div>
@@ -709,7 +1084,7 @@
                 <div class="film-overlay">
                     <div class="film-info">
                         <h3>Dextérité</h3>
-                        <p>Production J&J</p>
+                        <p data-en="J&J Production">Production J&J</p>
                     </div>
                 </div>
             </div>
@@ -720,7 +1095,7 @@
                 <div class="film-overlay">
                     <div class="film-info">
                         <h3>Avec le sauvage</h3>
-                        <p>Production J&J</p>
+                        <p data-en="J&J Production">Production J&J</p>
                     </div>
                 </div>
             </div>
@@ -731,7 +1106,7 @@
                 <div class="film-overlay">
                     <div class="film-info">
                         <h3>Tatonnement</h3>
-                        <p>Production J&J</p>
+                        <p data-en="J&J Production">Production J&J</p>
                     </div>
                 </div>
             </div>
@@ -742,24 +1117,24 @@
                 <div class="film-overlay">
                     <div class="film-info">
                         <h3>En bons termes</h3>
-                        <p>Production J&J</p>
+                        <p data-en="J&J Production">Production J&J</p>
                     </div>
                 </div>
             </div>
 
         </div>
 
-        <h2 style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;">MOYEN MÉTRAGE</h2>
-        <p style="color:#888; letter-spacing:2px; font-size:0.9rem;">EN PROGRESSION...</p>
+        <h2 style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;" data-en="MID-LENGTH FILM">MOYEN MÉTRAGE</h2>
+        <p style="color:#888; letter-spacing:2px; font-size:0.9rem;" data-en="IN PROGRESS...">EN PROGRESSION...</p>
     </div>
 </div>
    
     <!-- ILLUSTRATIONS -->
     <div id="illus" class="splash-section">
-        <a href="#home" class="close-splash">FERMER</a>
+        <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
         <div class="splash-content">
-            <h1 style="color:var(--primary-red);">ILLUSTRATIONS</h1>
-            <p>Cliquez sur une image pour l'agrandir.</p>
+            <h1 style="color:var(--primary-red);" data-en="ILLUSTRATIONS">ILLUSTRATIONS</h1>
+            <p data-en="Click an image to blow it up.">Cliquez sur une image pour l&#39;agrandir.</p>
 
             <div class="illus-grid">
                 <!-- =====================================================
@@ -831,23 +1206,23 @@
         <div id="lightbox" onclick="closeLightbox()" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.92); z-index:9999; align-items:center; justify-content:center; flex-direction:column;">
             <img id="lightbox-img" src="" style="max-width:90%; max-height:75vh; object-fit:contain; border-radius:8px;">
             <p id="lightbox-title" style="color:white; margin-top:16px; font-size:16px; font-weight:500;"></p>
-            <a id="lightbox-link" href="" target="_blank" onclick="event.stopPropagation()" style="margin-top:10px; padding:10px 24px; background:var(--primary-red); color:white; border-radius:8px; text-decoration:none; font-size:14px;">Voir sur Instagram</a>
-            <p style="color:rgba(255,255,255,0.4); font-size:12px; margin-top:16px;">Cliquez n'importe où pour fermer</p>
+            <a id="lightbox-link" href="" target="_blank" onclick="event.stopPropagation()" style="margin-top:10px; padding:10px 24px; background:var(--primary-red); color:white; border-radius:8px; text-decoration:none; font-size:14px;" data-en="View on Instagram">Voir sur Instagram</a>
+            <p style="color:rgba(255,255,255,0.4); font-size:12px; margin-top:16px;" data-en="Click anywhere to close">Cliquez n&#39;importe où pour fermer</p>
         </div>
     </div>
 
   <!-- MUSIQUE -->
 <div id="musique" class="splash-section">
     <canvas id="notefield" aria-hidden="true"></canvas>
-    <a href="#home" class="close-splash">FERMER</a>
+    <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
     <div class="splash-content">
-        <h1 style="color:var(--primary-red);">MUSIQUE / LABEL</h1>
+        <h1 style="color:var(--primary-red);" data-en="MUSIC / LABEL">MUSIQUE / LABEL</h1>
         <h2 style="color:var(--primary-red);">GHOST KING / ON THE TRACK</h2>
 
         <!-- ALBUMS -->
         <div style="margin-top:60px; border-top:2px solid var(--primary-red); padding-top:40px;">
-            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 8px;">ALBUMS</p>
-            <p style="color:#888; font-size:0.85rem; margin:0;">Cliquez sur une pochette pour voir la tracklist.</p>
+            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 8px;" data-en="ALBUMS">ALBUMS</p>
+            <p style="color:#888; font-size:0.85rem; margin:0;" data-en="Click a cover to see the tracklist.">Cliquez sur une pochette pour voir la tracklist.</p>
 
             <!-- =====================================================
                  POUR AJOUTER UN ALBUM (2 étapes) :
@@ -866,7 +1241,7 @@
                         <img src="./assets/img/soul.png" alt="Soul Ressurection">
                         <div class="album-play"><span>▶</span></div>
                     </div>
-                    <div class="album-card-info"><h3>SOUL RESSURECTION</h3><p>2025 · 10 titres</p></div>
+                    <div class="album-card-info"><h3>SOUL RESSURECTION</h3><p data-en="2025 · 10 tracks">2025 · 10 titres</p></div>
                 </div>
 
                 <!-- ALBUM 2 -->
@@ -875,7 +1250,7 @@
                         <img src="./assets/img/who-killed-ghost.jpg" alt="Who Killed Ghost">
                         <div class="album-play"><span>▶</span></div>
                     </div>
-                    <div class="album-card-info"><h3>WHO KILLED GHOST</h3><p>2026 · 10 titres</p></div>
+                    <div class="album-card-info"><h3>WHO KILLED GHOST</h3><p data-en="2026 · 10 tracks">2026 · 10 titres</p></div>
                 </div>
 
             </div>
@@ -884,10 +1259,10 @@
         <!-- SINGLES -->
         <div style="margin-top:80px; border-top:2px solid var(--primary-red); padding-top:40px;">
             <div style="margin-bottom:8px;">
-                <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 8px;">SINGLES</p>
-                <h2 style="margin:0;">TITRES INDÉPENDANTS</h2>
+                <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 8px;" data-en="SINGLES">SINGLES</p>
+                <h2 style="margin:0;" data-en="STANDALONE TRACKS">TITRES INDÉPENDANTS</h2>
             </div>
-            <p style="color:#888; font-size:0.85rem; margin:0;">Cliquez sur une pochette pour écouter.</p>
+            <p style="color:#888; font-size:0.85rem; margin:0;" data-en="Click a cover to give it a listen.">Cliquez sur une pochette pour écouter.</p>
 
             <!-- POUR AJOUTER UN SINGLE : copiez un bloc .album-card, changez le lien (window.open), la pochette et le titre. -->
             <div class="album-grid" style="margin-top:24px;">
@@ -904,28 +1279,28 @@
 
                 <div class="album-card" onclick="window.open('https://music.youtube.com/watch?v=dXm68mXZQOI','_blank')">
                     <div class="album-cover"><img src="./assets/img/single-ben-flex.jpg" alt="Ben Flex"><div class="album-play"><span>▶</span></div></div>
-                    <div class="album-card-info"><h3>Ben Flex</h3><p>Single</p></div>
+                    <div class="album-card-info"><h3>Ben Flex</h3><p data-en="Single">Single</p></div>
                 </div>
 
                 <div class="album-card" onclick="window.open('https://music.youtube.com/watch?v=0BJ9wXQSYPw','_blank')">
                     <div class="album-cover"><img src="./assets/img/single-cold-step.jpg" alt="Cold Step"><div class="album-play"><span>▶</span></div></div>
-                    <div class="album-card-info"><h3>Cold Step</h3><p>Single</p></div>
+                    <div class="album-card-info"><h3>Cold Step</h3><p data-en="Single">Single</p></div>
                 </div>
 
                 <!-- LIENS MANQUANTS : remplacez LIEN_YT_MUSIC par le vrai lien YouTube Music -->
                 <div class="album-card" onclick="window.open('https://music.youtube.com/watch?v=9O3YBq7ljXs','_blank')">
                     <div class="album-cover"><img src="./assets/img/single-montreal-nord.jpg" alt="Montréal Nord"><div class="album-play"><span>▶</span></div></div>
-                    <div class="album-card-info"><h3>Montréal Nord</h3><p>Single</p></div>
+                    <div class="album-card-info"><h3>Montréal Nord</h3><p data-en="Single">Single</p></div>
                 </div>
 
                 <div class="album-card" onclick="window.open('https://music.youtube.com/watch?v=PiP8LC4zIrk','_blank')">
                     <div class="album-cover"><img src="./assets/img/single-anniversaire.jpg" alt="Anniversaire"><div class="album-play"><span>▶</span></div></div>
-                    <div class="album-card-info"><h3>Anniversaire</h3><p>Single</p></div>
+                    <div class="album-card-info"><h3>Anniversaire</h3><p data-en="Single">Single</p></div>
                 </div>
 
                 <div class="album-card" onclick="window.open('https://music.youtube.com/playlist?list=OLAK5uy_kfcLYKW3aZgDcjxGqq4Iz1ea_x66-dKQg','_blank')">
                     <div class="album-cover"><img src="./assets/img/single-saps-ptite-dance.jpg" alt="SAPS / P'tite Dance"><div class="album-play"><span>▶</span></div></div>
-                    <div class="album-card-info"><h3>SAPS / P'tite Dance</h3><p>Double feature</p></div>
+                    <div class="album-card-info"><h3>SAPS / P'tite Dance</h3><p data-en="Double feature">Double feature</p></div>
                 </div>
 
             </div>
@@ -993,10 +1368,10 @@
     <!-- 3D RENDERING -->
     <div id="render" class="splash-section">
         <canvas id="renderfield" aria-hidden="true"></canvas>
-        <a href="#home" class="close-splash">FERMER</a>
+        <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
         <div class="splash-content">
             <h1 class="jj-reveal jj-title" style="color:var(--primary-red);">3D RENDERING</h1>
-            <p class="render-subtitle jj-reveal" data-delay="1">Fait par Mathéo.F sur Blender</p>
+            <p class="render-subtitle jj-reveal" data-delay="1" data-en="Made by Mathéo.F in Blender">Fait par Mathéo.F sur Blender</p>
 
             <!-- =====================================================
                  POUR AJOUTER UN RENDER :
@@ -1076,16 +1451,16 @@
             <span class="render-lb-close" onclick="closeRender()">✕</span>
             <img id="render-lb-img" src="" alt="">
             <p id="render-lb-title"></p>
-            <a id="render-lb-link" href="" target="_blank" onclick="event.stopPropagation()" class="cta-btn">Voir sur Instagram</a>
+            <a id="render-lb-link" href="" target="_blank" onclick="event.stopPropagation()" class="cta-btn" data-en="View on Instagram">Voir sur Instagram</a>
         </div>
     </div>
 
     <!-- PHOTOGRAPHIE -->
     <div id="photographie" class="splash-section">
-        <a href="#home" class="close-splash">FERMER</a>
+        <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
         <div class="splash-content">
-            <h1 style="color:var(--primary-red);">PHOTOGRAPHIE</h1>
-            <p>Survolez une photo pour voir l'œuvre et son artiste. Cliquez pour l'agrandir.</p>
+            <h1 style="color:var(--primary-red);" data-en="PHOTOGRAPHY">PHOTOGRAPHIE</h1>
+            <p data-en="Hover a photo to see the piece and who shot it. Click to blow it up.">Survolez une photo pour voir l&#39;œuvre et son artiste. Cliquez pour l&#39;agrandir.</p>
 
             <!-- =====================================================
                  POUR AJOUTER UNE PHOTO :
@@ -1228,6 +1603,31 @@
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Pick up!</p><p class="p-artist">Jordan Paul</p></div>
                     </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jordan-cinderella.jpg', 'Cinderella', 'Jordan Paul')">
+                        <img src="./assets/img/photo/jordan-cinderella.jpg" alt="Cinderella — Jordan Paul" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Cinderella</p><p class="p-artist">Jordan Paul</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jordan-i-said-pick-up.jpg', 'I Said Pick Up,', 'Jordan Paul')">
+                        <img src="./assets/img/photo/jordan-i-said-pick-up.jpg" alt="I Said Pick Up, — Jordan Paul" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">I Said Pick Up,</p><p class="p-artist">Jordan Paul</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jordan-please.jpg', 'Please?', 'Jordan Paul')">
+                        <img src="./assets/img/photo/jordan-please.jpg" alt="Please? — Jordan Paul" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Please?</p><p class="p-artist">Jordan Paul</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jordan-who-stole-the-mona-lisa.jpg', 'Who Stole The Mona Lisa?', 'Jordan Paul')">
+                        <img src="./assets/img/photo/jordan-who-stole-the-mona-lisa.jpg" alt="Who Stole The Mona Lisa? — Jordan Paul" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Who Stole The Mona Lisa?</p><p class="p-artist">Jordan Paul</p></div>
+                    </div>
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jordan-guest-room.jpg', 'Guest Room', 'Jordan Paul')">
+                        <img src="./assets/img/photo/jordan-guest-room.jpg" alt="Guest Room — Jordan Paul" loading="lazy">
+                        <div class="photo-expand">⤢</div>
+                        <div class="photo-overlay"><p class="p-title">Guest Room</p><p class="p-artist">Jordan Paul</p></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1238,81 +1638,81 @@
             <img id="photo-lb-img" src="" alt="">
             <p class="pl-title" id="photo-lb-title"></p>
             <p class="pl-artist" id="photo-lb-artist"></p>
-            <p class="pl-hint">Cliquez n'importe où pour fermer</p>
+            <p class="pl-hint" data-en="Click anywhere to close">Cliquez n&#39;importe où pour fermer</p>
         </div>
     </div>
 
 
     <!-- CLOUD -->
     <div id="cloud-page" class="splash-section">
-        <a href="#home" class="close-splash">FERMER</a>
+        <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
         <div class="splash-content"><h1 style="color:var(--primary-red);">CLOUD</h1></div>
     </div>
 
     <!-- ANIMATION PARASCOLAIRE -->
 <div id="savoir-page" class="splash-section">
-    <a href="#home" class="close-splash">FERMER</a>
+    <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
     <div class="splash-content">
 
         <!-- EN-TÊTE -->
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:40px; margin-bottom:60px;">
+        <div class="scolaire-panel scolaire-head">
             <div>
-                <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 12px;">ATELIERS MULTIMÉDIA</p>
-                <h1 style="color:var(--primary-red); margin:0 0 16px;">LE MONDE DU CINÉMA<br>À VOTRE ÉCOLE</h1>
-                <p style="max-width:520px; color:#888; font-size:0.9rem; line-height:1.8;">Nous voulons partager notre passion à travers la pédagogie. Nous travaillons avec des gens dont l'expertise remonte à plus de vingt ans, pour offrir des ateliers stimulants aux écoles et aux camps de jour à travers le Québec et l'Ontario.</p>
-                <a href="mailto:productionamorfati@gmail.com" class="cta-btn" style="margin-top:10px;">NOUS CONTACTER</a>
+                <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 12px;" data-en="MULTIMEDIA WORKSHOPS">ATELIERS MULTIMÉDIA</p>
+                <h1 style="color:var(--primary-red); margin:0 0 16px;" data-en="THE WORLD OF CINEMA<br>AT YOUR SCHOOL">LE MONDE DU CINÉMA<br>À VOTRE ÉCOLE</h1>
+                <p style="max-width:520px; color:#888; font-size:0.9rem; line-height:1.8;" data-en="We want to share our passion through teaching. We work with people whose expertise goes back more than twenty years, bringing hands-on workshops to schools and day camps across Quebec and Ontario.">Nous voulons partager notre passion à travers la pédagogie. Nous travaillons avec des gens dont l&#39;expertise remonte à plus de vingt ans, pour offrir des ateliers stimulants aux écoles et aux camps de jour à travers le Québec et l&#39;Ontario.</p>
+                <a href="mailto:productionamorfati@gmail.com" class="cta-btn" style="margin-top:10px;" data-en="GET IN TOUCH">NOUS CONTACTER</a>
             </div>
             <!-- TROUPEAU DE JACKALOPES FLOTTANTS -->
             <canvas id="jackalope-float" class="jackalope-float" aria-hidden="true"></canvas>
         </div>
 
         <!-- NOTRE MISSION -->
-        <div style="border-top:2px solid var(--primary-red); padding-top:40px; margin-bottom:60px;">
-            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 16px;">NOTRE MISSION</p>
-            <p style="max-width:800px; font-size:1rem; line-height:1.9;">Offrez à vos jeunes une immersion complète dans l'univers des médias — histoire du cinéma, théorie de la réalisation, ateliers pratiques avec équipement professionnel. Les participants deviennent tour à tour réalisateurs, techniciens ou comédiens.</p>
+        <div class="scolaire-panel">
+            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 16px;" data-en="OUR MISSION">NOTRE MISSION</p>
+            <p style="max-width:800px; font-size:1rem; line-height:1.9;" data-en="Give your students a full dive into the world of media — film history, directing theory, hands-on workshops with professional gear. Participants take turns being directors, technicians and actors.">Offrez à vos jeunes une immersion complète dans l&#39;univers des médias — histoire du cinéma, théorie de la réalisation, ateliers pratiques avec équipement professionnel. Les participants deviennent tour à tour réalisateurs, techniciens ou comédiens.</p>
         </div>
 
         <!-- 3 COLONNES D'ATELIERS -->
-        <div style="border-top:2px solid var(--primary-red); padding-top:40px; margin-bottom:60px;">
-            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 30px;">NOS ATELIERS</p>
+        <div class="scolaire-panel">
+            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 30px;" data-en="OUR WORKSHOPS">NOS ATELIERS</p>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(240px, 1fr)); gap:30px;">
 
-                <div class="atelier-card" style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
+                <div class="wobble atelier-card" style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
                     <div style="width:100%; height:140px; background:#111; border-radius:6px; margin-bottom:16px; overflow:hidden;">
                         <img class="atelier-photo" src="./assets/img/scolaire/atelier-creation-video.jpg" alt="Appareil photo encadré de deux flashs de studio" loading="lazy">
                     </div>
-                    <h4 style="color:var(--primary-red); margin:0 0 12px;">CRÉATION VIDÉO</h4>
+                    <h4 style="color:var(--primary-red); margin:0 0 12px;" data-en="VIDEO CREATION">CRÉATION VIDÉO</h4>
                     <ul style="font-size:0.85rem; color:#888; line-height:2; margin:0; padding-left:16px;">
-                        <li>Secrets du fond vert</li>
-                        <li>Secrets de l'animation 2D</li>
-                        <li>Réalisation d'un court-métrage</li>
-                        <li>Manipulation de matériel Pro</li>
+                        <li data-en="Green screen secrets">Secrets du fond vert</li>
+                        <li data-en="2D animation secrets">Secrets de l&#39;animation 2D</li>
+                        <li data-en="Making a short film">Réalisation d&#39;un court-métrage</li>
+                        <li data-en="Handling pro equipment">Manipulation de matériel Pro</li>
                     </ul>
                 </div>
 
-                <div class="atelier-card" style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
+                <div class="wobble atelier-card" style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
                     <div style="width:100%; height:140px; background:#111; border-radius:6px; margin-bottom:16px; overflow:hidden;">
                         <img class="atelier-photo" src="./assets/img/scolaire/atelier-histoire-cinema.jpg" alt="Chambre photographique géante manipulée par deux hommes, archive noir et blanc" loading="lazy">
                     </div>
-                    <h4 style="color:var(--primary-red); margin:0 0 12px;">HISTOIRE DU CINÉMA</h4>
+                    <h4 style="color:var(--primary-red); margin:0 0 12px;" data-en="FILM HISTORY">HISTOIRE DU CINÉMA</h4>
                     <ul style="font-size:0.85rem; color:#888; line-height:2; margin:0; padding-left:16px;">
-                        <li>Histoire des débuts du cinéma</li>
-                        <li>Courants cinématographiques</li>
-                        <li>Histoire du cinéma local</li>
-                        <li>Histoire d'Hollywood</li>
+                        <li data-en="The early days of cinema">Histoire des débuts du cinéma</li>
+                        <li data-en="Film movements">Courants cinématographiques</li>
+                        <li data-en="Our local film history">Histoire du cinéma local</li>
+                        <li data-en="The story of Hollywood">Histoire d&#39;Hollywood</li>
                     </ul>
                 </div>
 
-                <div class="atelier-card" style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
+                <div class="wobble atelier-card" style="border:1px solid var(--primary-red); border-radius:8px; padding:24px;">
                     <div style="width:100%; height:140px; background:#111; border-radius:6px; margin-bottom:16px; overflow:hidden;">
                         <img class="atelier-photo" src="./assets/img/scolaire/atelier-realisation.jpg" alt="Claquette de tournage posée sur une nappe rayée" loading="lazy">
                     </div>
-                    <h4 style="color:var(--primary-red); margin:0 0 12px;">THÉORIE DE LA RÉALISATION</h4>
+                    <h4 style="color:var(--primary-red); margin:0 0 12px;" data-en="DIRECTING THEORY">THÉORIE DE LA RÉALISATION</h4>
                     <ul style="font-size:0.85rem; color:#888; line-height:2; margin:0; padding-left:16px;">
-                        <li>Les différents types de plans</li>
-                        <li>La base du scénario</li>
-                        <li>La base du jeu de scène</li>
-                        <li>Derrière les caméras</li>
+                        <li data-en="The different types of shots">Les différents types de plans</li>
+                        <li data-en="Screenwriting basics">La base du scénario</li>
+                        <li data-en="Acting basics">La base du jeu de scène</li>
+                        <li data-en="Behind the camera">Derrière les caméras</li>
                     </ul>
                 </div>
 
@@ -1320,86 +1720,86 @@
         </div>
 
         <!-- FORFAITS -->
-        <div style="border-top:2px solid var(--primary-red); padding-top:40px; margin-bottom:60px;">
-            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 30px;">NOS FORFAITS</p>
+        <div class="scolaire-panel">
+            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 30px;" data-en="OUR PACKAGES">NOS FORFAITS</p>
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:24px;">
 
-                <div class="forfait-card" style="border:1px solid var(--primary-red); border-radius:8px; padding:28px;">
-                    <h3 style="margin:0 0 12px;">VISITE UNIQUE</h3>
-                    <p style="color:#888; font-size:0.85rem; line-height:1.8; margin:0;">Une rencontre ponctuelle et intensive où les jeunes apprennent des notions inoubliables et vivent une expérience immersive.</p>
+                <div class="wobble forfait-card" style="border:1px solid var(--primary-red); border-radius:8px; padding:28px;">
+                    <h3 style="margin:0 0 12px;" data-en="ONE-TIME VISIT">VISITE UNIQUE</h3>
+                    <p style="color:#888; font-size:0.85rem; line-height:1.8; margin:0;" data-en="A single intensive session where students pick up lessons they won&#39;t forget and live a fully immersive experience.">Une rencontre ponctuelle et intensive où les jeunes apprennent des notions inoubliables et vivent une expérience immersive.</p>
                 </div>
 
-                <div class="forfait-card" style="border:2px solid var(--primary-red); border-radius:8px; padding:28px; background:var(--primary-red); color:white;">
-                    <h3 style="margin:0 0 12px; color:white;">VISITE RÉGULIÈRE</h3>
-                    <p style="font-size:0.85rem; line-height:1.8; margin:0; color:rgba(255,255,255,0.85);">Des ateliers récurrents permettant à vos jeunes de réaliser un court-métrage sur le long terme et d'approfondir leurs connaissances.</p>
+                <div class="wobble forfait-card" style="border:2px solid var(--primary-red); border-radius:8px; padding:28px; background:var(--primary-red); color:white;">
+                    <h3 style="margin:0 0 12px; color:white;" data-en="RECURRING VISITS">VISITE RÉGULIÈRE</h3>
+                    <p style="font-size:0.85rem; line-height:1.8; margin:0; color:rgba(255,255,255,0.85);" data-en="Ongoing workshops that let your students build a short film over time and really deepen what they know.">Des ateliers récurrents permettant à vos jeunes de réaliser un court-métrage sur le long terme et d&#39;approfondir leurs connaissances.</p>
                 </div>
 
             </div>
         </div>
 
         <!-- TARIFS -->
-        <div style="border-top:2px solid var(--primary-red); padding-top:40px; margin-bottom:60px;">
-            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 30px;">NOS TARIFS</p>
+        <div class="scolaire-panel">
+            <p style="color:var(--primary-red); font-size:0.75rem; letter-spacing:3px; margin:0 0 30px;" data-en="OUR RATES">NOS TARIFS</p>
             <div style="overflow-x:auto;">
                 <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
                     <thead>
                         <tr style="border-bottom:2px solid var(--primary-red);">
-                            <th style="text-align:left; padding:12px 16px; font-weight:800; letter-spacing:1px;">ATELIER</th>
-                            <th style="text-align:center; padding:12px 16px; color:var(--primary-red);">15–20 JEUNES</th>
-                            <th style="text-align:center; padding:12px 16px; color:var(--primary-red);">21–35 JEUNES</th>
+                            <th style="text-align:left; padding:12px 16px; font-weight:800; letter-spacing:1px;" data-en="WORKSHOP">ATELIER</th>
+                            <th style="text-align:center; padding:12px 16px; color:var(--primary-red);" data-en="15–20 STUDENTS">15–20 JEUNES</th>
+                            <th style="text-align:center; padding:12px 16px; color:var(--primary-red);" data-en="21–35 STUDENTS">21–35 JEUNES</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr style="border-bottom:1px solid var(--card-border);">
-                            <td style="padding:14px 16px;">Création de vidéo cinématographique</td>
-                            <td style="text-align:center; padding:14px 16px; font-weight:800;">15$ / élève</td>
-                            <td style="text-align:center; padding:14px 16px; font-weight:800;">19$ / élève</td>
+                            <td style="padding:14px 16px;" data-en="Cinematic video creation">Création de vidéo cinématographique</td>
+                            <td style="text-align:center; padding:14px 16px; font-weight:800;" data-en="$15 / student">15$ / élève</td>
+                            <td style="text-align:center; padding:14px 16px; font-weight:800;" data-en="$19 / student">19$ / élève</td>
                         </tr>
                         <tr style="border-bottom:1px solid var(--card-border);">
-                            <td style="padding:14px 16px;">Histoire du cinéma</td>
-                            <td style="text-align:center; padding:14px 16px; font-weight:800;">14$ / élève</td>
-                            <td style="text-align:center; padding:14px 16px; font-weight:800;">18$ / élève</td>
+                            <td style="padding:14px 16px;" data-en="Film history">Histoire du cinéma</td>
+                            <td style="text-align:center; padding:14px 16px; font-weight:800;" data-en="$14 / student">14$ / élève</td>
+                            <td style="text-align:center; padding:14px 16px; font-weight:800;" data-en="$18 / student">18$ / élève</td>
                         </tr>
                         <tr>
-                            <td style="padding:14px 16px;">Théorie de la réalisation</td>
-                            <td style="text-align:center; padding:14px 16px; font-weight:800;">14$ / élève</td>
-                            <td style="text-align:center; padding:14px 16px; font-weight:800;">18$ / élève</td>
+                            <td style="padding:14px 16px;" data-en="Directing theory">Théorie de la réalisation</td>
+                            <td style="text-align:center; padding:14px 16px; font-weight:800;" data-en="$14 / student">14$ / élève</td>
+                            <td style="text-align:center; padding:14px 16px; font-weight:800;" data-en="$18 / student">18$ / élève</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <p style="color:#888; font-size:0.8rem; margin-top:16px;">Frais de déplacement : 0,43$ / km au départ de Farnham. Tarifs toujours négociables — appelez-nous !</p>
+            <p style="color:#888; font-size:0.8rem; margin-top:16px;" data-en="Travel fee: $0.43 / km from Farnham. Rates are always negotiable — just give us a call!">Frais de déplacement : 0,43$ / km au départ de Farnham. Tarifs toujours négociables — appelez-nous !</p>
         </div>
 
         <!-- CONTACT -->
         <div class="scolaire-contact">
 
             <div class="scolaire-contact-intro">
-                <p class="scolaire-eyebrow">CONTACTEZ-NOUS</p>
-                <h2>PRÊT À TOURNER<br>AVEC VOS JEUNES ?</h2>
-                <p class="scolaire-contact-lead">Dites-nous l'âge du groupe, le nombre de participants et le temps dont vous disposez — on bâtit l'atelier autour de vous.</p>
+                <p class="scolaire-eyebrow" data-en="CONTACT US">CONTACTEZ-NOUS</p>
+                <h2 data-en="READY TO SHOOT<br>WITH YOUR GROUP?">PRÊT À TOURNER<br>AVEC VOS JEUNES ?</h2>
+                <p class="scolaire-contact-lead" data-en="Tell us the age of the group, how many participants and how much time you have — we'll build the workshop around you.">Dites-nous l&#39;âge du groupe, le nombre de participants et le temps dont vous disposez — on bâtit l&#39;atelier autour de vous.</p>
                 <div class="scolaire-contact-actions">
-                    <a href="mailto:productionamorfati@gmail.com" class="cta-btn">ÉCRIRE UN MESSAGE</a>
-                    <a href="tel:5144301670" class="cta-btn ghost">APPELER</a>
+                    <a href="mailto:productionamorfati@gmail.com" class="cta-btn" data-en="SEND A MESSAGE">ÉCRIRE UN MESSAGE</a>
+                    <a href="tel:5144301670" class="cta-btn ghost" data-en="CALL US">APPELER</a>
                 </div>
             </div>
 
             <dl class="scolaire-contact-card">
                 <div class="scolaire-contact-row">
-                    <dt>COURRIEL</dt>
+                    <dt data-en="EMAIL">COURRIEL</dt>
                     <dd><a href="mailto:productionamorfati@gmail.com">productionamorfati@gmail.com</a></dd>
                 </div>
                 <div class="scolaire-contact-row">
-                    <dt>TÉLÉPHONE</dt>
+                    <dt data-en="PHONE">TÉLÉPHONE</dt>
                     <dd><a href="tel:5144301670">514 430-1670</a></dd>
                 </div>
                 <div class="scolaire-contact-row">
-                    <dt>SITE</dt>
+                    <dt data-en="WEBSITE">SITE</dt>
                     <dd><a href="https://productionamorfati.com">productionamorfati.com</a></dd>
                 </div>
                 <div class="scolaire-contact-row">
-                    <dt>TERRITOIRE</dt>
-                    <dd>Québec &amp; Ontario<small>Déplacements au départ de Farnham</small></dd>
+                    <dt data-en="SERVICE AREA">TERRITOIRE</dt>
+                    <dd>Québec &amp; Ontario<small data-en="Travelling out of Farnham">Déplacements au départ de Farnham</small></dd>
                 </div>
             </dl>
 
@@ -1407,12 +1807,6 @@
 
     </div>
 </div>
-
-    <!-- BLOG -->
-    <div id="blog" class="splash-section">
-        <a href="#home" class="close-splash">FERMER</a>
-        <div class="splash-content"><h1 style="color:var(--primary-red);">BLOG</h1></div>
-    </div>
 
     <script>
         function toggleTheme() {
@@ -1944,6 +2338,148 @@
 
             resize(); make();
             if (isActive()) start();
+        })();
+
+        /* ===================== PAGE D'ENTRÉE : CHOIX DU MODE ===================== */
+        const AF_MODES = ['collectif', 'services'];
+
+        function enterMode(mode, opts) {
+            if (!AF_MODES.includes(mode)) mode = 'collectif';
+            document.body.setAttribute('data-mode', mode);
+            try { sessionStorage.setItem('af-mode', mode); } catch (e) {}
+            if (!opts || !opts.silent) {
+                // on repart toujours de l'accueil en entrant
+                if (location.hash && location.hash !== '#home') location.hash = '#home';
+            }
+        }
+
+        function backToLanding(e) {
+            if (e) e.preventDefault();
+            const t = document.getElementById('mobile-menu-toggle');
+            if (t) t.checked = false;
+            if (location.hash && location.hash !== '#home') location.hash = '#home';
+            document.body.removeAttribute('data-mode');
+            try { sessionStorage.removeItem('af-mode'); } catch (e2) {}
+        }
+
+        (function initLanding() {
+            let saved = null;
+            try { saved = sessionStorage.getItem('af-mode'); } catch (e) {}
+            const deepLink = location.hash && location.hash !== '#home' && location.hash !== '#';
+            // Lien direct vers une section (ou mode déjà choisi dans l'onglet) -> on saute l'entrée
+            if (saved) {
+                enterMode(saved, { silent: true });
+            } else if (deepLink) {
+                const servicePages = ['#jj-page', '#tarifs-page', '#savoir-page'];
+                enterMode(servicePages.includes(location.hash) ? 'services' : 'collectif', { silent: true });
+            }
+        })();
+
+        // Clavier : Entrée / Espace sur une carte de choix
+        document.addEventListener('keydown', (e) => {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            const card = document.activeElement;
+            if (card && card.classList && card.classList.contains('landing-choice')) {
+                e.preventDefault();
+                card.click();
+            }
+        });
+
+        /* ===================== BILINGUE FR / EN ===================== */
+        function setLang(lang) {
+            if (lang !== 'en') lang = 'fr';
+            document.documentElement.lang = lang;
+            document.body.setAttribute('data-lang', lang);
+
+            document.querySelectorAll('[data-en]').forEach(el => {
+                // Au premier passage, on garde le texte français d'origine
+                if (!el.hasAttribute('data-fr')) el.setAttribute('data-fr', el.innerHTML);
+                el.innerHTML = (lang === 'en') ? el.getAttribute('data-en') : el.getAttribute('data-fr');
+            });
+
+            // État visuel des boutons FR / EN
+            document.querySelectorAll('.lang-btn').forEach(b => {
+                b.classList.toggle('active', b.getAttribute('data-lang') === lang);
+            });
+
+            try { sessionStorage.setItem('af-lang', lang); } catch (e) {}
+        }
+
+        (function initLang() {
+            let saved = null;
+            try { saved = sessionStorage.getItem('af-lang'); } catch (e) {}
+            if (!saved) {
+                // Si le navigateur est en anglais, on propose l'anglais d'emblée
+                saved = (navigator.language || 'fr').toLowerCase().startsWith('en') ? 'en' : 'fr';
+            }
+            setLang(saved);
+        })();
+
+        /* ===================== BARRE LATÉRALE REDIMENSIONNABLE ===================== */
+        const SB_DEFAULT = 240, SB_MIN = 150, SB_MAX = 460, SB_SNAP = 110;
+
+        function applySidebarWidth(px) {
+            document.documentElement.style.setProperty('--sidebar-w', px + 'px');
+        }
+        function collapseSidebar() {
+            document.body.setAttribute('data-sb', 'collapsed');
+            applySidebarWidth(0);
+            try { sessionStorage.setItem('af-sb', 'collapsed'); } catch (e) {}
+        }
+        function expandSidebar(px) {
+            const w = px || SB_DEFAULT;
+            document.body.removeAttribute('data-sb');
+            applySidebarWidth(w);
+            try { sessionStorage.setItem('af-sb', String(w)); } catch (e) {}
+        }
+
+        (function initSidebarResize() {
+            const handle = document.getElementById('sidebar-resizer');
+            if (!handle) return;
+
+            // Largeur mémorisée pour la session
+            try {
+                const saved = sessionStorage.getItem('af-sb');
+                if (saved === 'collapsed') collapseSidebar();
+                else if (saved) applySidebarWidth(Math.min(SB_MAX, Math.max(SB_MIN, parseInt(saved, 10) || SB_DEFAULT)));
+            } catch (e) {}
+
+            let dragging = false;
+
+            handle.addEventListener('pointerdown', (e) => {
+                if (window.innerWidth <= 1002) return;   // sur mobile, le bouton ☰ fait déjà le travail
+                dragging = true;
+                handle.setPointerCapture(e.pointerId);
+                document.body.classList.add('sb-resizing');
+                e.preventDefault();
+            });
+
+            handle.addEventListener('pointermove', (e) => {
+                if (!dragging) return;
+                const w = e.clientX;
+                if (w < SB_SNAP) {
+                    // Sous le seuil : aperçu de l'état replié
+                    applySidebarWidth(0);
+                } else {
+                    document.body.removeAttribute('data-sb');
+                    applySidebarWidth(Math.min(SB_MAX, Math.max(SB_MIN, w)));
+                }
+            });
+
+            function endDrag(e) {
+                if (!dragging) return;
+                dragging = false;
+                document.body.classList.remove('sb-resizing');
+                try { handle.releasePointerCapture(e.pointerId); } catch (err) {}
+                // On fige le résultat : replié si sous le seuil, sinon la largeur choisie
+                if (e.clientX < SB_SNAP) collapseSidebar();
+                else expandSidebar(Math.min(SB_MAX, Math.max(SB_MIN, e.clientX)));
+            }
+            handle.addEventListener('pointerup', endDrag);
+            handle.addEventListener('pointercancel', endDrag);
+
+            // Double-clic : retour à la largeur d'origine
+            handle.addEventListener('dblclick', () => expandSidebar(SB_DEFAULT));
         })();
     </script>
 </body>
