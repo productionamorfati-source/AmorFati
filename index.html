@@ -440,11 +440,11 @@
         #landing > * { position: relative; z-index: 1; }
         body[data-mode] #landing { opacity: 0; visibility: hidden; transform: scale(1.04); transition: opacity .7s ease, transform .7s ease, visibility 0s .7s; }
 
-        .landing-logo { width: clamp(120px, 20vw, 210px); margin: 0 0 clamp(20px, 4vh, 38px); animation: landLogo 1.15s cubic-bezier(.22,.9,.3,1) backwards; }
+        .landing-logo { width: clamp(230px, 38vw, 440px); max-width: 88vw; display: block; margin: 0 auto; animation: landLogo 1.25s cubic-bezier(.22,.9,.3,1) backwards; }
         @keyframes landLogo { 0% { opacity: 0; transform: scale(.55) translateY(26px); filter: blur(6px); } 60% { opacity: 1; filter: blur(0); } 100% { opacity: 1; transform: none; } }
 
-        .landing-title { font-size: clamp(2.4rem, 9vw, 6rem); font-weight: 800; letter-spacing: 3px; line-height: .9; margin: 0; text-transform: uppercase; animation: landUp .8s cubic-bezier(.22,.61,.36,1) .55s backwards; }
-        .landing-rule { width: 60px; height: 4px; background: var(--primary-red); border-radius: 2px; margin: clamp(20px, 3.4vh, 32px) 0 clamp(14px, 2.4vh, 24px); animation: landRule .7s cubic-bezier(.22,.61,.36,1) .8s backwards; }
+        .landing-title { margin: 0; line-height: 0; font-size: 0; }
+        .landing-rule { width: 60px; height: 4px; background: var(--primary-red); border-radius: 2px; margin: clamp(10px, 2vh, 20px) 0 clamp(14px, 2.4vh, 24px); animation: landRule .7s cubic-bezier(.22,.61,.36,1) .8s backwards; }
         @keyframes landRule { from { opacity: 0; width: 0; } to { opacity: 1; width: 60px; } }
         .landing-kicker { color: #888; font-size: clamp(.64rem, 1.5vw, .8rem); letter-spacing: 5px; font-weight: 700; text-transform: uppercase; margin: 0 0 clamp(34px, 6vh, 60px); animation: landUp .8s cubic-bezier(.22,.61,.36,1) .95s backwards; }
 
@@ -503,6 +503,7 @@
 
         /* --- SÉLECTEUR DE LANGUE --- */
         .lang-pick { display: flex; gap: 10px; align-items: center; justify-content: center; margin-top: clamp(30px, 5vh, 52px); animation: landUp .8s cubic-bezier(.22,.61,.36,1) 1.5s backwards; }
+        .theme-pick { margin-top: 14px; animation-delay: 1.62s; }
         .lang-pick .lp-label { color: #888; font-size: .6rem; letter-spacing: 3px; font-weight: 700; text-transform: uppercase; margin-right: 4px; }
         .lang-btn { background: transparent; border: 1.5px solid var(--card-border); color: #888; font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: .68rem; letter-spacing: 2px; padding: 8px 16px; border-radius: 30px; cursor: pointer; transition: all .3s ease; }
         .lang-btn:hover { border-color: var(--primary-red); color: var(--primary-red); }
@@ -586,14 +587,152 @@
 
         @media (prefers-reduced-motion: reduce) { .team-card { animation: none !important; } }
         @media (max-width: 600px) { .team-grid { gap: 16px; } .team-card { flex: 1 1 140px; max-width: 170px; } }
+
+        /* Sous-sections du menu Services */
+        .sidebar a.nav-link.nav-sub { font-size: .68rem; padding-left: 16px; margin-bottom: 18px; opacity: .78; position: relative; }
+        .sidebar a.nav-link.nav-sub::before { content: ""; position: absolute; left: 0; top: 50%; width: 8px; height: 1.5px; background: var(--primary-red); opacity: .55; transition: width .3s ease, opacity .3s ease; }
+        .sidebar a.nav-link.nav-sub:hover { opacity: 1; padding-left: 24px; }
+        .sidebar a.nav-link.nav-sub:hover::before { width: 14px; opacity: 1; }
+
+        /* --- PAGES EN CONSTRUCTION --- */
+        .wip { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; min-height: 58vh; }
+        .wip-icon { font-size: clamp(2.8rem, 8vw, 4.6rem); line-height: 1; margin-bottom: clamp(18px, 3vh, 30px); animation: wipSwing 2.6s ease-in-out infinite; transform-origin: 50% 20%; }
+        @keyframes wipSwing { 0%,100% { transform: rotate(-9deg); } 50% { transform: rotate(9deg); } }
+        .wip h2 { font-size: clamp(1.3rem, 3.4vw, 2rem); letter-spacing: 3px; margin: 0 0 16px; }
+        .wip-bar { width: min(340px, 80%); height: 6px; border-radius: 3px; background: var(--card-border); overflow: hidden; margin: 6px 0 22px; }
+        .wip-bar span { display: block; height: 100%; width: 38%; border-radius: 3px; background: var(--primary-red); animation: wipSlide 2.2s ease-in-out infinite; }
+        @keyframes wipSlide { 0% { transform: translateX(-110%); } 100% { transform: translateX(300%); } }
+        .wip p { color: #888; font-size: .9rem; line-height: 1.8; max-width: 440px; margin: 0 0 28px; }
+        @media (prefers-reduced-motion: reduce) { .wip-icon, .wip-bar span { animation: none; } }
+
+        /* --- FOND ANIMÉ DE LA PAGE D'ENTRÉE : COLONNES DE PROJETS --- */
+        #landing > .landing-bg { position: absolute; inset: 0; z-index: 0; display: flex; justify-content: space-between; overflow: hidden; pointer-events: none; }
+        .lbg-side { display: flex; gap: 14px; height: 100%; padding: 0 10px; }
+        .lbg-left  { width: 40%; }
+        .lbg-right { width: 28%; justify-content: flex-end; }
+        .lbg-col { flex: 1; min-width: 0; overflow: hidden; }
+        .lbg-track { display: flex; flex-direction: column; gap: 14px; will-change: transform; }
+        .lbg-track img { width: 100%; height: auto; display: block; border-radius: 8px; opacity: .55; filter: saturate(1.1) contrast(1.02); }
+
+        /* chaque colonne à son rythme, une sur deux en sens inverse */
+        .lbg-up   { animation: lbgUp   linear infinite; }
+        .lbg-down { animation: lbgDown linear infinite; }
+        @keyframes lbgUp   { from { transform: translateY(0); }     to { transform: translateY(-50%); } }
+        @keyframes lbgDown { from { transform: translateY(-50%); }  to { transform: translateY(0); } }
+
+        /* voile : le centre reste lisible, les bords s'estompent */
+        #landing::before { z-index: 1; background:
+            radial-gradient(ellipse 58% 62% at 50% 48%, var(--bg-color) 38%, transparent 78%),
+            linear-gradient(90deg, var(--bg-color) 0%, transparent 16%, transparent 84%, var(--bg-color) 100%),
+            linear-gradient(var(--bg-color) 0%, transparent 14%, transparent 86%, var(--bg-color) 100%); }
+        #landing > .landing-logo, #landing > .landing-title, #landing > .landing-rule,
+        #landing > .landing-kicker, #landing > .landing-choices, #landing > .lang-pick, #landing > .theme-pick { z-index: 2; }
+
+        @media (prefers-reduced-motion: reduce) { .lbg-up, .lbg-down { animation: none; } }
+        @media (max-width: 900px) {
+            .lbg-left { width: 46%; }
+            .lbg-right { width: 46%; }
+            .lbg-left .lbg-col:nth-child(3) { display: none; }
+            .lbg-track img { opacity: .4; }
+        }
     </style>
 </head>
 
 <body>
     <!-- ===================== PAGE D'ENTRÉE ===================== -->
     <div id="landing">
-        <img src="./assets/img/Jackalop.png" alt="Amor Fati" class="landing-logo">
-        <h1 class="landing-title">AMOR FATI</h1>
+        <div class="landing-bg" aria-hidden="true">
+            <div class="lbg-side lbg-left">
+                <div class="lbg-col">
+                    <div class="lbg-track lbg-up" style="animation-duration:58s;">
+                    <img src="./assets/img/render/render-cavalier.webp" alt="">
+                    <img src="./assets/img/illustration/duo.jpg" alt="">
+                    <img src="./assets/img/render/render-ippo.webp" alt="">
+                    <img src="./assets/img/illustration/explosion.jpg" alt="">
+                    <img src="./assets/img/render/render-lyra.webp" alt="">
+                    <img src="./assets/img/illustration/loser.jpg" alt="">
+                    <img src="./assets/img/render/render-salon-oublie.webp" alt="">
+                    <img src="./assets/img/render/render-cavalier.webp" alt="">
+                    <img src="./assets/img/illustration/duo.jpg" alt="">
+                    <img src="./assets/img/render/render-ippo.webp" alt="">
+                    <img src="./assets/img/illustration/explosion.jpg" alt="">
+                    <img src="./assets/img/render/render-lyra.webp" alt="">
+                    <img src="./assets/img/illustration/loser.jpg" alt="">
+                    <img src="./assets/img/render/render-salon-oublie.webp" alt="">
+                    </div>
+                </div>
+                <div class="lbg-col">
+                    <div class="lbg-track lbg-down" style="animation-duration:72s;">
+                    <img src="./assets/img/photo/jordan-cinderella.jpg" alt="">
+                    <img src="./assets/img/carpediem.png" alt="">
+                    <img src="./assets/img/photo/jordan-guest-room.jpg" alt="">
+                    <img src="./assets/img/rdls2.png" alt="">
+                    <img src="./assets/img/photo/jordan-monofeelz.webp" alt="">
+                    <img src="./assets/img/SDC.png" alt="">
+                    <img src="./assets/img/photo/jordan-two-oceans.webp" alt="">
+                    <img src="./assets/img/photo/jordan-cinderella.jpg" alt="">
+                    <img src="./assets/img/carpediem.png" alt="">
+                    <img src="./assets/img/photo/jordan-guest-room.jpg" alt="">
+                    <img src="./assets/img/rdls2.png" alt="">
+                    <img src="./assets/img/photo/jordan-monofeelz.webp" alt="">
+                    <img src="./assets/img/SDC.png" alt="">
+                    <img src="./assets/img/photo/jordan-two-oceans.webp" alt="">
+                    </div>
+                </div>
+                <div class="lbg-col">
+                    <div class="lbg-track lbg-up" style="animation-duration:64s;">
+                    <img src="./assets/img/soul.png" alt="">
+                    <img src="./assets/img/illustration/patins.jpg" alt="">
+                    <img src="./assets/img/who-killed-ghost.jpg" alt="">
+                    <img src="./assets/img/render/render-chevalier-fleches.webp" alt="">
+                    <img src="./assets/img/dessin1.png" alt="">
+                    <img src="./assets/img/illustration/chambre-verte.jpg" alt="">
+                    <img src="./assets/img/render/render-grillz.webp" alt="">
+                    <img src="./assets/img/soul.png" alt="">
+                    <img src="./assets/img/illustration/patins.jpg" alt="">
+                    <img src="./assets/img/who-killed-ghost.jpg" alt="">
+                    <img src="./assets/img/render/render-chevalier-fleches.webp" alt="">
+                    <img src="./assets/img/dessin1.png" alt="">
+                    <img src="./assets/img/illustration/chambre-verte.jpg" alt="">
+                    <img src="./assets/img/render/render-grillz.webp" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="lbg-side lbg-right">
+                <div class="lbg-col">
+                    <div class="lbg-track lbg-down" style="animation-duration:68s;">
+                    <img src="./assets/img/couverture777.png" alt="">
+                    <img src="./assets/img/scolaire/atelier-creation-video.jpg" alt="">
+                    <img src="./assets/img/jojo1.png" alt="">
+                    <img src="./assets/img/scolaire/atelier-realisation.jpg" alt="">
+                    <img src="./assets/img/piranha.png" alt="">
+                    <img src="./assets/img/couverture777.png" alt="">
+                    <img src="./assets/img/scolaire/atelier-creation-video.jpg" alt="">
+                    <img src="./assets/img/jojo1.png" alt="">
+                    <img src="./assets/img/scolaire/atelier-realisation.jpg" alt="">
+                    <img src="./assets/img/piranha.png" alt="">
+                    </div>
+                </div>
+                <div class="lbg-col">
+                    <div class="lbg-track lbg-up" style="animation-duration:80s;">
+                    <img src="./assets/img/cafecrepes2.png" alt="">
+                    <img src="./assets/img/scolaire/atelier-histoire-cinema.jpg" alt="">
+                    <img src="./assets/img/DSC3055.png" alt="">
+                    <img src="./assets/img/tache4.png" alt="">
+                    <img src="./assets/img/tache7.png" alt="">
+                    <img src="./assets/img/cafecrepes2.png" alt="">
+                    <img src="./assets/img/scolaire/atelier-histoire-cinema.jpg" alt="">
+                    <img src="./assets/img/DSC3055.png" alt="">
+                    <img src="./assets/img/tache4.png" alt="">
+                    <img src="./assets/img/tache7.png" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h1 class="landing-title">
+            <img src="./assets/img/logo-amorfati-dessine.png" alt="Amor Fati" class="landing-logo">
+        </h1>
         <div class="landing-rule"></div>
         <p class="landing-kicker" data-en="Pick your way in">Choisissez votre entrée</p>
 
@@ -616,6 +755,12 @@
             <span class="lp-label" data-en="Language">Langue</span>
             <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
             <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+        </div>
+
+        <div class="lang-pick theme-pick">
+            <span class="lp-label" data-en="Theme">Thème</span>
+            <button class="lang-btn" data-theme-btn="" onclick="setTheme('')" data-en="LIGHT">CLAIR</button>
+            <button class="lang-btn" data-theme-btn="dark" onclick="setTheme('dark')" data-en="DARK">SOMBRE</button>
         </div>
     </div>
 
@@ -643,6 +788,9 @@
         <!-- Liens des SERVICES -->
         <a href="#jj-page" class="nav-link nav-services" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="ADVERTISING">PUBLICITÉ</a>
         <a href="#savoir-page" class="nav-link nav-services" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="SCHOOL WORKSHOPS">PARASCOLAIRE</a>
+        <a href="#videoclip" class="nav-link nav-services nav-sub" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="MUSIC VIDEO">VIDÉO CLIP</a>
+        <a href="#immobilier" class="nav-link nav-services nav-sub" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="REAL ESTATE PHOTO">PHOTO IMMOBILIER</a>
+        <a href="#photoshoot" class="nav-link nav-services nav-sub" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="PHOTOSHOOT">PHOTOSHOOT</a>
 
         <div class="sidebar-lang">
             <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
@@ -1455,6 +1603,51 @@
         </div>
     </div>
 
+    <!-- VIDÉO CLIP (en construction) -->
+    <div id="videoclip" class="splash-section">
+        <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
+        <div class="splash-content">
+            <h1 style="color:var(--primary-red);" data-en="MUSIC VIDEO">VIDÉO CLIP</h1>
+            <div class="wip">
+                <div class="wip-icon" aria-hidden="true">🎬</div>
+                <h2 data-en="UNDER CONSTRUCTION">EN CONSTRUCTION</h2>
+                <div class="wip-bar"><span></span></div>
+                <p data-en="Music video production: concept, shooting and editing. This section is being put together — come back soon!">Réalisation de clips musicaux : concept, tournage et montage. Cette section est en préparation — revenez bientôt !</p>
+                <a href="mailto:productionamorfati@gmail.com" class="cta-btn" data-en="GET IN TOUCH">NOUS CONTACTER</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHOTO IMMOBILIER (en construction) -->
+    <div id="immobilier" class="splash-section">
+        <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
+        <div class="splash-content">
+            <h1 style="color:var(--primary-red);" data-en="REAL ESTATE PHOTO">PHOTO IMMOBILIER</h1>
+            <div class="wip">
+                <div class="wip-icon" aria-hidden="true">🏠</div>
+                <h2 data-en="UNDER CONSTRUCTION">EN CONSTRUCTION</h2>
+                <div class="wip-bar"><span></span></div>
+                <p data-en="Property photography for brokers and rentals: interiors, exteriors and walkthroughs. This section is being put together — come back soon!">Photographie de propriétés pour courtiers et locations : intérieurs, extérieurs et visites. Cette section est en préparation — revenez bientôt !</p>
+                <a href="mailto:productionamorfati@gmail.com" class="cta-btn" data-en="GET IN TOUCH">NOUS CONTACTER</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- PHOTOSHOOT (en construction) -->
+    <div id="photoshoot" class="splash-section">
+        <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
+        <div class="splash-content">
+            <h1 style="color:var(--primary-red);" data-en="PHOTOSHOOT">PHOTOSHOOT</h1>
+            <div class="wip">
+                <div class="wip-icon" aria-hidden="true">📸</div>
+                <h2 data-en="UNDER CONSTRUCTION">EN CONSTRUCTION</h2>
+                <div class="wip-bar"><span></span></div>
+                <p data-en="Studio or outdoor photo sessions: portraits, products and events. This section is being put together — come back soon!">Séances photo en studio ou en extérieur : portraits, produits et événements. Cette section est en préparation — revenez bientôt !</p>
+                <a href="mailto:productionamorfati@gmail.com" class="cta-btn" data-en="GET IN TOUCH">NOUS CONTACTER</a>
+            </div>
+        </div>
+    </div>
+
     <!-- PHOTOGRAPHIE -->
     <div id="photographie" class="splash-section">
         <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
@@ -1768,7 +1961,7 @@
                     </tbody>
                 </table>
             </div>
-            <p style="color:#888; font-size:0.8rem; margin-top:16px;" data-en="Travel fee: $0.43 / km from Farnham. Rates are always negotiable — just give us a call!">Frais de déplacement : 0,43$ / km au départ de Farnham. Tarifs toujours négociables — appelez-nous !</p>
+            <p style="color:#888; font-size:0.8rem; margin-top:16px;" data-en="Travel fee: $0.43 / km from Montréal-Nord. Rates are always negotiable — just give us a call!">Frais de déplacement : 0,43$ / km au départ de Montréal-Nord. Tarifs toujours négociables — appelez-nous !</p>
         </div>
 
         <!-- CONTACT -->
@@ -1799,7 +1992,7 @@
                 </div>
                 <div class="scolaire-contact-row">
                     <dt data-en="SERVICE AREA">TERRITOIRE</dt>
-                    <dd>Québec &amp; Ontario<small data-en="Travelling out of Farnham">Déplacements au départ de Farnham</small></dd>
+                    <dd>Québec &amp; Ontario<small data-en="Travelling out of Montréal-Nord">Déplacements au départ de Montréal-Nord</small></dd>
                 </div>
             </dl>
 
@@ -1809,15 +2002,26 @@
 </div>
 
     <script>
+        function setTheme(theme) {
+            if (theme !== 'dark') theme = '';
+            document.documentElement.setAttribute('data-theme', theme);
+            try { localStorage.setItem('theme', theme); } catch (e) {}
+            // état visuel des boutons Clair / Sombre
+            document.querySelectorAll('[data-theme-btn]').forEach(b => {
+                b.classList.toggle('active', b.getAttribute('data-theme-btn') === theme);
+            });
+        }
         function toggleTheme() {
-            const body = document.documentElement;
-            const newTheme = body.getAttribute('data-theme') === 'dark' ? '' : 'dark';
-            body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
+            setTheme(document.documentElement.getAttribute('data-theme') === 'dark' ? '' : 'dark');
         }
         document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme) document.documentElement.setAttribute('data-theme', savedTheme);
+            let saved = null;
+            try { saved = localStorage.getItem('theme'); } catch (e) {}
+            // rien de mémorisé : on suit la préférence du système
+            if (saved === null) {
+                saved = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : '';
+            }
+            setTheme(saved);
         });
         function switchSavoir(stepId) {
             document.querySelectorAll('.savoir-step').forEach(step => step.classList.add('hidden'));
@@ -2370,7 +2574,7 @@
             if (saved) {
                 enterMode(saved, { silent: true });
             } else if (deepLink) {
-                const servicePages = ['#jj-page', '#tarifs-page', '#savoir-page'];
+                const servicePages = ['#jj-page', '#tarifs-page', '#savoir-page', '#videoclip', '#immobilier', '#photoshoot'];
                 enterMode(servicePages.includes(location.hash) ? 'services' : 'collectif', { silent: true });
             }
         })();
