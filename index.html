@@ -3,15 +3,56 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Amor Fati | Direction Artistique & Production Visuelle</title>
-    <meta name="description" content="Portfolio de Amor Fati. Spécialiste en réalisation, court-métrage, bande dessinée et création de contenu J&J.">
-    <meta name="keywords" content="Amor Fati, Direction Artistique, Réalisation, BD, Illustration, Production Visuelle">
+    <title>Amor Fati | Production vidéo, publicité &amp; ateliers multimédia — Montréal</title>
+    <meta name="description" content="Amor Fati est un collectif de production visuelle basé à Montréal. Contenu publicitaire pour entreprises, vidéoclips, photo immobilier, photoshoot et ateliers multimédia pour les écoles du Québec et de l'Ontario.">
+    <meta name="keywords" content="Amor Fati, production vidéo Montréal, agence de contenu, publicité vidéo, contenu réseaux sociaux, vidéoclip, photo immobilier, photoshoot, ateliers multimédia, ateliers scolaires, cinéma, court métrage, collectif artistique, Québec, Ontario">
     <meta name="author" content="Amor Fati">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#dc3232">
+    <link rel="canonical" href="https://productionamorfati.com/">
+
+    <!-- Aperçu lors des partages (Facebook, Instagram, LinkedIn, iMessage...) -->
     <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Amor Fati">
+    <meta property="og:locale" content="fr_CA">
+    <meta property="og:locale:alternate" content="en_CA">
     <meta property="og:url" content="https://productionamorfati.com/">
-    <meta property="og:title" content="Amor Fati | Portfolio">
-    <meta property="og:description" content="Découvrez mes dernières réalisations, illustrations et projets de production visuelle.">
-    <meta property="og:image" content="https://productionamorfati.com/assets/img/Jackalop.png">
+    <meta property="og:title" content="Amor Fati | Production vidéo, publicité &amp; ateliers multimédia">
+    <meta property="og:description" content="Contenu publicitaire qui transforme vos spectateurs en clients, vidéoclips, photo immobilier et ateliers multimédia pour les écoles. Un collectif de création visuelle à Montréal.">
+    <meta property="og:image" content="https://productionamorfati.com/assets/img/og-amorfati.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Logo dessiné d'Amor Fati">
+
+    <!-- Aperçu sur X / Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Amor Fati | Production vidéo, publicité &amp; ateliers multimédia">
+    <meta name="twitter:description" content="Contenu publicitaire, vidéoclips, photo immobilier et ateliers multimédia pour les écoles. Collectif de création visuelle à Montréal.">
+    <meta name="twitter:image" content="https://productionamorfati.com/assets/img/og-amorfati.png">
+
+    <!-- Fiche entreprise pour les moteurs de recherche -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Amor Fati",
+      "url": "https://productionamorfati.com/",
+      "image": "https://productionamorfati.com/assets/img/og-amorfati.png",
+      "description": "Collectif de production visuelle à Montréal : contenu publicitaire pour entreprises, vidéoclips, photo immobilier, photoshoot et ateliers multimédia pour les écoles.",
+      "email": "productionamorfati@gmail.com",
+      "telephone": "+1-514-430-1670",
+      "address": { "@type": "PostalAddress", "addressLocality": "Montréal-Nord", "addressRegion": "QC", "addressCountry": "CA" },
+      "areaServed": ["Québec", "Ontario"],
+      "sameAs": ["https://www.instagram.com/jason_s_draw/"],
+      "makesOffer": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Production de contenu publicitaire" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ateliers multimédia en milieu scolaire" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Réalisation de vidéoclips" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Photographie immobilière" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Séances photo" } }
+      ]
+    }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;800&display=swap" rel="stylesheet">
@@ -330,7 +371,7 @@
     .film-card.film-large { grid-column: span 1; }
 }
 
-/* --- INTRO CINÉMATIQUE J&J (SCROLL STYLE APPLE) --- */
+/* --- INTRO CINÉMATIQUE PUBLICITÉ (SCROLL STYLE APPLE) --- */
 .jj-intro { position: relative; height: 340vh; }
 .jj-intro-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; }
 .jj-phase { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 0 6vw; opacity: 0; will-change: opacity, transform; }
@@ -635,6 +676,9 @@
             .lbg-left .lbg-col:nth-child(3) { display: none; }
             .lbg-track img { opacity: .4; }
         }
+
+        /* Page Services : on n'affiche que les membres concernés */
+        body[data-mode="services"] .team-card[data-collectif-only] { display: none; }
     </style>
 </head>
 
@@ -900,19 +944,19 @@
             <div class="scroll-wrapper">
                 <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/ZappL48qgbQ', '_blank')">
                     <div class="card-img"><img src="./assets/img/couverture777.png" alt="Vidéo Friperie 777" loading="lazy"></div>
-                    <div class="card-info"><h4>Friperie 777</h4><p data-en="J&J Marketing">J&J Marketing</p></div>
+                    <div class="card-info"><h4>Friperie 777</h4><p data-en="Amor Fati">Amor Fati</p></div>
                 </div>
                 <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/lZZNtsFhsY4', '_blank')">
                     <div class="card-img"><img src="./assets/img/jojo1.png" alt="Vidéo Bistro à Jojo" loading="lazy"></div>
-                    <div class="card-info"><h4>Bistro à Jojo</h4><p data-en="J&J Marketing">J&J Marketing</p></div>
+                    <div class="card-info"><h4>Bistro à Jojo</h4><p data-en="Amor Fati">Amor Fati</p></div>
                 </div>
                 <div class="project-card" onclick="window.open('https://www.youtube.com/watch?v=5gc4kjuLFOo', '_blank')">
                     <div class="card-img"><img src="./assets/img/DSC3055.png" alt="Vidéo Café &amp; Crêpes" loading="lazy"></div>
-                    <div class="card-info"><h4>Café &amp; Crêpes</h4><p data-en="J&J Marketing">J&J Marketing</p></div>
+                    <div class="card-info"><h4>Café &amp; Crêpes</h4><p data-en="Amor Fati">Amor Fati</p></div>
                 </div>
                 <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/1hRdDMp_rv4', '_blank')">
                     <div class="card-img"><img src="./assets/img/piranha.png" alt="Vidéo Piranha Bar" loading="lazy"></div>
-                    <div class="card-info"><h4>Piranha bar</h4><p data-en="J&J Marketing">J&J Marketing</p></div>
+                    <div class="card-info"><h4>Piranha bar</h4><p data-en="Amor Fati">Amor Fati</p></div>
                 </div>
             </div>
         </div>
@@ -932,7 +976,7 @@
                 </div>
             </a>
 
-            <a href="https://www.instagram.com/jonahmarcy/" target="_blank" rel="noopener" class="team-card">
+            <a href="https://www.instagram.com/jonahmarcy/" target="_blank" rel="noopener" class="team-card" data-collectif-only>
                 <div class="team-photo">
                     <span class="team-fallback">J</span>
                     <img src="./assets/img/equipe/jonathan.png" alt="Jonathan Vaillancourt" loading="lazy"
@@ -945,7 +989,7 @@
                 </div>
             </a>
 
-            <a href="https://www.instagram.com/lyno.444/" target="_blank" rel="noopener" class="team-card">
+            <a href="https://www.instagram.com/lyno.444/" target="_blank" rel="noopener" class="team-card" data-collectif-only>
                 <div class="team-photo">
                     <span class="team-fallback">M</span>
                     <img src="./assets/img/equipe/matheo.png" alt="Mathéo F." loading="lazy"
@@ -984,7 +1028,7 @@
                 </div>
             </a>
 
-            <a href="https://www.instagram.com/mitchattwo/" target="_blank" rel="noopener" class="team-card">
+            <a href="https://www.instagram.com/mitchattwo/" target="_blank" rel="noopener" class="team-card" data-collectif-only>
                 <div class="team-photo">
                     <span class="team-fallback">M</span>
                     <img src="./assets/img/equipe/mitch.png" alt="Mitch Mondestin" loading="lazy"
@@ -997,7 +1041,7 @@
                 </div>
             </a>
 
-            <a href="https://www.instagram.com/ghxst__king/" target="_blank" rel="noopener" class="team-card">
+            <a href="https://www.instagram.com/ghxst__king/" target="_blank" rel="noopener" class="team-card" data-collectif-only>
                 <div class="team-photo">
                     <span class="team-fallback">J</span>
                     <img src="./assets/img/equipe/jerry.png" alt="Jerry — Ghost King" loading="lazy"
@@ -1010,7 +1054,7 @@
                 </div>
             </a>
 
-            <a href="https://www.instagram.com/_.cloud._330/" target="_blank" rel="noopener" class="team-card">
+            <a href="https://www.instagram.com/_.cloud._330/" target="_blank" rel="noopener" class="team-card" data-collectif-only>
                 <div class="team-photo">
                     <span class="team-fallback">C</span>
                     <img src="./assets/img/equipe/carlos.png" alt="Carlos-Enrique" loading="lazy"
@@ -1038,7 +1082,7 @@
         </div>
     </div>
 
-    <!-- J&J PAGE -->
+    <!-- PAGE PUBLICITÉ -->
     <div id="jj-page" class="splash-section">
         <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
 
@@ -1069,7 +1113,7 @@
             <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(300px, 1fr)); gap:60px; margin-top:40px;">
                 <div>
                     <h2 class="jj-reveal jj-title" data-en="An investment, not an expense.">Un investissement, pas une dépense.</h2>
-                    <p class="jj-reveal" data-delay="1" data-en="Every dollar you put into your image is a dollar working for you. At J&J, we turn your online presence into a real client-generating machine: content built to grab attention, spark desire, and turn viewers into actual bookings. Clients who switch to professional content see their traffic and visibility climb, month after month.">Chaque dollar investi dans votre image, c&#39;est un dollar qui travaille pour vous. Chez J&J, nous transformons votre présence en ligne en véritable machine à attirer des clients : du contenu pensé pour capter l&#39;attention, créer l&#39;envie, et convertir vos visiteurs en réservations concrètes. Nos clients qui passent au contenu professionnel voient systématiquement leur achalandage et leur visibilité grimper, mois après mois.</p>
+                    <p class="jj-reveal" data-delay="1" data-en="Every dollar you put into your image is a dollar working for you. At Amor Fati, we turn your online presence into a real client-generating machine: content built to grab attention, spark desire, and turn viewers into actual bookings. Clients who switch to professional content see their traffic and visibility climb, month after month.">Chaque dollar investi dans votre image, c&#39;est un dollar qui travaille pour vous. Chez Amor Fati, nous transformons votre présence en ligne en véritable machine à attirer des clients : du contenu pensé pour capter l&#39;attention, créer l&#39;envie, et convertir vos visiteurs en réservations concrètes. Nos clients qui passent au contenu professionnel voient systématiquement leur achalandage et leur visibilité grimper, mois après mois.</p>
                     <h3 class="jj-reveal" data-delay="1" data-en="Why go with us?">Pourquoi choisir notre solution ?</h3>
                     <ul class="jj-list jj-reveal" data-delay="2">
                         <li data-en="<strong>Cinema quality:</strong> Professional shoots (4K, gimbal, pro audio) that set your brand apart from the competition."><strong>Qualité Cinéma :</strong> Captations professionnelles (4K, Gimbal, Audio Pro) qui démarquent votre marque de la concurrence.</li>
@@ -1093,10 +1137,10 @@
 
             <h3 class="jj-reveal" style="margin-top:80px; border-top:1px solid var(--grid-bold); padding-top:40px;" data-en="Recent Client Acquisition Work">Projets Récents Service d&#39;Acquisition de Clients</h3>
             <div class="scroll-wrapper jj-stagger">
-                <div class="project-card" onclick="window.open('https://www.instagram.com/reel/DYiwM9euzUq/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')"><div class="card-img"><img src="./assets/img/cafecrepes2.png" alt="Vidéo Beau Réveil"></div><div class="card-info"><h4>Beau Réveil</h4><p data-en="J&J Marketing">J&J Marketing</p></div></div>
-                <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/ZappL48qgbQ', '_blank')"><div class="card-img"><img src="./assets/img/couverture777.png" alt="Vidéo 777"></div><div class="card-info"><h4>Friperie 777</h4><p data-en="J&J Marketing">J&J Marketing</p></div></div>
-                <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/lZZNtsFhsY4', '_blank')"><div class="card-img"><img src="./assets/img/jojo1.png" alt="Vidéo Jojo"></div><div class="card-info"><h4>Bistro à Jojo</h4><p data-en="J&J Event">J&J Event</p></div></div>
-                <div class="project-card" onclick="window.open('https://www.youtube.com/watch?v=5gc4kjuLFOo', '_blank')"><div class="card-img"><img src="./assets/img/DSC3055.png" alt="Vidéo Crêpes"></div><div class="card-info"><h4>Café & Crêpes</h4><p data-en="J&J Marketing">J&J Marketing</p></div></div>
+                <div class="project-card" onclick="window.open('https://www.instagram.com/reel/DYiwM9euzUq/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==', '_blank')"><div class="card-img"><img src="./assets/img/cafecrepes2.png" alt="Vidéo Beau Réveil"></div><div class="card-info"><h4>Beau Réveil</h4><p data-en="Amor Fati">Amor Fati</p></div></div>
+                <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/ZappL48qgbQ', '_blank')"><div class="card-img"><img src="./assets/img/couverture777.png" alt="Vidéo 777"></div><div class="card-info"><h4>Friperie 777</h4><p data-en="Amor Fati">Amor Fati</p></div></div>
+                <div class="project-card" onclick="window.open('https://www.youtube.com/shorts/lZZNtsFhsY4', '_blank')"><div class="card-img"><img src="./assets/img/jojo1.png" alt="Vidéo Jojo"></div><div class="card-info"><h4>Bistro à Jojo</h4><p data-en="Amor Fati">Amor Fati</p></div></div>
+                <div class="project-card" onclick="window.open('https://www.youtube.com/watch?v=5gc4kjuLFOo', '_blank')"><div class="card-img"><img src="./assets/img/DSC3055.png" alt="Vidéo Crêpes"></div><div class="card-info"><h4>Café & Crêpes</h4><p data-en="Amor Fati">Amor Fati</p></div></div>
             </div>
         </div>
     </div>
@@ -2076,7 +2120,7 @@
             if (e.key === 'Escape') { closePhoto(); closeLightbox(); closeAlbum(); closeRender(); }
         });
 
-        /* --- INTRO CINÉMATIQUE J&J PILOTÉE PAR LE SCROLL --- */
+        /* --- INTRO CINÉMATIQUE PUBLICITÉ PILOTÉE PAR LE SCROLL --- */
         function initJJIntro() {
             const page = document.getElementById('jj-page');
             if (!page) return;
