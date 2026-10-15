@@ -679,6 +679,9 @@
 
         /* Page Services : on n'affiche que les membres concernés */
         body[data-mode="services"] .team-card[data-collectif-only] { display: none; }
+
+        /* Ramy : uniquement sur la page Services */
+        body[data-mode="collectif"] .team-card[data-services-only] { display: none; }
     </style>
 </head>
 
@@ -1012,6 +1015,18 @@
                 <div class="team-info">
                     <p class="team-name">Jordan Paul</p>
                     <p class="team-role" data-en="Photo / Videographer">Photo / Vidéographe</p>
+                </div>
+            </a>
+            <a href="https://www.instagram.com/roramy_213/" target="_blank" rel="noopener" class="team-card" data-services-only>
+                <div class="team-photo">
+                    <span class="team-fallback">R</span>
+                    <img src="./assets/img/equipe/ramy.jpg" alt="Ramy Lariby" loading="lazy"
+                         onerror="this.style.display='none'">
+                </div>
+                <span class="team-ig">&#9673;</span>
+                <div class="team-info">
+                    <p class="team-name">Ramy Lariby</p>
+                    <p class="team-role" data-en="Head of Sales">Chef des ventes</p>
                 </div>
             </a>
 
