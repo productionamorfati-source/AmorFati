@@ -682,6 +682,30 @@
 
         /* Ramy : uniquement sur la page Services */
         body[data-mode="collectif"] .team-card[data-services-only] { display: none; }
+
+        /* --- PAGE CONDITIONS GÉNÉRALES --- */
+        .legal { max-width: 820px; }
+        .legal-meta { color: #888; font-size: .76rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; margin: 0 0 10px; }
+        .legal-intro { color: #888; font-size: .92rem; line-height: 1.85; margin: 0 0 40px; }
+        .legal-toc { background-color: var(--bg-color); border: 1px solid var(--card-border); border-left: 3px solid var(--primary-red); border-radius: 10px; padding: 22px 26px; margin-bottom: 44px; box-shadow: var(--shadow-soft); }
+        .legal-toc p { font-size: .68rem; letter-spacing: 2.5px; font-weight: 800; color: var(--primary-red); text-transform: uppercase; margin: 0 0 14px; }
+        .legal-toc ol { margin: 0; padding-left: 18px; columns: 2; column-gap: 30px; font-size: .84rem; line-height: 2; }
+        .legal-toc a:hover { color: var(--primary-red); }
+        .legal-art { background-color: var(--bg-color); border: 1px solid var(--card-border); border-top: 3px solid var(--primary-red); border-radius: 12px; padding: 28px 30px; margin-bottom: 22px; box-shadow: var(--shadow-soft); transition: box-shadow .4s ease; scroll-margin-top: 110px; }
+        .legal-art:hover { box-shadow: var(--shadow-lift); }
+        .legal-art h2 { font-size: 1rem; letter-spacing: 1.5px; margin: 0 0 16px; }
+        .legal-art h2 span { color: var(--primary-red); margin-right: 10px; }
+        .legal-art p, .legal-art li { font-size: .88rem; line-height: 1.85; color: #888; font-weight: 400; }
+        .legal-art p { margin: 0 0 14px; }
+        .legal-art p:last-child, .legal-art ul:last-child { margin-bottom: 0; }
+        .legal-art ul { margin: 0 0 14px; padding-left: 20px; }
+        .legal-art strong { color: var(--text-color); font-weight: 700; }
+        @media (max-width: 700px) { .legal-toc ol { columns: 1; } .legal-art { padding: 22px 20px; } }
+
+        /* Lien discret vers les conditions générales */
+        .sidebar a.nav-link.nav-legal { margin-top: 30px; margin-bottom: 10px; font-size: .58rem; letter-spacing: 1.5px; color: #999; opacity: .7; }
+        .sidebar a.nav-link.nav-legal:hover { opacity: 1; color: var(--primary-red); }
+        .sidebar a.nav-link.nav-legal ~ a.nav-link.nav-legal { margin-top: 0; }
     </style>
 </head>
 
@@ -839,6 +863,9 @@
         <a href="#immobilier" class="nav-link nav-services nav-sub" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="REAL ESTATE PHOTO">PHOTO IMMOBILIER</a>
         <a href="#photoshoot" class="nav-link nav-services nav-sub" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="PHOTOSHOOT">PHOTOSHOOT</a>
 
+        <a href="#confidentialite" class="nav-link nav-services nav-legal" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="PRIVACY POLICY">POLITIQUE DE CONFIDENTIALITÉ</a>
+        <a href="#conditions" class="nav-link nav-services nav-legal" onclick="document.getElementById('mobile-menu-toggle').checked=false" data-en="TERMS &amp; CONDITIONS">CONDITIONS GÉNÉRALES</a>
+
         <div class="sidebar-lang">
             <button class="lang-btn" data-lang="fr" onclick="setLang('fr')">FR</button>
             <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
@@ -926,7 +953,7 @@
             </div>
 
             <div class="mix-card" onclick="location.hash='#photographie'">
-                <img src="./assets/img/photo/jonah-niagara-5.webp" alt="Niagara Falls — Photographie" loading="lazy">
+                <img src="./assets/img/photo/jonah-niagara-5.jpg" alt="Niagara Falls — Photographie" loading="lazy">
                 <div class="mix-overlay"><p class="m-cat" data-en="Photography">Photographie</p><p class="m-title">Niagara Falls</p></div>
             </div>
 
@@ -1707,6 +1734,328 @@
         </div>
     </div>
 
+    <!-- CONDITIONS GÉNÉRALES -->
+    <div id="conditions" class="splash-section">
+        <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
+        <div class="splash-content legal">
+            <p class="legal-meta" data-en="Last updated: October 15, 2026">Dernière mise à jour : 15 octobre 2026</p>
+            <h1 style="color:var(--primary-red);" data-en="TERMS AND CONDITIONS">CONDITIONS GÉNÉRALES</h1>
+            <p class="legal-intro" data-en="These terms govern every service provided by Amor Fati. Please read them before confirming a quote — accepting a quote or paying a deposit means accepting these terms.">Les présentes conditions encadrent l'ensemble des prestations offertes par Amor Fati. Nous vous invitons à en prendre connaissance avant de confirmer un devis : son acceptation ou le versement d'un acompte vaut adhésion à ces conditions.</p>
+
+            <nav class="legal-toc">
+                <p data-en="Contents">Sommaire</p>
+                <ol>
+                    <li><a href="#cg-objet">Objet et acceptation</a></li>
+                    <li><a href="#cg-identification">Identification du prestataire</a></li>
+                    <li><a href="#cg-services">Description des services</a></li>
+                    <li><a href="#cg-devis">Devis, commande et modifications</a></li>
+                    <li><a href="#cg-tarifs">Tarifs et modalités de paiement</a></li>
+                    <li><a href="#cg-annulation">Annulation et report</a></li>
+                    <li><a href="#cg-obligations">Obligations du client</a></li>
+                    <li><a href="#cg-livraison">Livraison et révisions</a></li>
+                    <li><a href="#cg-propriete">Propriété intellectuelle et droits d'utilisation</a></li>
+                    <li><a href="#cg-portfolio">Droit de présentation au portfolio</a></li>
+                    <li><a href="#cg-image">Droit à l'image et consentements</a></li>
+                    <li><a href="#cg-ateliers">Dispositions propres aux ateliers scolaires</a></li>
+                    <li><a href="#cg-donnees">Protection des renseignements personnels</a></li>
+                    <li><a href="#cg-responsabilite">Responsabilité</a></li>
+                    <li><a href="#cg-force-majeure">Force majeure</a></li>
+                    <li><a href="#cg-modifications">Modification des conditions</a></li>
+                    <li><a href="#cg-droit">Droit applicable et règlement des différends</a></li>
+                    <li><a href="#cg-contact-legal">Nous joindre</a></li>
+                </ol>
+            </nav>
+
+            <section class="legal-art" id="cg-objet">
+                <h2><span>01</span>Objet et acceptation</h2>
+<p>Les présentes conditions générales encadrent toute prestation offerte par <strong>Amor Fati</strong> (« le Prestataire ») à ses clients (« le Client »). Elles s'appliquent à l'ensemble des services : production de contenu publicitaire, réalisation de vidéoclips, photographie immobilière, séances photo et ateliers multimédia en milieu scolaire.</p>
+<p>Toute commande, signature de devis, versement d'acompte ou début d'exécution emporte <strong>acceptation sans réserve</strong> des présentes conditions. Elles prévalent sur tout autre document du Client, sauf dérogation écrite acceptée par le Prestataire.</p>
+            </section>
+            <section class="legal-art" id="cg-identification">
+                <h2><span>02</span>Identification du prestataire</h2>
+<p><strong>Amor Fati</strong> — collectif de production visuelle établi à Montréal-Nord (Québec, Canada).</p>
+<ul>
+<li>Courriel : <strong>productionamorfati@gmail.com</strong></li>
+<li>Téléphone : <strong>514 430-1670</strong></li>
+<li>Site : <strong>productionamorfati.com</strong></li>
+<li>Territoire desservi : Québec et Ontario</li>
+</ul>
+            </section>
+            <section class="legal-art" id="cg-services">
+                <h2><span>03</span>Description des services</h2>
+<p>Le Prestataire offre notamment :</p>
+<ul>
+<li><strong>Contenu publicitaire</strong> : captation et montage de vidéos destinées aux réseaux sociaux et à la promotion commerciale.</li>
+<li><strong>Vidéoclips</strong> : conception, tournage et montage de clips musicaux.</li>
+<li><strong>Photographie immobilière</strong> : prises de vue de propriétés pour courtiers, propriétaires et locations.</li>
+<li><strong>Séances photo</strong> : portraits, produits et événements, en studio ou en extérieur.</li>
+<li><strong>Ateliers multimédia</strong> : activités pédagogiques en milieu scolaire et en camp de jour.</li>
+</ul>
+<p>L'étendue exacte des livrables, les délais et le prix sont définis dans le <strong>devis</strong> propre à chaque mandat, lequel fait partie intégrante du contrat.</p>
+            </section>
+            <section class="legal-art" id="cg-devis">
+                <h2><span>04</span>Devis, commande et modifications</h2>
+<p>Chaque mandat fait l'objet d'un devis écrit, valable <strong>30 jours</strong> à compter de son envoi, sauf mention contraire. Le devis précise les prestations, le nombre de livrables, les délais et le montant.</p>
+<p>Le contrat est formé à la date de l'acceptation écrite du devis par le Client, ou au versement de l'acompte.</p>
+<p>Toute demande du Client qui modifie l'étendue du mandat après acceptation (ajout de livrables, changement de concept, journée de tournage supplémentaire) fait l'objet d'un <strong>avenant chiffré</strong> et peut entraîner un ajustement du prix et des délais.</p>
+            </section>
+            <section class="legal-art" id="cg-tarifs">
+                <h2><span>05</span>Tarifs et modalités de paiement</h2>
+<p>Les prix sont indiqués en <strong>dollars canadiens</strong>. Les taxes applicables, le cas échéant, s'ajoutent au montant indiqué.</p>
+<p>Sauf entente contraire au devis :</p>
+<ul>
+<li>Un <strong>acompte de 30 %</strong> est exigible à la confirmation du mandat; il déclenche la réservation des dates.</li>
+<li>Le <strong>solde</strong> est payable à la livraison des fichiers finaux.</li>
+<li>Les factures sont payables dans un délai de <strong>30 jours</strong> suivant leur émission.</li>
+</ul>
+<p><strong>Frais de déplacement</strong> : 0,43 $ / km au départ de Montréal-Nord, facturés en sus lorsque applicable.</p>
+<p>Tout retard de paiement peut entraîner des <strong>intérêts de 1,5 % par mois</strong> (18 % par année) sur le solde impayé, ainsi que la suspension des travaux en cours et la rétention des livrables.</p>
+            </section>
+            <section class="legal-art" id="cg-annulation">
+                <h2><span>06</span>Annulation et report</h2>
+<p><strong>Annulation par le Client</strong> — sauf entente contraire :</p>
+<ul>
+<li>Plus de <strong>7 jours</strong> avant la date prévue : l'acompte est conservé à titre de frais administratifs.</li>
+<li>Entre <strong>7 jours et 48 heures</strong> : 50 % du montant total est exigible.</li>
+<li>Moins de <strong>48 heures</strong> : la totalité du montant est exigible, les ressources ayant été réservées.</li>
+</ul>
+<p><strong>Report</strong> : un report demandé plus de 7 jours à l'avance est accepté sans frais, une fois par mandat, sous réserve des disponibilités.</p>
+<p><strong>Annulation par le Prestataire</strong> : en cas d'empêchement majeur, le Prestataire propose une nouvelle date ou rembourse intégralement les sommes versées, sans autre indemnité.</p>
+<p><strong>Intempéries</strong> : pour un tournage ou une séance en extérieur, les conditions météorologiques rendant la captation impossible donnent lieu à un report sans frais.</p>
+            </section>
+            <section class="legal-art" id="cg-obligations">
+                <h2><span>07</span>Obligations du client</h2>
+<p>Le Client s'engage à :</p>
+<ul>
+<li>Fournir en temps utile les informations, accès, autorisations et contenus nécessaires à l'exécution du mandat;</li>
+<li>Garantir un <strong>accès sécuritaire</strong> aux lieux de tournage et obtenir les permis requis le cas échéant;</li>
+<li>Désigner une personne-ressource habilitée à valider les étapes du projet;</li>
+<li>S'assurer de détenir les <strong>droits sur tout élément qu'il fournit</strong> (musique, logos, images, marques) et garantir le Prestataire contre tout recours à ce sujet.</li>
+</ul>
+<p>Un retard du Client dans la transmission des éléments ou dans les validations reporte d'autant les délais de livraison, sans engager la responsabilité du Prestataire.</p>
+            </section>
+            <section class="legal-art" id="cg-livraison">
+                <h2><span>08</span>Livraison et révisions</h2>
+<p>Les livrables sont transmis par voie numérique (lien de téléchargement) dans les formats convenus au devis. Les délais indiqués courent à compter de la réception de tous les éléments requis du Client.</p>
+<p>Sauf mention contraire, le mandat comprend <strong>deux séries de révisions mineures</strong> (ajustements de montage, de colorimétrie ou de rythme). Toute révision supplémentaire, ou toute modification touchant le concept validé, est facturée en sus.</p>
+<p>Les livrables sont réputés <strong>acceptés</strong> à défaut de commentaires écrits du Client dans les <strong>10 jours</strong> suivant leur mise à disposition.</p>
+<p>Les fichiers sources (rushes, projets de montage) ne sont pas inclus et demeurent la propriété du Prestataire, sauf rachat convenu par écrit. Le Prestataire conserve les fichiers bruts pendant <strong>90 jours</strong> après la livraison, sans obligation d'archivage au-delà.</p>
+            </section>
+            <section class="legal-art" id="cg-propriete">
+                <h2><span>09</span>Propriété intellectuelle et droits d'utilisation</h2>
+<p>Le Prestataire demeure titulaire des <strong>droits d'auteur</strong> sur les œuvres créées. Le paiement intégral du prix emporte cession au Client d'une <strong>licence d'utilisation</strong> des livrables finaux, pour les usages, les territoires et la durée précisés au devis.</p>
+<p>À défaut de précision, la licence est accordée pour un usage <strong>promotionnel et commercial sur les canaux numériques du Client</strong>, sans limite de durée, pour le Québec et l'Ontario.</p>
+<p>Toute utilisation excédant cette licence (campagne d'affichage, publicité télévisée, revente, cession à un tiers) requiert une <strong>entente écrite distincte</strong>.</p>
+<p>Le Client ne peut ni modifier substantiellement, ni recadrer de manière dénaturante, ni retirer les mentions de crédit des œuvres livrées, sans accord préalable.</p>
+<p>Aucun paiement n'étant effectué, aucun droit d'utilisation n'est transféré.</p>
+            </section>
+            <section class="legal-art" id="cg-portfolio">
+                <h2><span>10</span>Droit de présentation au portfolio</h2>
+<p>Sauf refus écrit du Client formulé avant la livraison, le Prestataire se réserve le droit de présenter les travaux réalisés dans son <strong>portfolio</strong>, sur son site web, ses réseaux sociaux et ses dossiers de présentation, à des fins de démonstration de son savoir-faire.</p>
+<p>Le Client peut demander un <strong>délai d'embargo</strong> (par exemple jusqu'à la date de lancement d'une campagne); cette demande est respectée lorsqu'elle est formulée par écrit.</p>
+            </section>
+            <section class="legal-art" id="cg-image">
+                <h2><span>11</span>Droit à l'image et consentements</h2>
+<p>Lorsque des personnes apparaissent à l'image, le Client s'assure que les <strong>autorisations de captation et de diffusion</strong> nécessaires ont été obtenues, et en conserve la preuve.</p>
+<p>Dans le cadre d'<strong>ateliers scolaires ou de camps de jour</strong>, l'établissement ou l'organisme est responsable d'obtenir le <strong>consentement écrit des parents ou tuteurs</strong> pour tout mineur filmé ou photographié, ainsi que pour toute diffusion ultérieure des productions réalisées.</p>
+<p>Le Prestataire s'engage à ne diffuser aucune image d'un participant mineur sans que ce consentement lui ait été confirmé.</p>
+            </section>
+            <section class="legal-art" id="cg-ateliers">
+                <h2><span>12</span>Dispositions propres aux ateliers scolaires</h2>
+<p>Les tarifs par élève, les formules (visite unique ou visites régulières) et les frais de déplacement sont ceux affichés sur la page <strong>Parascolaire</strong> du site, ou ceux convenus au devis.</p>
+<p>L'établissement s'engage à :</p>
+<ul>
+<li>Communiquer le <strong>nombre réel de participants</strong> au moins 5 jours avant l'atelier; la facturation se fonde sur le nombre confirmé, même en cas d'absences;</li>
+<li>Assurer en tout temps la <strong>supervision et la discipline</strong> du groupe par son propre personnel, les animateurs du Prestataire n'ayant pas la responsabilité de l'encadrement disciplinaire;</li>
+<li>Mettre à disposition un <strong>local adéquat</strong> et les accès électriques nécessaires.</li>
+</ul>
+<p>Le matériel professionnel demeure la propriété du Prestataire. Tout dommage causé par un participant, en dehors d'une utilisation normale supervisée, peut être facturé à l'établissement.</p>
+            </section>
+            <section class="legal-art" id="cg-donnees">
+                <h2><span>13</span>Protection des renseignements personnels</h2>
+<p>Le Prestataire recueille uniquement les renseignements nécessaires à l'exécution du mandat et à la facturation (nom, coordonnées, informations de projet). Ces renseignements ne sont <strong>ni vendus ni communiqués à des tiers</strong>, sauf obligation légale ou nécessité d'exécution du contrat.</p>
+<p>Conformément à la législation québécoise applicable en matière de protection des renseignements personnels, le Client dispose d'un <strong>droit d'accès, de rectification et de retrait</strong> de ses renseignements, exerçable à l'adresse productionamorfati@gmail.com.</p>
+<p>Le site productionamorfati.com n'utilise pas de cookies publicitaires. Les préférences de langue et de thème sont conservées <strong>localement dans le navigateur</strong> du visiteur et ne sont transmises à aucun serveur.</p>
+            </section>
+            <section class="legal-art" id="cg-responsabilite">
+                <h2><span>14</span>Responsabilité</h2>
+<p>Le Prestataire est tenu à une <strong>obligation de moyens</strong> et met en œuvre son savoir-faire professionnel pour la bonne exécution du mandat.</p>
+<p>Sa responsabilité, toutes causes confondues, est <strong>limitée au montant effectivement payé</strong> par le Client pour le mandat concerné. Le Prestataire ne saurait être tenu responsable des dommages indirects, notamment la perte de profits, de clientèle ou d'occasion d'affaires.</p>
+<p>Le Prestataire n'est pas responsable du rendement commercial d'une campagne, les résultats dépendant de facteurs qui échappent à son contrôle.</p>
+            </section>
+            <section class="legal-art" id="cg-force-majeure">
+                <h2><span>15</span>Force majeure</h2>
+<p>Aucune partie n'est responsable d'un manquement résultant d'un cas de force majeure, soit un événement imprévisible, irrésistible et extérieur : catastrophe naturelle, sinistre, panne majeure, mesure gouvernementale, conflit de travail, maladie grave ou accident touchant une personne clé du mandat.</p>
+<p>Les obligations sont alors suspendues le temps de l'empêchement. Si celui-ci persiste au-delà de <strong>60 jours</strong>, chaque partie peut résilier le contrat, les sommes dues au titre des travaux déjà réalisés demeurant exigibles.</p>
+            </section>
+            <section class="legal-art" id="cg-modifications">
+                <h2><span>16</span>Modification des conditions</h2>
+<p>Le Prestataire peut modifier les présentes conditions à tout moment. La version applicable à un mandat est celle <strong>en vigueur à la date d'acceptation du devis</strong>. La version courante est publiée sur cette page, avec sa date de mise à jour.</p>
+            </section>
+            <section class="legal-art" id="cg-droit">
+                <h2><span>17</span>Droit applicable et règlement des différends</h2>
+<p>Les présentes conditions sont régies par les <strong>lois en vigueur dans la province de Québec</strong> et les lois du Canada qui y sont applicables.</p>
+<p>En cas de différend, les parties s'engagent à rechercher d'abord une <strong>solution amiable</strong>. À défaut d'entente dans un délai raisonnable, les tribunaux du <strong>district judiciaire de Montréal</strong> sont seuls compétents.</p>
+<p>Si une disposition des présentes était jugée invalide, les autres dispositions conserveraient leur plein effet.</p>
+            </section>
+            <section class="legal-art" id="cg-contact-legal">
+                <h2><span>18</span>Nous joindre</h2>
+<p>Pour toute question relative aux présentes conditions, à un devis en cours ou à vos renseignements personnels :</p>
+<ul>
+<li>Courriel : <strong>productionamorfati@gmail.com</strong></li>
+<li>Téléphone : <strong>514 430-1670</strong></li>
+</ul>
+            </section>
+        </div>
+    </div>
+
+    <!-- POLITIQUE DE CONFIDENTIALITÉ -->
+    <div id="confidentialite" class="splash-section">
+        <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
+        <div class="splash-content legal">
+            <p class="legal-meta" data-en="Last updated: October 18, 2026">Dernière mise à jour : 18 octobre 2026</p>
+            <h1 style="color:var(--primary-red);" data-en="PRIVACY POLICY">POLITIQUE DE CONFIDENTIALITÉ</h1>
+            <p class="legal-intro" data-en="Our site uses no cookies, no analytics and no tracking pixels. This policy explains what we collect in the course of our work, why, how long we keep it and what your rights are.">Notre site n'utilise ni cookies, ni outils de statistiques, ni pixels de suivi. Cette politique explique ce que nous recueillons dans le cadre de notre travail, pourquoi, combien de temps nous le conservons et quels sont vos droits.</p>
+
+            <nav class="legal-toc">
+                <p data-en="Contents">Sommaire</p>
+                <ol>
+                    <li><a href="#pc-engagement">Notre engagement</a></li>
+                    <li><a href="#pc-responsable">Responsable de la protection des renseignements personnels</a></li>
+                    <li><a href="#pc-site">Ce que le site web recueille</a></li>
+                    <li><a href="#pc-preferences">Préférences conservées dans votre navigateur</a></li>
+                    <li><a href="#pc-tiers-techniques">Services tiers et hébergement</a></li>
+                    <li><a href="#pc-clients">Renseignements recueillis auprès des clients</a></li>
+                    <li><a href="#pc-images">Images et enregistrements de personnes</a></li>
+                    <li><a href="#pc-mineurs">Enfants et ateliers en milieu scolaire</a></li>
+                    <li><a href="#pc-partage">Partage avec des tiers</a></li>
+                    <li><a href="#pc-conservation">Durée de conservation</a></li>
+                    <li><a href="#pc-securite">Mesures de sécurité</a></li>
+                    <li><a href="#pc-droits">Vos droits</a></li>
+                    <li><a href="#pc-incident">Incident de confidentialité</a></li>
+                    <li><a href="#pc-modifications-pc">Modification de la politique</a></li>
+                    <li><a href="#pc-plainte">Questions et recours</a></li>
+                </ol>
+            </nav>
+
+            <section class="legal-art" id="pc-engagement">
+                <h2><span>01</span>Notre engagement</h2>
+<p>Amor Fati recueille le <strong>minimum de renseignements nécessaires</strong> à son travail : joindre ses clients, réaliser ses mandats et facturer ses services. Nous ne vendons, ne louons et n'échangeons aucun renseignement personnel.</p>
+<p>La présente politique explique, en termes simples, ce que nous recueillons, pourquoi, combien de temps nous le conservons et quels sont vos droits. Elle s'applique au site <strong>productionamorfati.com</strong> ainsi qu'à l'ensemble de nos activités.</p>
+            </section>
+            <section class="legal-art" id="pc-responsable">
+                <h2><span>02</span>Responsable de la protection des renseignements personnels</h2>
+<p>Conformément à la loi québécoise, une personne est désignée responsable de la protection des renseignements personnels au sein d'Amor Fati :</p>
+<ul>
+<li><strong>Jason Laurin</strong>, cofondateur</li>
+<li>Courriel : <strong>productionamorfati@gmail.com</strong></li>
+<li>Téléphone : <strong>514 430-1670</strong></li>
+</ul>
+<p>Adressez-lui toute question, demande d'accès ou plainte concernant vos renseignements personnels. Nous répondons dans un délai maximal de <strong>30 jours</strong>.</p>
+            </section>
+            <section class="legal-art" id="pc-site">
+                <h2><span>03</span>Ce que le site web recueille</h2>
+<p>Notre site est volontairement <strong>sobre sur le plan technique</strong>. Il ne comporte :</p>
+<ul>
+<li><strong>aucun formulaire</strong> de collecte;</li>
+<li><strong>aucun cookie</strong>;</li>
+<li><strong>aucun outil de statistiques ni pixel publicitaire</strong> (pas de Google Analytics, pas de pixel Meta);</li>
+<li><strong>aucun contenu intégré</strong> de réseaux sociaux qui vous suivrait à votre insu.</li>
+</ul>
+<p>Nous ne créons donc <strong>aucun profil de navigation</strong> et ne savons pas qui visite le site.</p>
+            </section>
+            <section class="legal-art" id="pc-preferences">
+                <h2><span>04</span>Préférences conservées dans votre navigateur</h2>
+<p>Pour que le site se souvienne de vos choix d'une page à l'autre, quatre réglages sont enregistrés <strong>dans votre propre navigateur</strong> : la langue, le thème clair ou sombre, l'univers choisi à l'entrée (Collectif ou Services) et la largeur du menu latéral.</p>
+<p>Ces informations sont purement techniques, ne vous identifient pas et <strong>ne sont transmises à aucun serveur</strong>. Vider les données de navigation de votre navigateur les supprime.</p>
+            </section>
+            <section class="legal-art" id="pc-tiers-techniques">
+                <h2><span>05</span>Services tiers et hébergement</h2>
+<p><strong>Polices de caractères</strong> — le site affiche la police Montserrat fournie par Google Fonts. L'affichage d'une page entraîne une requête vers les serveurs de Google, qui reçoit alors votre <strong>adresse IP</strong>. Google n'utilise pas cette information pour vous profiler à notre demande, et nous ne recevons de Google aucune donnée vous concernant.</p>
+<p><strong>Hébergement</strong> — le site est hébergé par un fournisseur tiers dont les serveurs peuvent être situés <strong>à l'extérieur du Québec</strong>. Comme tout hébergeur, il peut conserver des journaux techniques (adresse IP, date, page demandée) à des fins de sécurité et de fonctionnement. Nous n'y avons pas accès et ne les exploitons pas.</p>
+<p><strong>Liens externes</strong> — nos pages renvoient vers Instagram, YouTube, Spotify et YouTube Music. Ces plateformes appliquent <strong>leurs propres politiques</strong> dès que vous cliquez; nous n'en avons pas le contrôle.</p>
+            </section>
+            <section class="legal-art" id="pc-clients">
+                <h2><span>06</span>Renseignements recueillis auprès des clients</h2>
+<p>Lorsque vous nous contactez ou nous confiez un mandat, nous recueillons uniquement ce qui est utile au dossier :</p>
+<ul>
+<li>nom, courriel et numéro de téléphone;</li>
+<li>nom de l'entreprise, de l'école ou de l'organisme, et adresse du lieu de tournage;</li>
+<li>renseignements liés au projet et échanges (courriels, messages);</li>
+<li>informations de facturation.</li>
+</ul>
+<p>Ces renseignements servent exclusivement à <strong>répondre à vos demandes, exécuter le mandat, facturer et respecter nos obligations comptables et fiscales</strong>. Ils ne servent jamais à de la prospection non sollicitée.</p>
+            </section>
+            <section class="legal-art" id="pc-images">
+                <h2><span>07</span>Images et enregistrements de personnes</h2>
+<p>Notre métier produit des <strong>photographies et des vidéos</strong>. L'image et la voix d'une personne identifiable constituent des renseignements personnels, et nous les traitons comme tels.</p>
+<p>Avant toute diffusion publique, nous nous assurons que les <strong>autorisations nécessaires</strong> ont été obtenues. Lorsqu'une captation a lieu dans un lieu privé ou dans un cadre organisé, l'obtention des consentements relève du client ou de l'établissement d'accueil, qui en conserve la preuve.</p>
+<p>Une personne apparaissant sur une image publiée par nos soins peut <strong>demander son retrait</strong> en écrivant au responsable désigné. Nous procédons au retrait de nos propres canaux dans les meilleurs délais, sous réserve des droits déjà cédés à un client pour ses propres publications.</p>
+            </section>
+            <section class="legal-art" id="pc-mineurs">
+                <h2><span>08</span>Enfants et ateliers en milieu scolaire</h2>
+<p>Nos ateliers multimédia s'adressent à des jeunes, souvent <strong>mineurs</strong>. Nous y appliquons une vigilance renforcée.</p>
+<ul>
+<li>L'<strong>école, le camp ou l'organisme</strong> est responsable d'obtenir le <strong>consentement écrit des parents ou tuteurs</strong> pour la captation et pour toute diffusion ultérieure.</li>
+<li>Nous ne publions <strong>aucune image d'un participant mineur</strong> sans confirmation écrite de ce consentement par l'établissement.</li>
+<li>Les productions réalisées pendant un atelier servent d'abord un <strong>objectif pédagogique</strong>. Leur diffusion hors du cadre scolaire exige un accord distinct.</li>
+<li>Nous ne recueillons <strong>aucune donnée nominative d'élève</strong> : ni liste de noms, ni coordonnées, ni dossier. Seul le nombre de participants nous est communiqué, aux fins de facturation.</li>
+<li>Un parent peut en tout temps demander le <strong>retrait de l'image de son enfant</strong> de nos canaux, sans avoir à se justifier.</li>
+</ul>
+            </section>
+            <section class="legal-art" id="pc-partage">
+                <h2><span>09</span>Partage avec des tiers</h2>
+<p>Nous ne vendons, ne louons et n'échangeons <strong>aucun renseignement personnel</strong>.</p>
+<p>Des renseignements peuvent être communiqués uniquement dans ces cas :</p>
+<ul>
+<li>à un <strong>collaborateur ponctuel</strong> (technicien, monteur, graphiste) strictement pour l'exécution de votre mandat, et tenu à la même confidentialité;</li>
+<li>à nos <strong>outils de travail</strong> (messagerie, stockage de fichiers, transfert de gros fichiers), dans la mesure nécessaire;</li>
+<li>si la <strong>loi l'exige</strong> ou pour faire valoir nos droits devant un tribunal.</li>
+</ul>
+            </section>
+            <section class="legal-art" id="pc-conservation">
+                <h2><span>10</span>Durée de conservation</h2>
+<ul>
+<li><strong>Fichiers bruts et projets de montage</strong> : conservés <strong>90 jours</strong> après la livraison finale, puis supprimés, sauf entente d'archivage.</li>
+<li><strong>Livrables finaux</strong> : conservés pour notre portfolio, tant que le client ne demande pas leur retrait.</li>
+<li><strong>Échanges et dossiers clients</strong> : conservés pendant la durée de la relation d'affaires, puis jusqu'à <strong>3 ans</strong>.</li>
+<li><strong>Pièces comptables et factures</strong> : conservées <strong>7 ans</strong>, conformément aux obligations fiscales.</li>
+</ul>
+<p>Au terme de ces délais, les renseignements sont détruits ou rendus anonymes.</p>
+            </section>
+            <section class="legal-art" id="pc-securite">
+                <h2><span>11</span>Mesures de sécurité</h2>
+<p>Nous protégeons les renseignements par des moyens raisonnables au regard de leur sensibilité : appareils et comptes protégés par mot de passe, <strong>authentification à deux facteurs</strong> sur les comptes principaux, accès aux fichiers limité aux personnes qui travaillent sur le mandat, et suppression des fichiers bruts à l'échéance prévue.</p>
+<p>Aucun système n'étant infaillible, nous ne pouvons garantir une sécurité absolue, mais nous nous engageons à réagir rapidement en cas de problème.</p>
+            </section>
+            <section class="legal-art" id="pc-droits">
+                <h2><span>12</span>Vos droits</h2>
+<p>La loi québécoise vous reconnaît plusieurs droits sur vos renseignements personnels :</p>
+<ul>
+<li><strong>Accès</strong> — savoir quels renseignements nous détenons à votre sujet et en obtenir copie.</li>
+<li><strong>Rectification</strong> — faire corriger un renseignement inexact ou incomplet.</li>
+<li><strong>Retrait</strong> — demander la suppression d'un renseignement ou le retrait d'une image, sous réserve de nos obligations légales.</li>
+<li><strong>Portabilité</strong> — recevoir, dans un format technologique structuré et couramment utilisé, les renseignements informatisés que vous nous avez fournis.</li>
+<li><strong>Retrait du consentement</strong> — en tout temps, pour l'avenir.</li>
+</ul>
+<p>Écrivez simplement à <strong>productionamorfati@gmail.com</strong>. Nous pouvons demander une vérification raisonnable de votre identité avant de donner suite, et répondons au plus tard dans les <strong>30 jours</strong>. Nos réponses sont gratuites.</p>
+            </section>
+            <section class="legal-art" id="pc-incident">
+                <h2><span>13</span>Incident de confidentialité</h2>
+<p>En cas d'incident présentant un <strong>risque de préjudice sérieux</strong> (perte, vol ou accès non autorisé à des renseignements personnels), nous nous engageons à prendre sans délai les mesures pour en limiter les conséquences, à aviser les <strong>personnes concernées</strong> ainsi que la <strong>Commission d'accès à l'information du Québec</strong>, et à consigner l'incident dans un registre.</p>
+            </section>
+            <section class="legal-art" id="pc-modifications-pc">
+                <h2><span>14</span>Modification de la politique</h2>
+<p>Cette politique peut être mise à jour pour refléter l'évolution de nos pratiques ou de la loi. La version en vigueur est toujours celle publiée sur cette page, accompagnée de sa date de mise à jour. En cas de changement important, nous en informons nos clients actifs.</p>
+            </section>
+            <section class="legal-art" id="pc-plainte">
+                <h2><span>15</span>Questions et recours</h2>
+<p>Pour toute question ou demande, écrivez à <strong>Jason Laurin</strong>, responsable de la protection des renseignements personnels, à <strong>productionamorfati@gmail.com</strong> ou au <strong>514 430-1670</strong>.</p>
+<p>Si notre réponse ne vous satisfait pas, vous pouvez porter plainte auprès de la <strong>Commission d'accès à l'information du Québec</strong> (cai.gouv.qc.ca).</p>
+            </section>
+        </div>
+    </div>
+
     <!-- PHOTOGRAPHIE -->
     <div id="photographie" class="splash-section">
         <a href="#home" class="close-splash" data-en="CLOSE">FERMER</a>
@@ -1735,13 +2084,13 @@
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Mon mur</p><p class="p-artist">Carlos-Enrique</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/carlos-the-glace.webp', 'Thé glacé', 'Carlos-Enrique')">
-                        <img src="./assets/img/photo/carlos-the-glace.webp" alt="Thé glacé — Carlos-Enrique" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/carlos-the-glace.jpg', 'Thé glacé', 'Carlos-Enrique')">
+                        <img src="./assets/img/photo/carlos-the-glace.jpg" alt="Thé glacé — Carlos-Enrique" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Thé glacé</p><p class="p-artist">Carlos-Enrique</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/carlos-motion8-page3.webp', 'Motion8 — page 3', 'Carlos-Enrique')">
-                        <img src="./assets/img/photo/carlos-motion8-page3.webp" alt="Motion8 page 3 — Carlos-Enrique" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/carlos-motion8-page3.jpg', 'Motion8 — page 3', 'Carlos-Enrique')">
+                        <img src="./assets/img/photo/carlos-motion8-page3.jpg" alt="Motion8 page 3 — Carlos-Enrique" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Motion8 — page 3</p><p class="p-artist">Carlos-Enrique</p></div>
                     </div>
@@ -1755,58 +2104,58 @@
                     <span>SÉRIE NIAGARA FALLS</span>
                 </div>
                 <div class="photo-grid">
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-1.webp', 'Niagara Falls 1', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-1.webp" alt="Niagara Falls 1 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-1.jpg', 'Niagara Falls 1', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-1.jpg" alt="Niagara Falls 1 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 1</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-2.webp', 'Niagara Falls 2', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-2.webp" alt="Niagara Falls 2 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-2.jpg', 'Niagara Falls 2', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-2.jpg" alt="Niagara Falls 2 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 2</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-3.webp', 'Niagara Falls 3', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-3.webp" alt="Niagara Falls 3 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-3.jpg', 'Niagara Falls 3', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-3.jpg" alt="Niagara Falls 3 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 3</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-4.webp', 'Niagara Falls 4', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-4.webp" alt="Niagara Falls 4 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-4.jpg', 'Niagara Falls 4', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-4.jpg" alt="Niagara Falls 4 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 4</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-5.webp', 'Niagara Falls 5', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-5.webp" alt="Niagara Falls 5 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-5.jpg', 'Niagara Falls 5', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-5.jpg" alt="Niagara Falls 5 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 5</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-6.webp', 'Niagara Falls 6', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-6.webp" alt="Niagara Falls 6 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-6.jpg', 'Niagara Falls 6', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-6.jpg" alt="Niagara Falls 6 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 6</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-7.webp', 'Niagara Falls 7', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-7.webp" alt="Niagara Falls 7 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-7.jpg', 'Niagara Falls 7', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-7.jpg" alt="Niagara Falls 7 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 7</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-8.webp', 'Niagara Falls 8', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-8.webp" alt="Niagara Falls 8 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-8.jpg', 'Niagara Falls 8', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-8.jpg" alt="Niagara Falls 8 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 8</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-9.webp', 'Niagara Falls 9', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-9.webp" alt="Niagara Falls 9 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-9.jpg', 'Niagara Falls 9', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-9.jpg" alt="Niagara Falls 9 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 9</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-10.webp', 'Niagara Falls 10', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-10.webp" alt="Niagara Falls 10 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-10.jpg', 'Niagara Falls 10', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-10.jpg" alt="Niagara Falls 10 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 10</p><p class="p-artist">Jonah</p></div>
                     </div>
-                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-12.webp', 'Niagara Falls 12', 'Jonah')">
-                        <img src="./assets/img/photo/jonah-niagara-12.webp" alt="Niagara Falls 12 — Jonah" loading="lazy">
+                    <div class="photo-card" onclick="openPhoto('./assets/img/photo/jonah-niagara-12.jpg', 'Niagara Falls 12', 'Jonah')">
+                        <img src="./assets/img/photo/jonah-niagara-12.jpg" alt="Niagara Falls 12 — Jonah" loading="lazy">
                         <div class="photo-expand">⤢</div>
                         <div class="photo-overlay"><p class="p-title">Niagara Falls 12</p><p class="p-artist">Jonah</p></div>
                     </div>
@@ -2633,7 +2982,7 @@
             if (saved) {
                 enterMode(saved, { silent: true });
             } else if (deepLink) {
-                const servicePages = ['#jj-page', '#tarifs-page', '#savoir-page', '#videoclip', '#immobilier', '#photoshoot'];
+                const servicePages = ['#jj-page', '#tarifs-page', '#savoir-page', '#videoclip', '#immobilier', '#photoshoot', '#conditions', '#confidentialite'];
                 enterMode(servicePages.includes(location.hash) ? 'services' : 'collectif', { silent: true });
             }
         })();
